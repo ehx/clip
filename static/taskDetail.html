@@ -1,0 +1,194 @@
+<toaster-container></toaster-container>
+<div class="clearfix"></div>
+<div class="row">
+  <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+      <div class="x_title">
+        <h2>Contenido</h2>
+        <div class="clearfix"></div>
+      </div>
+      <div class="x_content">
+        <div class="col-md-8 col-sm-8 col-xs-12">
+          <div class="" role="tabpanel" data-example-id="togglable-tabs">
+            <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
+              <li role="presentation" class="active">
+                <a href="" role="tab" data-target="#comments-tab" aria-expanded="true" data-toggle="tab">Comentarios</a>
+              </li>
+              <li role="presentation" class="">
+                <a href="" role="tab" data-target="#profile-tab" aria-expanded="false" data-toggle="tab">Checklist</a>
+              </li>
+            </ul>
+            <div id="myTabContent" class="tab-content">
+              <div role="tabpanel" class="tab-pane fade active in" id="comments-tab" aria-labelledby="comment-tab">
+                <!-- user messages -->
+                <ul class="messages">
+                  <li ng-if="allComments.length > 0" ng-repeat="comment in allComments">
+                    <img src="images/img.jpg" class="avatar" alt="Avatar">
+                    <div class="message_date">
+                      <h3 class="date text-info">{{comment.creation_date |  moment:'DD'}}</h3>
+                      <p class="month">{{comment.creation_date | moment:'MMM'}}</p>
+
+                      <span class="{{ 1 | date_color }}">aaaaaaaaaaaa{{comment.creation_date}}</span>
+
+                    </div>
+                    <div class="message_wrapper">
+                      <h4 class="heading">{{comment.user.first_name}} {{comment.user.last_name}}</h4>
+                      <div ng-if="userId === comment.user.id">
+                        <a href="#" onaftersave="updateComment(comment)" editable-text="comment.comment">
+                          <blockquote ng-bind-html="comment.comment | rawHtml"></blockquote>
+                        </a>
+                      </div>
+                      <div ng-if="userId !== comment.user.id">
+                        <blockquote ng-bind-html="comment.comment | rawHtml"></blockquote>
+                      </div>
+                      <br />
+                      <p class="url" ng-show="comment.docfile">
+                        <span class="fs1 text-info" aria-hidden="true" data-icon=""></span>
+                        <a href="{{comment.docfile}}"><i class="fa fa-paperclip"></i> {{comment.docfile | lastWord}} </a>
+                      </p>
+                      <a ng-if="userId === comment.user.id" ng-click="deleteComment(comment.id)"><i class="fa fa-trash-o"></i> borrar</a>
+                    </div>
+                  </li>
+                  <li ng-if="allComments.length === 0" style="list-style-type:none;">
+                    <div class="message_wrapper text-center">
+                      <h6>No se encontraron comentarios para esta tarea.</h6>
+                      <br />
+                    </div>
+                  </li>
+                </ul>
+                <!-- end of user messages -->
+                <form name="form" ng-submit="newComment(form)">
+                  <div class="form-group">
+                    <div text-angular ng-model="cm.comment" name="comment"></div>
+                    <input file-model="cm.docfile" name="docfile" type="file" class="btn">
+                  </div>
+                  <div class="form-group">
+                    <button class="btn btn-default btn-sm" type="submit">Comentar</button>
+                  </div>
+                </form>
+                <!-- paginado -->
+                <div ng-show="allComments.length > 0">
+                  <uib-pagination boundary-links="true" total-items="totalItems" ng-model="currentPage" class="pagination-sm default" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;" ng-change="pageChanged()" items-per-page="5">
+                  </uib-pagination>
+                </div>
+                <!-- /paginado -->
+              </div>
+              <div role="tabpanel" class="tab-pane fade" id="profile-tab" aria-labelledby="profile-tab">
+                <!-- /checklist-tab -->
+                <div ng-controller="todoController" class="wrapper-md">
+                  <div>
+                    <form ng-submit="addTodo()" id="todo-form" class="ng-pristine ng-valid">
+                      <input ng-model="description" placeholder="Tarea a realizar" class="form-control input-lg ng-pristine ng-valid ng-touched" tabindex="0" aria-invalid="false">
+                    </form>
+                  </div>
+                  <div aria-hidden="false" class="">
+                    <ul class="nav nav-pills">
+                      <li ui-sref-active="active">
+                        <a ng-click="statusFilter = {}">Todas</a>
+                      </li>
+                      <li ui-sref-active="active">
+                        <a ng-click="statusFilter = {done: false}">Activas</a>
+                      </li>
+                      <li ui-sref-active="active">
+                        <a ng-click="statusFilter = {done: true}">Completas</a>
+                      </li>
+                    </ul>
+                    <ul class="to_do">
+                      <li ng-show="todoTasks !== []" ng-repeat="todo in todoTasks | filter:statusFilter track by $index">
+                        <p>
+                          <input icheck ng-model="todo.done" ng-change="doneTodo(todo.id)" type="checkbox" class="flat"> {{todo.description}}
+                        </p>
+                      </li>
+                    </ul>
+                    <div ng-if="todoTasks.length === 0" class="streamline b-l m-b">
+                      <div class="sl-item b-danger b-l">
+                        <div class="m-l">
+                          <p>No se encontraron tareas.</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- /checklist-tab -->
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- start project-detail sidebar -->
+        <div class="col-md-4 col-sm-4 col-xs-12">
+          <section class="panel" id="proj-panel">
+            <div class="x_title" id="proj-title">
+              <h2>Descripcion del proyecto</h2>
+              <div class="clearfix"></div>
+            </div>
+            <div class="panel-body">
+              <h3 class="green">{{task.title}}</h3>
+              <p>
+                <b>Descripcion :</b> {{task.description}}
+              </p>
+              <div class="divisor"></div>
+              <p>
+                <b>Referente :</b> {{task.client.first_name}} {{task.client.last_name}}
+              </p>
+              <p>
+                <b>Propietario de la tarea : </b>{{task.user.first_name}} {{task.user.last_name}}
+              </p>
+              <div class="divisor"></div>
+              <p>
+                <b>Cod. Tarea :</b>
+                <a href="#" onaftersave="updateTask()" editable-text="task_update.identificator">{{task.identificator}}</a>
+              </p>
+              <p>
+                <b>Fecha de comienzo :</b>
+                <a href="#" onaftersave="updateTask()" editable-date="task_update.start_date" e-datepicker-popup="yyyy-MM-dd">{{task.start_date}}</a>
+              </p>
+              <p>
+                <b>Fecha de finalizacion :</b>
+                <a href="#" onaftersave="updateTask()" editable-date="task_update.finish_date" e-datepicker-popup="yyyy-MM-dd">{{task.finish_date}}</a>
+              </p>
+              <p>
+                <b>Horas estimadas :</b>
+                <a href="#" onaftersave="updateTask()" editable-text="task_update.estimation_hours">{{task.estimation_hours}}</a> hs
+              </p>
+              <p>
+                <b>Cod. Admin. Implementacion :</b>
+                <a href="#" onaftersave="updateTask()" editable-text="task_update.implementation_id">{{task.implementation_id}}</a>
+              </p>
+              <p>
+                <b>Urgencia :</b>
+                <a href="#" onaftersave="updateTask()" editable-select="task_update.urgency" e-ng-options="item.id as item.name for item in urgency">{{task.urgency.name}}</a>
+              </p>
+              <p>
+                <b>Modulo :</b>
+                <a href="#" onaftersave="updateTask()" editable-select="task_update.module" e-ng-options="item.id as item.name for item in modules">{{task.module.name}}</a>
+              </p>
+              <p>
+                <b>Estado :</b>
+                <a href="#" onaftersave="updateTask()" editable-select="task_update.status" e-ng-options="item.id as item.name for item in Tstatus">{{task.status.name}}</a>
+              </p>
+              <div class="mtop20">
+                <button ng-if="!task.done" ng-click="doneTask()" class="btn btn-sm btn-info">Cerrar tarea</button>
+                  <button ng-if="task.done" ng-click="openTask()" class="btn btn-sm btn-info">Abrir tarea</button>
+                    <button ng-if="userId === task.user.id" ng-click="deleteTask()" class="btn btn-sm btn-danger">Borrar tarea
+                    </button>
+              </div>
+              <div ng-if="attachments.length > 0">
+                <div class="ln_solid"></div>
+                <h5><u>Adjuntos</u></h5>
+                <ul class="list-unstyled project_files">
+                  <li ng-repeat="att in attachments">
+                    <a href="{{ att.docfile }}">
+                      <i class="{{ att.docfile | extension }}">
+                    </i>{{att.docfile | lastWord }}
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </section>
+        </div>
+        <!-- end project-detail sidebar -->
+      </div>
+    </div>
+  </div>
+</div>

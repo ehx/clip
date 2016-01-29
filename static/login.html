@@ -1,0 +1,22 @@
+<div id="wrapper">
+  <div id="login" class="animate form">
+    <br>
+    <toaster-container></toaster-container>
+    <section class="login_content">
+      <form ng-submit="login()">
+        <h1>Login Form</h1>
+        <div>
+          <input ng-model="usr.username" type="text" class="form-control" placeholder="Usuario" required="" />
+        </div>
+        <div>
+          <input ng-model="usr.password" type="password" class="form-control" placeholder="Password" required="" />
+        </div>
+        <div>
+          <button class="btn btn-default submit" type="submit">Log in</button>
+          <a ng-click="resetPassword()" class="reset_pass" href="#">Password perdida?</a>
+        </div>
+        <div class="clearfix"></div>
+      </form>
+    </section>
+  </div>
+</div>
