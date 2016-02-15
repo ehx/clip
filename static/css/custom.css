@@ -6472,17 +6472,41 @@ ul.notifications {
 }
 
 
-.summer {
-    background-color: #EFC234;
+.milestone{
+    display: inline-block;
+    *display: inline;/* for IE7*/
+    *zoom:1;/* for IE7*/
+    min-width: 100%;
+    color: #fff;
+    font-size: 90%;
+    text-align: left;
+    border-radius: 0.5em;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size: 14px;
+    margin-bottom: 4px;
+}
+
+.future {
+    background-color: #355D88
 } 
-.winter {
-    background-color: #52C0BF;
+
+.past {
+    background-color: rgba(193, 43, 43, 0.76);
 }
 
-.spring {
-    background-color: #46AE72;
+.next {
+    background-color: rgb(171, 150, 27);
 }
 
-.autumn {
-    background-color: #4297B2;
+.now {
+    background-color: rgba(15, 130, 108, 0.94);
+}
+
+.blanco {
+    color: #FFF;
+}
+
+.gris {
+    color: #9C9999;
 }

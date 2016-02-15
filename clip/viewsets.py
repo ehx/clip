@@ -171,3 +171,16 @@ class MessageViewSet(viewsets.ModelViewSet):
         if self.action == 'list':
             return MessageSerializer
         return MessageSerializerWriter
+
+class MilestoneViewSet(viewsets.ModelViewSet):
+    queryset = Milestone.objects.all().order_by('-date')
+    serializer_class = MilestoneSerializer
+    filter_backends = (filters.DjangoFilterBackend,)
+    filter_fields = ('id', 'task', 'user', 'date', 'description')
+
+    def get_serializer_class(self):
+        if self.action == 'retrieve':
+            return MilestoneSerializer
+        if self.action == 'list':
+            return MilestoneSerializer
+        return MilestoneSerializerWriter

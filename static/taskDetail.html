@@ -17,6 +17,9 @@
               <li role="presentation" class="">
                 <a href="" role="tab" data-target="#profile-tab" aria-expanded="false" data-toggle="tab">Checklist</a>
               </li>
+              <li role="presentation" class="">
+                <a href="" role="tab" data-target="#dates-tab" aria-expanded="false" data-toggle="tab">Hitos</a>
+              </li>
             </ul>
             <div id="myTabContent" class="tab-content">
               <div role="tabpanel" class="tab-pane fade active in" id="comments-tab" aria-labelledby="comment-tab">
@@ -25,11 +28,8 @@
                   <li ng-if="allComments.length > 0" ng-repeat="comment in allComments">
                     <img src="images/img.jpg" class="avatar" alt="Avatar">
                     <div class="message_date">
-                      <h3 class="date text-info">{{comment.creation_date |  moment:'DD'}}</h3>
-                      <p class="month">{{comment.creation_date | moment:'MMM'}}</p>
-
-                      <span class="{{ 1 | date_color }}">aaaaaaaaaaaa{{comment.creation_date}}</span>
-
+                      <h3 class="date text-info">{{comment.created_at |  moment:'DD'}}</h3>
+                      <p class="month">{{comment.created_at | moment:'MMM'}}</p>
                     </div>
                     <div class="message_wrapper">
                       <h4 class="heading">{{comment.user.first_name}} {{comment.user.last_name}}</h4>
@@ -46,7 +46,9 @@
                         <span class="fs1 text-info" aria-hidden="true" data-icon=""></span>
                         <a href="{{comment.docfile}}"><i class="fa fa-paperclip"></i> {{comment.docfile | lastWord}} </a>
                       </p>
-                      <a ng-if="userId === comment.user.id" ng-click="deleteComment(comment.id)"><i class="fa fa-trash-o"></i> borrar</a>
+                      <a ng-if="userId === comment.user.id" ng-click="deleteComment(comment.id)">
+                      <i class="fa fa-trash-o"></i> borrar
+                      </a>
                     </div>
                   </li>
                   <li ng-if="allComments.length === 0" style="list-style-type:none;">
@@ -78,7 +80,7 @@
                 <div ng-controller="todoController" class="wrapper-md">
                   <div>
                     <form ng-submit="addTodo()" id="todo-form" class="ng-pristine ng-valid">
-                      <input ng-model="description" placeholder="Tarea a realizar" class="form-control input-lg ng-pristine ng-valid ng-touched" tabindex="0" aria-invalid="false">
+                      <input ng-model="description" placeholder="Tarea a realizar" class="form-control input-md ng-pristine ng-valid ng-touched" tabindex="0" aria-invalid="false">
                     </form>
                   </div>
                   <div aria-hidden="false" class="">
@@ -110,6 +112,46 @@
                   </div>
                 </div>
                 <!-- /checklist-tab -->
+              </div>
+              <div role="tabpanel" class="tab-pane fade" id="dates-tab" aria-labelledby="dates-tab">
+                <!-- /dates-tab -->
+                <div ng-controller="milestoneController" class="wrapper-md">
+                  <form ng-submit="addMilestone()" id="todo-form" class="ng-pristine ng-valid">
+                    <div class="row">
+                      <div class="col-xs-3 col-md-3">
+                        <div class="form-group">
+                          <input ng-model="newMilestone.date" type="text" placeholder="Fecha" class="form-control input-md" jqdatepicker format="yy-mm-dd">
+                        </div>
+                      </div>
+                      <div class="col-xs-9 col-md-9">
+                        <div class="form-group">
+                          <input ng-model="newMilestone.description" type="text" placeholder="Nuevo hito" class="form-control input-md">
+                        </div>
+                      </div>
+                      <button type="submit" style="visibility: hidden;"></button>
+                    </div>
+                  </form>
+                  <div ng-if="milestones.length > 0" ng-repeat="ml in milestones">
+                    <span class="milestone" ng-class="getClass(ml.date)">
+                      {{ ml.date }} &nbsp 
+                      {{ml.description}}
+                      <div class="pull-right">
+                        {{ ml.date | momentNow }}
+                        <a ng-if="userId === ml.user" ng-click="deleteMilestone(ml.id)" class="blanco">
+                        <i class="fa fa-trash-o"></i>
+                        </a>
+                        <i ng-if="userId !== ml.user" class="fa fa-trash-o gris"></i>
+                      </div>
+                    </span>
+                  </div>
+                  <div ng-if="milestones.length === 0" style="list-style-type:none;">
+                    <div class="message_wrapper text-center">
+                      <h6>No se encontraron hitos para esta tarea.</h6>
+                      <br />
+                    </div>
+                  </div>
+                </div>
+                <!-- /dates-tab -->
               </div>
             </div>
           </div>
@@ -168,9 +210,8 @@
               </p>
               <div class="mtop20">
                 <button ng-if="!task.done" ng-click="doneTask()" class="btn btn-sm btn-info">Cerrar tarea</button>
-                  <button ng-if="task.done" ng-click="openTask()" class="btn btn-sm btn-info">Abrir tarea</button>
-                    <button ng-if="userId === task.user.id" ng-click="deleteTask()" class="btn btn-sm btn-danger">Borrar tarea
-                    </button>
+                <button ng-if="task.done" ng-click="openTask()" class="btn btn-sm btn-info">Abrir tarea</button>
+                <button ng-if="userId === task.user.id" ng-click="deleteTask()" class="btn btn-sm btn-danger">Borrar tarea</button>
               </div>
               <div ng-if="attachments.length > 0">
                 <div class="ln_solid"></div>
@@ -178,7 +219,7 @@
                 <ul class="list-unstyled project_files">
                   <li ng-repeat="att in attachments">
                     <a href="{{ att.docfile }}">
-                      <i class="{{ att.docfile | extension }}">
+                    <i class="{{ att.docfile | extension }}">
                     </i>{{att.docfile | lastWord }}
                     </a>
                   </li>

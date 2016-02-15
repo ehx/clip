@@ -3,7 +3,15 @@
 // momentJs
 angular.module('app').filter('moment', function() {
   return function(dateString, format) {
+    moment.locale('es');
     return moment(dateString).format(format);
+  };
+})
+
+angular.module('app').filter('momentNow', function() {
+  return function(dateString) {
+    moment.locale('es');
+    return moment(dateString).fromNow();
   };
 })
 
@@ -48,37 +56,5 @@ angular.module('app').filter('extension', function($sce) {
           return 'fa fa-file-o'
       }
     };
-  }
-})
-
-// colors for events!
-angular.module('app').filter('date_color', function($sce) {
-  return function(date) {
-    var season = "";
-    var date_edit = new Date(date);
-    switch (date_edit.getMonth()) {
-      case "12":
-      case "1":
-      case "2":
-        season = "winter";
-        break;
-      case "3":
-      case "4":
-      case "5":
-        season = "spring";
-        break;
-      case "6":
-      case "7":
-      case "8":
-        season = "summer";
-        break;
-      case "9":
-      case "10":
-      case "11":
-        season = "autumn";
-        break;
-
-      return season;
-    }
   }
 })

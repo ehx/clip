@@ -151,3 +151,14 @@ class UserProfile(models.Model):
 
     def __str__(self):
         return self.user.username
+
+class Milestone(models.Model):
+    user = models.ForeignKey(User, verbose_name="Usuario", related_name="milestone_owner")
+    task = models.ForeignKey(Task, null=True, verbose_name="Tarea")
+    date = models.DateField(verbose_name="Fecha")
+    description = models.CharField(max_length=255, verbose_name='Descripcion')
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
+    def __str__(self):
+        return str(self.task) + ' @ ' + str(self.date)

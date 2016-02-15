@@ -291,3 +291,30 @@ angular.module('app').factory('loginResource', function($resource) {
     }
   });
 })
+
+angular.module('app').factory('milestoneResource', function($resource) {
+  return $resource('/milestone/:id', {
+    id: '@id'
+  }, {
+    'get': {
+      method: 'GET',
+      isArray: false
+    },
+    'save': {
+      method: 'POST'
+    },
+    'update': {
+      method: 'PUT'
+    },
+    'query': {
+      method: 'GET',
+      isArray: true
+    },
+    'remove': {
+      method: 'DELETE'
+    },
+    'delete': {
+      method: 'DELETE'
+    }
+  });
+})

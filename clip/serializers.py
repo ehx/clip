@@ -70,7 +70,7 @@ class TaskCommentSerializer(serializers.ModelSerializer):
     user = UserSerializer();
     class Meta:
         model = TaskComment
-        fields = ('id', 'task', 'user', 'comment', 'docfile')
+        fields = ('id', 'task', 'user', 'comment', 'docfile', 'created_at')
 
 class TodoSerializer(serializers.ModelSerializer):
     class Meta:
@@ -112,3 +112,14 @@ class MessageSerializerWriter(serializers.ModelSerializer):
     class Meta:
         model = Message
         fields = ('id', 'owner', 'receptor', 'message')
+
+
+class MilestoneSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Milestone
+        fields = ('id', 'task', 'user', 'date', 'description')
+
+class MilestoneSerializerWriter(serializers.ModelSerializer):
+    class Meta:
+        model = Milestone
+        fields = ('id', 'task', 'user', 'date', 'description')

@@ -38,6 +38,17 @@ class Migration(migrations.Migration):
             ],
         ),
         migrations.CreateModel(
+            name='Milestone',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('date', models.DateField(verbose_name=b'Fecha')),
+                ('description', models.CharField(max_length=255, verbose_name=b'Descripcion')),
+                ('created_at', models.DateTimeField(auto_now_add=True)),
+                ('updated_at', models.DateTimeField(auto_now=True)),
+                ('owner', models.OneToOneField(related_name='milestone_owner', verbose_name=b'Usuario', to=settings.AUTH_USER_MODEL)),
+            ],
+        ),
+        migrations.CreateModel(
             name='Module',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
@@ -163,6 +174,11 @@ class Migration(migrations.Migration):
             model_name='task',
             name='user',
             field=models.ForeignKey(related_name='userTask', verbose_name=b'Usuario', to=settings.AUTH_USER_MODEL, null=True),
+        ),
+        migrations.AddField(
+            model_name='milestone',
+            name='task',
+            field=models.ForeignKey(verbose_name=b'Tarea', to='task.Task', null=True),
         ),
         migrations.AlterUniqueTogether(
             name='userclient',
