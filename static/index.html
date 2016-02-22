@@ -5,6 +5,8 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
     <title>EQuality | Clip </title>
     <link href="components/textAngular/dist/textAngular.css" rel="stylesheet">
     <link rel="stylesheet" href="css/jquery-ui.css"/>
@@ -17,6 +19,7 @@
     <link rel="stylesheet" href="css/normalize.css"/>
     <link rel="stylesheet" href="css/toaster.min.css"/>
     <link rel="stylesheet" href="css/switchery/switchery.min.css"/>
+    <link rel="stylesheet" href="css/xeditable.css"/>
     <link rel="stylesheet" href="css/xeditable.css"/>
     <script src="js/jquery.min.js"></script>
     <!--[if lt IE 9]>
@@ -82,7 +85,7 @@
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                  <img src="images/img.jpg" alt="">{{username}}
+                  <img ng-src="{{ avatar || 'images/user.png'}}" alt="">{{username}}
                   <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu animated fadeInDown pull-right">
@@ -107,14 +110,14 @@
                     <li ng-repeat="nt in notifications">
                       <a ng-click="readNotification(nt)">
                         <span class="image">
-                        <img src="images/img.jpg" alt="Profile Image" />
+                          <img src="images/img.jpg" alt="Profile Image" />
                         </span>
                         <span>
                         <span>{{nt.user.first_name}} {{nt.user.last_name}}</span>
                         <span class="time">{{nt.creation_date | moment:'DD/MM/YYYY'}}</span>
                         </span>
                         <span class="message">
-                        <span ng-bind-html="nt.ntype | rawHtml" class="message"></span>
+                          <span ng-bind-html="nt.ntype | rawHtml" class="message"></span>
                         </span>
                       </a>
                     </li>
@@ -140,7 +143,7 @@
             <div class="">
               <p class="pull-right">
                 <img src="images/eqlogo.png" id="logo-eq">
-                EQuality.
+                <a href="http://www.equality.coop">EQualityCoop.</a>
               </p>
             </div>
             <div class="clearfix"></div>

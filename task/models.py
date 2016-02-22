@@ -144,6 +144,7 @@ class Message(models.Model):
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, unique=True, verbose_name="Usuario")
+    avatar = models.FileField(upload_to='avatar', null=True, blank=True)
     organization = models.ForeignKey(Organization, verbose_name="Organizacion")
     online = models.BooleanField(default=1, verbose_name='Online')
     created_at = models.DateTimeField(auto_now_add=True)

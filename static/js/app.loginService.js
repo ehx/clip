@@ -2,11 +2,12 @@
 
 angular.module('app').factory('loginService', loginService);
 
-function loginService($http, $location, localStorageService, toaster) {
+function loginService($http, $location, localStorageService, toaster, RESOURCES, configurationResource, $q) {
   return {
     login : login,
     getUser : getUser,
     getUserId : getUserId,
+    getAvatar : getAvatar,
     getUsername : getUsername,
     resetPassword : resetPassword,
     logout : logout
@@ -15,7 +16,7 @@ function loginService($http, $location, localStorageService, toaster) {
   function login() {
     var data_login = localStorageService.get('data_login');
 
-    $http.post('http://localhost:8000/auth/login/', data_login).then(function(result){
+    $http.post(RESOURCES.SERVER + '/auth/login/', data_login).then(function(result){
       localStorageService.remove('data_login');
       localStorageService.set('token', result.data.auth_token);
 
@@ -23,7 +24,7 @@ function loginService($http, $location, localStorageService, toaster) {
       $http.defaults.headers.common.Authorization = 'Token ' + result.data.auth_token;
 
       // obtengo datos del usuario y los guardo en un storage local
-      $http.get('http://localhost:8000/auth/me/').then(function(user){
+      $http.get(RESOURCES.SERVER + '/auth/me/').then(function(user){
         localStorageService.set('user', user);
 
         // redirigo la ruta
@@ -44,7 +45,26 @@ function loginService($http, $location, localStorageService, toaster) {
 
   function getUser(){
     var user = localStorageService.get('user');
-    return user.data;
+    var d = $q.defer();
+
+    configurationResource.query({
+      user : user.data.id
+    }, function(data) {
+      user.data['avatar'] = data[0].avatar;
+      d.resolve(user.data);
+    })
+    return d.promise;
+  }
+
+  function getAvatar(userId){
+    var d = $q.defer();
+
+    configurationResource.query({
+      user : userId
+    }, function(data) {
+      d.resolve(data.avatar);
+    })
+    return d.promise;
   }
 
   function getUserId() {
@@ -59,7 +79,7 @@ function loginService($http, $location, localStorageService, toaster) {
 
   //TODO
   function resetPassword(){
-     $http.post('http://localhost:8000/auth/logout/').then(function(){
+     $http.post(RESOURCES.SERVER + '/auth/logout/').then(function(){
       localStorageService.remove('user');
       return toaster.pop({
         type: 'info',
@@ -73,7 +93,7 @@ function loginService($http, $location, localStorageService, toaster) {
   }
 
   function logout(){
-    $http.post('http://localhost:8000/auth/logout/').then(function(){
+    $http.post(RESOURCES.SERVER + '/auth/logout/').then(function(){
       localStorageService.remove('user');
       return $location.path( "/login" );
     })

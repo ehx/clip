@@ -23,7 +23,6 @@ router.register(r'milestone', MilestoneViewSet)
 
 urlpatterns = [
 	url(r'^', include(router.urls)),
-	url(r'^admin/', include('smuggler.urls')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^auth/', include('djoser.urls.authtoken'))

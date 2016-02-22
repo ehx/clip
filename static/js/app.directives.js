@@ -71,6 +71,22 @@ angular.module('app').directive('fileModel', ['$parse', function($parse) {
   };
 }])
 
+angular.module('app').directive('avatarModel', ['$parse', function($parse) {
+  return {
+    restrict: 'A',
+    link: function(scope, element, attrs) {
+      var model = $parse(attrs.avatarModel);
+      var modelSetter = model.assign;
+
+      element.bind('change', function() {
+        scope.$apply(function() {
+          modelSetter(scope, element[0].files[0]);
+        });
+      });
+    }
+  };
+}])
+
 angular.module('app').directive('icheck', ['$timeout', '$parse', function($timeout, $parse) {
   return {
     compile: function(element, $attrs) {
@@ -142,6 +158,24 @@ angular.module('app').service('fileUpload', ['$http', function($http) {
     }
 
     $http.post(uploadUrl, fd, {
+      transformRequest: angular.identity,
+      headers: {
+        'Content-Type': undefined
+      }
+    })
+  }
+}])
+
+angular.module('app').service('avatarUpload', ['$http', function($http) {
+  this.uploadFileToUrl = function(data, file, uploadUrl) {
+    var fd = new FormData();
+    fd.append('organization', data.organization);
+    fd.append('user', data.user.id)
+    if (file) {
+      fd.append('avatar', file);
+    }
+
+    $http.put(uploadUrl, fd, {
       transformRequest: angular.identity,
       headers: {
         'Content-Type': undefined

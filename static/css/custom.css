@@ -4413,7 +4413,7 @@ ul.messages {
 
 ul.messages li,
 .tasks li {
-    border-bottom: 1px dotted #e6e6e6;
+    border-bottom: 1px solid #B1B0B0;
     padding: 8px 0;
 }
 
@@ -4429,11 +4429,13 @@ img.avatar {
     padding: 2px;
     background: #f7f7f7;
     border: 1px solid #e6e6e6;
+    margin-left: 10px;
 }
 
 ul.messages li .message_date {
     float: right;
     text-align: right;
+    margin-right: 10px;
 }
 
 ul.messages li .message_wrapper {
@@ -6389,6 +6391,15 @@ ul.notifications {
     font-size: 20px;
 }
 
+.icon-15 {
+    font-size: 15px;
+    margin-top: 7px;
+}
+
+.top-5 {
+    margin-top: 5px;
+}
+
 .btn-danger { 
     border-color: #BF3636; 
     background-color: #d84f4f;
@@ -6509,4 +6520,36 @@ ul.notifications {
 
 .gris {
     color: #9C9999;
+}
+
+.emergency-label{
+    padding: 1px 5px;
+    font-size: 12px;
+    line-height: 1.5;
+    border-radius: 3px;
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: normal;
+    text-align: center;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    background-image: none;
+    border: 1px solid transparent;
+    white-space: nowrap;
+    line-height: 1.42857143;
+    border-radius: 4px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.nav, .pagination, .carousel, .panel-title a {
+    cursor: pointer;
+}
+
+.pagination>li>a:hover, .pagination>li>span:hover, .pagination>li>a:focus, .pagination>li>span:focus {
+    background-color: #1ABBA3 !important;
+    border-color: #267768;
 }

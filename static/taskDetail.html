@@ -25,8 +25,10 @@
               <div role="tabpanel" class="tab-pane fade active in" id="comments-tab" aria-labelledby="comment-tab">
                 <!-- user messages -->
                 <ul class="messages">
-                  <li ng-if="allComments.length > 0" ng-repeat="comment in allComments">
-                    <img src="images/img.jpg" class="avatar" alt="Avatar">
+                  <input ng-model="searchComment" tabindex="0" aria-invalid="false" type="text" class="form-control" placeholder="Buscar comentario..." style="border-radius: 5px;">
+                  </br>
+                  <li ng-if="totalItems > 0" ng-repeat="comment in allComments | filter:searchComment">
+                    <img ng-src="{{ getAvatar(comment.user.id) || 'images/user.png'}}" class="avatar" alt="Avatar">
                     <div class="message_date">
                       <h3 class="date text-info">{{comment.created_at |  moment:'DD'}}</h3>
                       <p class="month">{{comment.created_at | moment:'MMM'}}</p>
@@ -51,7 +53,7 @@
                       </a>
                     </div>
                   </li>
-                  <li ng-if="allComments.length === 0" style="list-style-type:none;">
+                  <li ng-if="totalItems === 0" style="list-style-type:none;">
                     <div class="message_wrapper text-center">
                       <h6>No se encontraron comentarios para esta tarea.</h6>
                       <br />
@@ -69,9 +71,16 @@
                   </div>
                 </form>
                 <!-- paginado -->
-                <div ng-show="allComments.length > 0">
-                  <uib-pagination boundary-links="true" total-items="totalItems" ng-model="currentPage" class="pagination-sm default" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;" ng-change="pageChanged()" items-per-page="5">
+                <div ng-show="totalItems > 0">
+                  <uib-pagination boundary-links="true" total-items="totalItems" ng-model="currentPage" class="pagination-sm pagination" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;" ng-change="pageChanged()" items-per-page="5">
                   </uib-pagination>
+                  {{ currentPage }}
+                  <uib-pagination
+                        ng-model="currentPage"
+                        total-items="rows.length"
+                        max-size="maxSize"
+                        boundary-links="true">
+                </uib-pagination>
                 </div>
                 <!-- /paginado -->
               </div>
@@ -207,6 +216,10 @@
               <p>
                 <b>Estado :</b>
                 <a href="#" onaftersave="updateTask()" editable-select="task_update.status" e-ng-options="item.id as item.name for item in Tstatus">{{task.status.name}}</a>
+              </p>
+              <p>
+                <b>Orden :</b>
+                <a href="#" onaftersave="updateTask()" editable-text="task_update.priority">{{task.priority}}
               </p>
               <div class="mtop20">
                 <button ng-if="!task.done" ng-click="doneTask()" class="btn btn-sm btn-info">Cerrar tarea</button>

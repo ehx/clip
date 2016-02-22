@@ -58,7 +58,7 @@ class NotificationViewSet(viewsets.ModelViewSet):
         return NotificationSerializerWriter
 
 class TaskViewSet(viewsets.ModelViewSet):
-    queryset = Task.objects.all().order_by('priority')
+    queryset = Task.objects.all().order_by('priority').order_by('urgency')
     filter_backends = (filters.DjangoFilterBackend,)
     filter_fields = ('id', 'title', 'done', 'user', 'client')
     permission_classes = (IsOwnerOrReadOnly, IsAuthenticated)
@@ -151,6 +151,16 @@ class UserClientViewSet(viewsets.ModelViewSet):
     serializer_class = UserClientSerializer
     filter_backends = (filters.DjangoFilterBackend,)
     filter_fields = ('id', 'user', 'userR', 'relation')
+
+    def get_queryset(self):
+        queryset = super(UserClientViewSet, self).get_queryset() 
+        idUser = self.request.query_params.get('all_rel', None)
+        if idUser:
+
+            a = queryset.filter(user=idUser).values(name='user')
+            b = queryset.filter(userR=idUser).values(name='userR')
+            return a | b
+        return queryset
 
     def get_serializer_class(self):
         if self.action == 'retrieve':

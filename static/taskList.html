@@ -5,10 +5,23 @@
         <h2>Lista de tareas</h2>
         <ul class="nav navbar-right panel_toolbox">
           <li>
+            <p class="top-5">Exportar :</p>
+          </li>
+          <li>
+            <i class="fa fa-file-pdf-o icon-15 pull-right" ng-click="exportAction('pdf')"></i>
+          </li>
+          <li>
+            <i class="fa fa-file-excel-o icon-15 pull-right" ng-click="exportAction('excel')"></i>
+          </li>
+          <li>
+            <i class="fa fa-file-word-o icon-15 pull-right" ng-click="exportAction('doc')"></i>
+          </li>
+          <li>
             <a class="collapse-link">
-            <i class="fa fa-plus-square icon-20" data-toggle="modal" data-target="#myModal"></i>
+              <i class="fa fa-plus-square icon-20 pull-right" data-toggle="modal" data-target="#myModal"></i>
             </a>
           </li>
+            
         </ul>
         <div class="clearfix"></div>
       </div>
@@ -44,7 +57,7 @@
                   </div>
                 </td>
                 <td>
-                  <span class="btn btn-xs" ng-class="{
+                  <span class="emergency-label" ng-class="{
                     'ur-red'    : tdTask.urgency.id == 4,
                     'ur-yellow' : tdTask.urgency.id == 3,
                     'ur-green'  : tdTask.urgency.id == 2,
@@ -86,7 +99,8 @@
         </div>
         <div ng-repeat="client in clients | orderBy:['organization','lastname','firstname'] | filter:filterFullname" class="animated flipInY col-lg-12 col-md-12 col-sm-12 col-xs-12">
           <div ng-click="vm.client = client.user.id" ng-class="{ marcado: vm.client === client.user.id }" class="tile-stats padd-top">
-            <h2>{{client.user.first_name}} {{client.user.last_name}}</h2>
+            <h2 ng-if="userId === client.user.id">{{client.userR.first_name}} {{client.userR.last_name}}</h2>
+            <h2 ng-if="userId === client.userR.id">{{client.user.first_name}} {{client.user.last_name}}</h2>
           </div>
         </div>
       </div>
@@ -124,7 +138,7 @@
               <div class="form-group">
                 <label for="clientSelect">Referente :</label>
                 <select required name="clientSelect" id="clientSelect" ng-model="task.client" class="form-control">
-                  <option ng-repeat="option in clientsM" value="{{option.id}}">{{option.name}} {{option.lastname}}</option>
+                  <option ng-repeat="option in clientsM" value="{{option.userR.id}}">{{option.userR.first_name}} {{option.userR.last_name}}</option>
                 </select>
               </div>
             </div>
@@ -206,13 +220,7 @@
     </div>
   </div>
 </div>
+
+
 </div>
-<!--
-  <button type="button" ng-csv="tasks" field-separator=";" filename="test.csv" csv-header="getHeader()">Exportar</button>
-  
-  <div class="btn-group" role="group">
-    <button type="button" class="btn btn-default" ng-click="exportAction('pdf')">pdf</button>
-    <button type="button" class="btn btn-default" ng-click="exportAction('excel')">excel</button>
-    <button type="button" class="btn btn-default" ng-click="exportAction('doc')">doc</button>
-  </div>
-  -->
+
