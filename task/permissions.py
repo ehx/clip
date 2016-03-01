@@ -5,4 +5,4 @@ class IsOwnerOrReadOnly(BasePermission):
 		if request.method in SAFE_METHODS:
 			return True
 
-		return obj.user == request.user
+		return (obj.user == request.user) | (obj.client == request.user)

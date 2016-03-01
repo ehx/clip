@@ -87,31 +87,61 @@ angular.module('app').directive('avatarModel', ['$parse', function($parse) {
   };
 }])
 
-angular.module('app').directive('icheck', ['$timeout', '$parse', function($timeout, $parse) {
-  return {
-    compile: function(element, $attrs) {
-      var icheckOptions = {
-        checkboxClass: 'icheckbox_flat-green',
-        radioClass: 'iradio_flat-green'
-      };
+angular.module('app').directive('icheck', iCheck);
 
-      var modelAccessor = $parse($attrs['ngModel']);
-      return function($scope, element, $attrs, controller) {
+iCheck.$inject = ['$timeout'];
 
-        var modelChanged = function(event) {
-          $scope.$apply(function() {
-            modelAccessor.assign($scope, event.target.checked);
-          });
-        };
+function iCheck($timeout) {
 
-        $scope.$watch(modelAccessor, function(val) {
-          var action = val ? 'check' : 'uncheck';
-          element.iCheck(icheckOptions, action).on('ifChanged', modelChanged);
-        });
-      };
-    }
+  var directive = {
+    restrict: 'A',
+    require: 'ngModel',
+
+    scope: {
+      model: '=ngModel'
+    },
+
+    link: linkFn
   };
-}])
+  return directive;
+
+  function linkFn(scope, element, attrs, ngModel) {
+
+    $timeout(function() {
+      $(element).iCheck({
+          checkboxClass: 'icheckbox_flat-green',
+          radioClass: 'iradio_flat-green'
+        })
+        .on('ifChanged', onChanged);
+      update(ngModel.$modelValue);
+    });
+
+    var watchModel = scope.$watch(function() {
+      return ngModel.$modelValue;
+    }, update);
+
+    scope.$on('$destroy', function() {
+      watchModel();
+    });
+
+    function update(value) {
+      if (attrs.type == 'checkbox') {
+        $(element).iCheck('update');
+      }
+    }
+
+    function onChanged(event) {
+      if (attrs.type == 'checkbox') {
+        ngModel.$setViewValue(event.target.checked);
+      }
+
+      if (attrs.type == 'radio') {
+        ngModel.$setViewValue(event.target.value);
+      }
+    }
+  }
+}
+
 
 angular.module('app').directive('exportTable', exportTable);
 

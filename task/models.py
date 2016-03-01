@@ -163,3 +163,13 @@ class Milestone(models.Model):
     
     def __str__(self):
         return str(self.task) + ' @ ' + str(self.date)
+
+class Tip(models.Model):
+    category = models.CharField(max_length=255, verbose_name='Categoria')
+    description = models.CharField(max_length=255, verbose_name='Descripcion')
+    user = models.ForeignKey(User, verbose_name="Usuario", related_name="tips_owner")
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.category + ' @ ' + self.description

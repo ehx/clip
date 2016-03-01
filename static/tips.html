@@ -1,0 +1,71 @@
+<div class="clearfix"></div>
+<div class="row">
+  <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+      <div class="x_title">
+        <h2>Tips</h2>
+        <ul class="nav navbar-right panel_toolbox">
+          <li>
+            <a class="collapse-link">
+              <i class="fa fa-plus-square icon-20 pull-right" data-toggle="modal" data-target="#myModal"></i>
+            </a>
+          </li>
+        </ul>
+        <div class="clearfix"></div>
+      </div>
+      <div class="x_content">
+          <div ng-repeat="cat in categoryToFilter() | filter:filterCategory">
+            <b>{{cat.category}}</b>
+            <li ng-repeat="tip in tips | filter:{category: cat.category}">{{tip.description}}</li>        
+          </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+</div>
+
+
+
+
+
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form ng-submit="newTask()">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Nuevo tip</h4>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-xs-6">
+              <div class="form-group">
+                <label for="category">Categoria :</label>
+                <input required type='text' class="form-control" ng-model="tip.category" id="category">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12">
+              <div class="form-group">
+                <label for="description">Descripcion :</label>
+                <input required type='text' class="form-control" ng-model="tip.description" id="description">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button ng-click="newTip()" class="btn btn-info" type="submit">Guardar</button>
+          <button ng-click="cancel()" data-dismiss="modal" class="btn btn-default">Cerrar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+</div>
+
+

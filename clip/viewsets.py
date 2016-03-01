@@ -194,3 +194,16 @@ class MilestoneViewSet(viewsets.ModelViewSet):
         if self.action == 'list':
             return MilestoneSerializer
         return MilestoneSerializerWriter
+
+class TipViewSet(viewsets.ModelViewSet):
+    queryset = Tip.objects.all().order_by('category')
+    serializer_class = TipSerializer
+    filter_backends = (filters.DjangoFilterBackend,)
+    filter_fields = ('id', 'description', 'category', 'user')
+
+    def get_serializer_class(self):
+        if self.action == 'retrieve':
+            return TipSerializer
+        if self.action == 'list':
+            return TipSerializer
+        return TipSerializerWriter

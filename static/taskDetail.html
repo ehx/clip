@@ -28,7 +28,7 @@
                   <input ng-model="searchComment" tabindex="0" aria-invalid="false" type="text" class="form-control" placeholder="Buscar comentario..." style="border-radius: 5px;">
                   </br>
                   <li ng-if="totalItems > 0" ng-repeat="comment in allComments | filter:searchComment">
-                    <img ng-src="{{ getAvatar(comment.user.id) || 'images/user.png'}}" class="avatar" alt="Avatar">
+                    <img ng-src="{{ comment.user.avatar || 'images/user.png'}}" class="avatar" alt="Avatar">
                     <div class="message_date">
                       <h3 class="date text-info">{{comment.created_at |  moment:'DD'}}</h3>
                       <p class="month">{{comment.created_at | moment:'MMM'}}</p>
@@ -74,19 +74,14 @@
                 <div ng-show="totalItems > 0">
                   <uib-pagination boundary-links="true" total-items="totalItems" ng-model="currentPage" class="pagination-sm pagination" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;" ng-change="pageChanged()" items-per-page="5">
                   </uib-pagination>
-                  {{ currentPage }}
-                  <uib-pagination
-                        ng-model="currentPage"
-                        total-items="rows.length"
-                        max-size="maxSize"
-                        boundary-links="true">
-                </uib-pagination>
                 </div>
                 <!-- /paginado -->
               </div>
               <div role="tabpanel" class="tab-pane fade" id="profile-tab" aria-labelledby="profile-tab">
                 <!-- /checklist-tab -->
                 <div ng-controller="todoController" class="wrapper-md">
+                  <input ng-model="searchTodo" tabindex="0" aria-invalid="false" type="text" class="form-control" placeholder="Filtrar tarea a realizar..." style="border-radius: 5px;">
+                  </br>
                   <div>
                     <form ng-submit="addTodo()" id="todo-form" class="ng-pristine ng-valid">
                       <input ng-model="description" placeholder="Tarea a realizar" class="form-control input-md ng-pristine ng-valid ng-touched" tabindex="0" aria-invalid="false">
@@ -105,9 +100,13 @@
                       </li>
                     </ul>
                     <ul class="to_do">
-                      <li ng-show="todoTasks !== []" ng-repeat="todo in todoTasks | filter:statusFilter track by $index">
+                      <li 
+                      ng-show="todoTasks !== []" 
+                      ng-repeat="todo in todoTasks | 
+                      filter: { description : searchTodo } |
+                      filter : statusFilter">
                         <p>
-                          <input icheck ng-model="todo.done" ng-change="doneTodo(todo.id)" type="checkbox" class="flat"> {{todo.description}}
+                          <input icheck data-i-check ng-model="todo.done" ng-change="doneTodo(todo.id)" type="checkbox" class="flat"> {{ todo.description }}
                         </p>
                       </li>
                     </ul>
@@ -143,7 +142,7 @@
                   <div ng-if="milestones.length > 0" ng-repeat="ml in milestones">
                     <span class="milestone" ng-class="getClass(ml.date)">
                       {{ ml.date }} &nbsp 
-                      {{ml.description}}
+                      {{ ml.description }}
                       <div class="pull-right">
                         {{ ml.date | momentNow }}
                         <a ng-if="userId === ml.user" ng-click="deleteMilestone(ml.id)" class="blanco">
@@ -219,7 +218,7 @@
               </p>
               <p>
                 <b>Orden :</b>
-                <a href="#" onaftersave="updateTask()" editable-text="task_update.priority">{{task.priority}}
+                <a href="#" onaftersave="updateTask()" editable-text="task_update.priority">{{task.priority}}</a>
               </p>
               <div class="mtop20">
                 <button ng-if="!task.done" ng-click="doneTask()" class="btn btn-sm btn-info">Cerrar tarea</button>

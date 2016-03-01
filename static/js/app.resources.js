@@ -62,7 +62,7 @@ angular.module('app').factory('configurationResource', function($resource) {
 })
 
 angular.module('app').factory('taskResource', function($resource) {
-  return $resource('/task/:id/', {
+  return $resource('/task/:id', {
     id: '@id'
   }, {
     'get': {
@@ -294,6 +294,33 @@ angular.module('app').factory('loginResource', function($resource) {
 
 angular.module('app').factory('milestoneResource', function($resource) {
   return $resource('/milestone/:id', {
+    id: '@id'
+  }, {
+    'get': {
+      method: 'GET',
+      isArray: false
+    },
+    'save': {
+      method: 'POST'
+    },
+    'update': {
+      method: 'PUT'
+    },
+    'query': {
+      method: 'GET',
+      isArray: true
+    },
+    'remove': {
+      method: 'DELETE'
+    },
+    'delete': {
+      method: 'DELETE'
+    }
+  });
+})
+
+angular.module('app').factory('tipResource', function($resource) {
+  return $resource('/tip/:id', {
     id: '@id'
   }, {
     'get': {

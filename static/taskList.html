@@ -18,15 +18,15 @@
           </li>
           <li>
             <a class="collapse-link">
-              <i class="fa fa-plus-square icon-20 pull-right" data-toggle="modal" data-target="#myModal"></i>
+            <i class="fa fa-plus-square icon-20 pull-right" data-toggle="modal" data-target="#myModal"></i>
             </a>
           </li>
-            
         </ul>
         <div class="clearfix"></div>
       </div>
       <div class="x_content">
         <input ng-model="searchTask" tabindex="0" aria-invalid="false" type="text" class="form-control" placeholder="Filtrar tarea..." style="border-radius: 5px;">
+        </br>
         <!-- task list -->
         <div class="table-responsive">
           <table class="table table-striped responsive-utilities export-table">
@@ -41,10 +41,9 @@
             </thead>
             <tbody>
               <tr ng-repeat="tdTask in tasks | 
-                filter: (vm.client || '') && 
-                {client: {id : vm.client}} &&
-                {user: {id : vm.client}} | 
-                filter:{$:searchTask}"
+                filter: (vm.client || '') |
+                filterBy: ['user.id', 'client.id']: vm.client |
+                filter: {$:searchTask }"
                 >
                 <td>
                   {{ tdTask.module.tag }}
@@ -98,9 +97,11 @@
           <br>
         </div>
         <div ng-repeat="client in clients | orderBy:['organization','lastname','firstname'] | filter:filterFullname" class="animated flipInY col-lg-12 col-md-12 col-sm-12 col-xs-12">
-          <div ng-click="vm.client = client.user.id" ng-class="{ marcado: vm.client === client.user.id }" class="tile-stats padd-top">
-            <h2 ng-if="userId === client.user.id">{{client.userR.first_name}} {{client.userR.last_name}}</h2>
-            <h2 ng-if="userId === client.userR.id">{{client.user.first_name}} {{client.user.last_name}}</h2>
+          <div ng-if="userId === client.user.id || client.user.id === ''" ng-click="vm.client = client.userR.id" ng-class="{ marcado: vm.client === client.userR.id }" class="tile-stats padd-top">
+            <h2>{{client.userR.first_name}} {{client.userR.last_name}}</h2>
+          </div>
+          <div ng-if="userId === client.userR.id" ng-click="vm.client = client.user.id" ng-class="{ marcado: vm.client === client.user.id }" class="tile-stats padd-top">
+            <h2>{{client.user.first_name}} {{client.user.last_name}}</h2>
           </div>
         </div>
       </div>
@@ -220,7 +221,4 @@
     </div>
   </div>
 </div>
-
-
 </div>
-

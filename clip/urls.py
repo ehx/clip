@@ -20,6 +20,7 @@ router.register(r'userClient', UserClientViewSet)
 router.register(r'message', MessageViewSet)
 router.register(r'userProfile', UserProfileViewSet)
 router.register(r'milestone', MilestoneViewSet)
+router.register(r'tip', TipViewSet)
 
 urlpatterns = [
 	url(r'^', include(router.urls)),

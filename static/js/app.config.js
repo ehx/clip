@@ -82,6 +82,14 @@ function configFunction($httpProvider, $resourceProvider, localStorageServicePro
     }
   })
 
+  .when('/tips/', {
+    templateUrl: 'tips.html',
+    controller: 'tipController',
+    resolve: {
+      loggedIn: onlyLoggedIn
+    }
+  })
+
   .otherwise({
     redirectTo: '/login/'
   });
