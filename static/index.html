@@ -126,6 +126,16 @@
                           <span ng-bind-html="nt.ntype | rawHtml" class="message"></span>
                         </span>
                       </a>
+
+                    </li>
+                    <li ng-show="countNotification > 0">
+                    <!-- paginator -->
+                      
+                        <uib-pagination total-items="countNotification" ng-model="currentPage" class="pagination-sm pagination" previous-text="&lsaquo;" next-text="&rsaquo;" 
+                        first-text="&laquo;" last-text="&raquo;" items-per-page="5">
+                        </uib-pagination>
+                      
+                      <!-- /paginator -->
                     </li>
                   </ul>
                   <ul ng-if="countNotification === 0" class="dropdown-menu list-unstyled msg_list animated fadeInDown" role="menu">

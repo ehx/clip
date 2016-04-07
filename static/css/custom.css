@@ -4434,7 +4434,6 @@ img.avatar {
 
 ul.messages li .message_date {
     float: right;
-    text-align: right;
     margin-right: 10px;
 }
 
@@ -6519,7 +6518,7 @@ ul.notifications {
 }
 
 .gris {
-    color: #9C9999;
+    color: #000000;
 }
 
 .emergency-label{
@@ -6553,3 +6552,13 @@ ul.notifications {
     background-color: #1ABBA3 !important;
     border-color: #267768;
 }
+
+.star {
+    color: #F5F220;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: orange;
+}
+
+ .comments {
+    list-style-type: none;
+ }

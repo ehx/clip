@@ -50,7 +50,7 @@
                 </td>
                 <td>
                   <div id="tasktitle">
-                    <a href="#/task/{{tdTask.id}}" >{{tdTask.title}}</a>
+                    <a href="#/task/{{tdTask.id}}" uib-popover="{{tdTask.title}}" popover-trigger="mouseenter" popover-placement="top-left">{{tdTask.title}}</a>
                     <br />
                     <small>Creada el {{tdTask.creation_date | moment:'DD/MM/YYYY'}}</small>
                   </div>

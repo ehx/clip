@@ -93,6 +93,7 @@ class TaskComment(models.Model):
     user = models.ForeignKey(User, null=True, verbose_name="Usuario")
     comment = models.CharField(max_length= 5000, verbose_name="Comentario")
     docfile = models.FileField(upload_to='%Y-%m-%d', null=True, blank=True)
+    favourite = models.BooleanField(default=0, verbose_name='Favorito')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     
@@ -158,6 +159,7 @@ class Milestone(models.Model):
     task = models.ForeignKey(Task, null=True, verbose_name="Tarea")
     date = models.DateField(verbose_name="Fecha")
     description = models.CharField(max_length=255, verbose_name='Descripcion')
+    done = models.BooleanField(default=0, verbose_name='Completado')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     

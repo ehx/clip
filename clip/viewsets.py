@@ -99,7 +99,7 @@ class TaskCommentViewSet(viewsets.ModelViewSet):
     queryset = TaskComment.objects.all().order_by('-created_at')
     serializer_class = TaskCommentSerializer
     filter_backends = (filters.DjangoFilterBackend,)
-    filter_fields = ('id', 'task', 'user', 'docfile')
+    filter_fields = ('id', 'task', 'user', 'docfile', 'favourite')
     pagination_class = StandardResultsSetPagination
     permission_classes = (IsOwnerOrReadOnly, IsAuthenticated)
 
@@ -186,7 +186,7 @@ class MilestoneViewSet(viewsets.ModelViewSet):
     queryset = Milestone.objects.all().order_by('-date')
     serializer_class = MilestoneSerializer
     filter_backends = (filters.DjangoFilterBackend,)
-    filter_fields = ('id', 'task', 'user', 'date', 'description')
+    filter_fields = ('id', 'task', 'user', 'date', 'description', 'done')
 
     def get_serializer_class(self):
         if self.action == 'retrieve':

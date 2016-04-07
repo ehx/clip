@@ -14,22 +14,17 @@
         <div class="clearfix"></div>
       </div>
       <div class="x_content">
-          <div ng-repeat="cat in categoryToFilter() | filter:filterCategory">
+          <input ng-model="searchTip" tabindex="0" aria-invalid="false" type="text" class="form-control" placeholder="Filtrar tips..." style="border-radius: 5px;">
+          </br>
+          <div ng-repeat="cat in categoryToFilter() | filter:filterCategory | filter: searchTip">
             <b>{{cat.category}}</b>
-            <li ng-repeat="tip in tips | filter:{category: cat.category}">{{tip.description}}</li>        
+            <li ng-repeat="tip in tips | filter:{category: cat.category}" style="list-style: none;" ng-bind-html="tip.description | rawHtml">
+            </li>
           </div>
       </div>
     </div>
   </div>
-
-
-
-
 </div>
-
-
-
-
 
 <!-- Modal -->
 <div id="myModal" class="modal fade" role="dialog">
@@ -53,7 +48,7 @@
             <div class="col-xs-12">
               <div class="form-group">
                 <label for="description">Descripcion :</label>
-                <input required type='text' class="form-control" ng-model="tip.description" id="description">
+                <div text-angular ng-model="tip.description" name="comment" id="description"></div>
               </div>
             </div>
           </div>

@@ -10,10 +10,10 @@ function userService(configurationResource, $q) {
   function getAvatar(userId){
     var d = $q.defer();
 
-    configurationResource.query({
+    configurationResource.get({
       user : userId
     }, function(data) {
-      d.resolve(data.avatar);
+      d.resolve(data[0].avatar);
     })
     return d.promise;
   }
