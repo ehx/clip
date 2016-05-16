@@ -6440,25 +6440,25 @@ ul.notifications {
 .ur-red{
     width: 5em;
     color: #FFFFFF;
-    background-color: #7A82AB;
+    background-color: #0A369D;
 }
 
 .ur-yellow{
     width: 5em;
     color: #FFFFFF;
-    background-color: #949FD1;
+    background-color: #4472CA;
 }
 
 .ur-green{
     width: 5em;
     color: #FFFFFF;
-    background-color: #B1B2DB;
+    background-color: #5E7CE2;
 }
 
 .ur-black{
     width: 5em;
     color: #FFFFFF;
-    background-color: #C6D4FF;
+    background-color: #92B4F4;
 }
 
 #tasktitle a {
