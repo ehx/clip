@@ -6410,14 +6410,14 @@ ul.notifications {
 }
 
 .btn-danger { 
-    border-color: #BF3636; 
-    background-color: #EF6E6E;
+    border-color: #EF8D2D;
+    background-color: #EDA65A;
 }
 
 .btn-danger:hover{
     transition: background-color 0.8s ease;
-    border-color: #EF6E6E; 
-    background-color: #EF6E6E;
+    border-color: #EC4F3C;
+    background-color: #D23E2C;
 }
 
 .btn-info { 
@@ -6572,3 +6572,7 @@ ul.notifications {
  .comments {
     list-style-type: none;
  }
+
+.fa-plus-square:before {
+    color: #18A999 !important; 
+}
