@@ -6440,7 +6440,7 @@ ul.notifications {
 .ur-red{
     width: 5em;
     color: #FFFFFF;
-    background-color: #EF6E6E;
+    background-color: #7A82AB;
 }
 
 .ur-yellow{
@@ -6452,13 +6452,13 @@ ul.notifications {
 .ur-green{
     width: 5em;
     color: #FFFFFF;
-    background-color: #D0FF5B;
+    background-color: #307473;
 }
 
 .ur-black{
     width: 5em;
     color: #FFFFFF;
-    background-color: #575E68;
+    background-color: #C6D4FF;
 }
 
 #tasktitle a {
@@ -6467,6 +6467,7 @@ ul.notifications {
     overflow:hidden;
     text-overflow:ellipsis;
     white-space:nowrap;
+    display: inline-block;
 }
 
 .divisor{
