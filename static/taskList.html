@@ -2,30 +2,38 @@
   <div class="col-md-9 col-sm-9 col-xs-12">
     <div class="x_panel">
       <div class="x_title">
-        <h2>Lista de tareas</h2>
-        <ul class="nav navbar-right panel_toolbox">
-          <li>
-            <p class="top-5">Exportar :</p>
-          </li>
-          <li>
-            <i class="fa fa-file-pdf-o icon-15 pull-right" ng-click="exportAction('pdf')"></i>
-          </li>
-          <li>
-            <i class="fa fa-file-excel-o icon-15 pull-right" ng-click="exportAction('excel')"></i>
-          </li>
-          <li>
-            <i class="fa fa-file-word-o icon-15 pull-right" ng-click="exportAction('doc')"></i>
-          </li>
-          <li>
+        <h2>Lista de tareas ({{count}})</h2>
+        <ul class="nav navbar-right panel_toolbox" uib-popover="Nueva tarea" popover-trigger="mouseenter" popover-placement="left">
             <a class="collapse-link">
-            <i class="fa fa-plus-square icon-20 pull-right" data-toggle="modal" data-target="#myModal"></i>
+              <i class="fa fa-plus-square icon-29 pull-right" data-toggle="modal" data-target="#myModal"></i>
             </a>
           </li>
         </ul>
         <div class="clearfix"></div>
       </div>
       <div class="x_content">
-        <input ng-model="searchTask" tabindex="0" aria-invalid="false" type="text" class="form-control" placeholder="Filtrar tarea..." style="border-radius: 5px;">
+        <div class="row">
+          <div class="col-lg-10">
+            <input ng-model="searchTask" tabindex="0" aria-invalid="false" type="text" class="form-control" placeholder="Filtrar tarea..." style="border-radius: 5px;" autofocus="autofocus">
+          </div>
+          <div class="col-lg-2">
+            <ul class="nav navbar-right panel_toolbox">
+              <li>
+                <p class="top-5 margin-top15">Exportar :</p>
+              </li>
+              <li>
+                <i class="fa fa-file-pdf-o icon-15 pull-right margin-top15" ng-click="exportAction('pdf')"></i>
+              </li>
+              <li>
+                <i class="fa fa-file-excel-o icon-15 pull-right margin-top15" ng-click="exportAction('excel')"></i>
+              </li>
+              <li>
+                <i class="fa fa-file-word-o icon-15 pull-right margin-top15" ng-click="exportAction('doc')"></i>
+              </li>
+              <li>
+            </ul>
+          </div>
+        </div>
         </br>
         <!-- task list -->
         <div class="table-responsive">
@@ -35,7 +43,7 @@
                 <th>Modulo</th>
                 <th>Nombre</th>
                 <th>Urgencia</th>
-                <th>Fecha comprometida</th>
+                <th>Deadline</th>
                 <th>Accion</th>
               </tr>
             </thead>

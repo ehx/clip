@@ -6386,6 +6386,12 @@ ul.notifications {
     color: #FFFFFF;
 }
 
+.margin-top15 {
+    margin-top: 15px !important;
+    margin-bottom: 0px !important;
+}
+
+
 .icon-20 {
     font-size: 20px;
 }
@@ -6395,60 +6401,64 @@ ul.notifications {
     margin-top: 7px;
 }
 
+.icon-29 {
+    font-size: 29px;
+}
+
 .top-5 {
     margin-top: 5px;
 }
 
 .btn-danger { 
     border-color: #BF3636; 
-    background-color: #d84f4f;
+    background-color: #EF6E6E;
 }
 
 .btn-danger:hover{
     transition: background-color 0.8s ease;
-    border-color: #BF3636; 
-    background-color: #b02727;
+    border-color: #EF6E6E; 
+    background-color: #EF6E6E;
 }
 
 .btn-info { 
-    border-color: #A29797;
-    background-color: #969090;
+    border-color: #575E68;
+    background-color: #575E68;
 }
 
 .btn-info:hover{
     transition: background-color 0.8s ease;
-    border-color: #A29797;
-    background-color: #584E4E;
+    border-color: #575E68;
+    background-color: #575E68;
 }
 
 .btn-info:visited{
     transition: background-color 0.8s ease;
-    border-color: #A29797;
-    background-color: #584E4E;
+    border-color: #575E68;
+    background-color: #575E68;
 }
 
 .ur-red{
     width: 5em;
     color: #FFFFFF;
-    background-color: #BF3636;
+    background-color: #EF6E6E;
 }
 
 .ur-yellow{
     width: 5em;
     color: #FFFFFF;
-    background-color: #CEA76C;
+    background-color: #B1B2DB;
 }
 
 .ur-green{
     width: 5em;
     color: #FFFFFF;
-    background-color: #1ABB9C;
+    background-color: #D0FF5B;
 }
 
 .ur-black{
     width: 5em;
     color: #FFFFFF;
-    background-color: #584E4E;
+    background-color: #575E68;
 }
 
 #tasktitle a {
@@ -6457,7 +6467,6 @@ ul.notifications {
     overflow:hidden;
     text-overflow:ellipsis;
     white-space:nowrap;
-    display:inline-block;
 }
 
 .divisor{

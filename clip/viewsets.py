@@ -58,7 +58,7 @@ class NotificationViewSet(viewsets.ModelViewSet):
         return NotificationSerializerWriter
 
 class TaskViewSet(viewsets.ModelViewSet):
-    queryset = Task.objects.all().order_by('priority').order_by('urgency')
+    queryset = Task.objects.all().order_by('-urgency').order_by('priority')
     filter_backends = (filters.DjangoFilterBackend,)
     filter_fields = ('id', 'title', 'done', 'user', 'client')
     permission_classes = (IsOwnerOrReadOnly, IsAuthenticated)
