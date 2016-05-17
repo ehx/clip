@@ -6467,7 +6467,7 @@ ul.notifications {
 
 #tasktitle a {
     position:relative;
-    width: 35em;
+    width: 32em;
     overflow:hidden;
     text-overflow:ellipsis;
     white-space:nowrap;
