@@ -75,7 +75,7 @@ class Task(models.Model):
     finish_date = models.DateField(null=True, verbose_name='Fecha Comprometida')
     estimation_hours = models.IntegerField(default=0, verbose_name='Horas Estimada')
     description = models.CharField(default='', max_length=255, verbose_name='Descripcion')
-    identificator = models.IntegerField(default=0, verbose_name='Incidente')
+    identificator = models.CharField(max_length=30, verbose_name='Incidente', blank=True)
     done = models.BooleanField(default=0, verbose_name='Completado')
     module = models.ForeignKey(Module, null=True, verbose_name="Modulo")
     status = models.ForeignKey(Status, null=True, verbose_name="Estado")

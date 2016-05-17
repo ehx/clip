@@ -15,7 +15,7 @@ class StandardResultsSetPagination(PageNumberPagination):
     max_page_size = 100
 
 class ModuleViewSet(viewsets.ModelViewSet):
-    queryset = Module.objects.all()
+    queryset = Module.objects.all().order_by('name')
     serializer_class = ModuleSerializer
     filter_backends = (filters.DjangoFilterBackend,)
 
@@ -58,7 +58,7 @@ class NotificationViewSet(viewsets.ModelViewSet):
         return NotificationSerializerWriter
 
 class TaskViewSet(viewsets.ModelViewSet):
-    queryset = Task.objects.all().order_by('-urgency').order_by('priority')
+    queryset = Task.objects.all().order_by('-urgency')
     filter_backends = (filters.DjangoFilterBackend,)
     filter_fields = ('id', 'title', 'done', 'user', 'client')
     permission_classes = (IsOwnerOrReadOnly, IsAuthenticated)
@@ -78,7 +78,7 @@ class TaskViewSet(viewsets.ModelViewSet):
         return TaskSerializerWriter
 
 class ClientViewSet(viewsets.ModelViewSet):
-    queryset = Client.objects.all()
+    queryset = Client.objects.all().order_by('name').order_by('lastname')
     filter_backends = (filters.DjangoFilterBackend,)
     filter_fields = ('id', 'name', 'lastname')
 
@@ -129,19 +129,19 @@ class TodoViewSet(viewsets.ModelViewSet):
         return queryset        
 
 class StatusViewSet(viewsets.ModelViewSet):
-    queryset = Status.objects.all()
+    queryset = Status.objects.all().order_by('name')
     serializer_class = StatusSerializer
     filter_backends = (filters.DjangoFilterBackend,)
     filter_fields = ('id', 'name')
     
 class UrgencyViewSet(viewsets.ModelViewSet):
-    queryset = Urgency.objects.all()
+    queryset = Urgency.objects.all().order_by('name')
     serializer_class = UrgencySerializer
     filter_backends = (filters.DjangoFilterBackend,)
     filter_fields = ('id', 'name')
 
 class UrgencyViewSet(viewsets.ModelViewSet):
-    queryset = Urgency.objects.all()
+    queryset = Urgency.objects.all().order_by('name')
     serializer_class = UrgencySerializer
     filter_backends = (filters.DjangoFilterBackend,)
     filter_fields = ('id', 'name')

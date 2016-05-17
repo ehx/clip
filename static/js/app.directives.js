@@ -213,3 +213,15 @@ angular.module('app').service('avatarUpload', ['$http', function($http) {
     })
   }
 }])
+
+angular.module('app').directive('scrollOnClick', function() {
+  return {
+    restrict: 'A',
+    link: function(scope, $elm) {
+      $elm.on('click', function() {
+        var $el = angular.element("div[contenteditable=true]");
+        $("body").animate({scrollTop: $el.offset().top}, "slow");
+      });
+    }
+  }
+});

@@ -27,9 +27,18 @@
             <div id="myTabContent" class="tab-content">
               <div role="tabpanel" class="tab-pane fade active in" id="comments-tab" aria-labelledby="comment-tab">
                 <!-- user messages -->
+                <div class="row clearfix margin-b10">
+                  <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11">
+                    <input ng-model="searchComment" tabindex="0" aria-invalid="false" type="text" class="form-control pull-left" placeholder="Buscar comentario..." 
+                    style="border-radius: 5px">
+                  </div>
+                  <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+                    <a scroll-on-click>
+                      <i class="fa fa-pencil-square-o icon-36 pull-right" aria-hidden="true"></i>
+                    </a>
+                  </div>
+                </div>
                 <ul class="messages">
-                  <input ng-model="searchComment" tabindex="0" aria-invalid="false" type="text" class="form-control" placeholder="Buscar comentario..." style="border-radius: 5px;">
-                  </br>
                   <li class="comments" ng-if="totalItems > 0" ng-repeat="comment in allComments | filter:{ comment : searchComment }">
                     <img ng-src="{{ comment.user.avatar || 'images/user.png'}}" class="avatar" alt="Avatar">
                     <div class="message_date">
@@ -76,7 +85,7 @@
                 <!-- end of user messages -->
                 <form name="form" ng-submit="newComment(form)">
                   <div class="form-group">
-                    <div text-angular ng-model="cm.comment" name="comment"></div>
+                    <div id="comments" text-angular ng-model="cm.comment" name="comment"></div>
                     <input file-model="cm.docfile" name="docfile" type="file" class="btn">
                   </div>
                   <div class="form-group">
@@ -200,7 +209,7 @@
               <div role="tabpanel" class="tab-pane fade" id="comments-stars" aria-labelledby="comments-stars">
                 <!-- /comments-stars -->
                 <ul class="messages">
-                  <input ng-model="searchComment" tabindex="0" aria-invalid="false" type="text" class="form-control" placeholder="Buscar comentario..." style="border-radius: 5px;">
+                  <input ng-model="searchComment" tabindex="0" aria-invalid="false" type="text" class="form-control" placeholder="Buscar comentario..." style="border-radius: 5px;width: 96%;">
                   </br>
                   <li class="comments" ng-if="totalItems > 0" ng-repeat="comment in allComments | filter: { comment : searchComment } | filter: {favourite : true}">
                     <img ng-src="{{ comment.user.avatar || 'images/user.png'}}" class="avatar" alt="Avatar">

@@ -6405,6 +6405,10 @@ ul.notifications {
     font-size: 29px;
 }
 
+.icon-36 {
+    font-size: 36px;
+}
+
 .top-5 {
     margin-top: 5px;
 }
@@ -6463,7 +6467,7 @@ ul.notifications {
 
 #tasktitle a {
     position:relative;
-    width: 220px;
+    width: 35em;
     overflow:hidden;
     text-overflow:ellipsis;
     white-space:nowrap;
@@ -6508,19 +6512,19 @@ ul.notifications {
 }
 
 .future {
-    background-color: #355D88
+    background-color: #4472CA;
 } 
 
 .past {
-    background-color: rgba(193, 43, 43, 0.76);
+    background-color: #0A369D;
 }
 
 .next {
-    background-color: rgb(171, 150, 27);
+    background-color: #92B4F4;
 }
 
 .now {
-    background-color: rgba(15, 130, 108, 0.94);
+    background-color: #5E7CE2;
 }
 
 .blanco {
@@ -6575,4 +6579,8 @@ ul.notifications {
 
 .fa-plus-square:before {
     color: #18A999 !important; 
+}
+
+.margin-b10{
+    margin-bottom: 10px;
 }
