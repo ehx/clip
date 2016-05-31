@@ -47,7 +47,7 @@ class TaskSerializerWriter(serializers.ModelSerializer):
         model = Task
         fields = (
             'id', 'identificator', 'title', 'description', 'done', 'start_date', 'finish_date', 'client', 'user',
-            'priority', 'urgency', 'estimation_hours', 'module', 'status', 'implementation_id')
+            'priority', 'urgency', 'estimation_hours', 'module', 'status', 'om', 'implementation_id')
 
 class TaskSerializer(serializers.ModelSerializer):
     user = UserSerializer()
@@ -59,7 +59,7 @@ class TaskSerializer(serializers.ModelSerializer):
         model = Task
         fields = (
             'id', 'identificator', 'title', 'description', 'done', 'start_date', 'finish_date', 'client', 'user',
-            'priority', 'urgency', 'estimation_hours', 'module', 'status', 'implementation_id')
+            'priority', 'urgency', 'estimation_hours', 'module', 'status', 'om', 'implementation_id')
 
 class TaskCommentSerializerWriter(serializers.ModelSerializer):
     class Meta:

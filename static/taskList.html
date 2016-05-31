@@ -4,46 +4,48 @@
       <div class="x_title">
         <h2>Lista de tareas ({{count}})</h2>
         <ul class="nav navbar-right panel_toolbox" uib-popover="Nueva tarea" popover-trigger="mouseenter" popover-placement="left">
-            <a class="collapse-link">
-              <i class="fa fa-plus-square icon-29 pull-right" data-toggle="modal" data-target="#myModal"></i>
-            </a>
-          </li>
+          <a class="btn-floating btn-small waves-effect waves-light green-std"><i class="fa fa-plus" data-toggle="modal" data-target="#myModal"></i></a>
         </ul>
         <div class="clearfix"></div>
       </div>
       <div class="x_content">
         <div class="row">
           <div class="col-lg-10">
-            <input ng-model="searchTask" tabindex="0" aria-invalid="false" type="text" class="form-control" placeholder="Filtrar tarea..." style="border-radius: 5px;" autofocus="autofocus">
+            <input ng-model="searchTask" tabindex="0" aria-invalid="false" type="text" class="form-control" placeholder="Filtrar tarea..." autofocus="autofocus">
           </div>
           <div class="col-lg-2">
-            <ul class="nav navbar-right panel_toolbox">
-              <li>
-                <p class="top-5 margin-top15">Exportar :</p>
-              </li>
-              <li>
-                <i class="fa fa-file-pdf-o icon-15 pull-right margin-top15" ng-click="exportAction('pdf')"></i>
-              </li>
-              <li>
-                <i class="fa fa-file-excel-o icon-15 pull-right margin-top15" ng-click="exportAction('excel')"></i>
-              </li>
-              <li>
-                <i class="fa fa-file-word-o icon-15 pull-right margin-top15" ng-click="exportAction('doc')"></i>
-              </li>
-              <li>
-            </ul>
+            <div class="fixed-action-btn horizontal pull-right">
+              <a class="btn-floating btn-small blue-grey">
+                <i class="fa fa-external-link"></i>
+              </a>
+              <ul>
+                <li><a class="btn-floating blue-grey lighten-3"><i class="fa fa-file-pdf-o" ng-click="exportAction('pdf')"></i></a></li>
+                <li><a class="btn-floating blue-grey lighten-2"><i class="fa fa-file-excel-o" ng-click="exportAction('excel')"></i></a></li>
+                <li><a class="btn-floating blue-grey lighten-1"><i class="fa fa-file-word-o" ng-click="exportAction('doc')"></i></a></li>
+              </ul>
+            </div>
           </div>
         </div>
-        </br>
-        <!-- task list -->
+        <!-- task list -->  
         <div class="table-responsive">
           <table class="table table-striped responsive-utilities export-table">
             <thead>
               <tr>
-                <th class="col-lg-1 col-md-1 col-sm-1 col-xs-1">Modulo</th>
-                <th class="col-lg-8 col-md-8 col-sm-8 col-xs-8">Nombre</th>
-                <th class="col-lg-1 col-md-1 col-sm-1 col-xs-1">Urgencia</th>
-                <th class="col-lg-1 col-md-1 col-sm-1 col-xs-1">Deadline</th>
+                <th ng-click="order('module.tag')" class="col-lg-1 col-md-1 col-sm-1 col-xs-1 noselect">Modulo
+                  <i class="iconTable fa fa-angle-up" ng-show="predicate === 'module.tag'"></i>
+                </th>
+                <th ng-click="order('title')" class="col-lg-6 col-md-6 col-sm-6 col-xs-6 noselect">Nombre
+                  <i class="iconTable fa fa-angle-up" ng-show="predicate === 'title'"></i>
+                </th>
+                <th ng-click="order('urgency.id')" class="col-lg-1 col-md-1 col-sm-1 col-xs-1 noselect">Urgencia
+                  <i class="iconTable fa fa-angle-up" ng-show="predicate === 'urgency.id'"></i>
+                </th>
+                <th ng-click="order('om')" class="col-lg-1 col-md-1 col-sm-1 col-xs-1 noselect">Resp. OyP
+                  <i class="iconTable fa fa-angle-up" ng-show="predicate === 'om'"></i>
+                </th>
+                <th ng-click="order('finish_date')" class="col-lg-1 col-md-1 col-sm-1 col-xs-1 noselect">Deadline
+                  <i class="iconTable fa fa-angle-up" ng-show="predicate === 'finish_date'"></i>
+                </th>
                 <th class="col-lg-1 col-md-1 col-sm-1 col-xs-1">Accion</th>
               </tr>
             </thead>
@@ -51,14 +53,15 @@
               <tr ng-repeat="tdTask in tasks | 
                 filter: (vm.client || '') |
                 filterBy: ['user.id', 'client.id']: vm.client |
-                filter: {$:searchTask }"
+                filter: {$:searchTask } | 
+                orderBy:predicate:reverse"
                 >
                 <td>
                   {{ tdTask.module.tag }}
                 </td>
                 <td>
                   <div id="tasktitle">
-                    <a href="#/task/{{tdTask.id}}" uib-popover="{{tdTask.title}}" popover-trigger="mouseenter" popover-placement="top-left">{{tdTask.title}}</a>
+                    <a href="#/task/{{tdTask.id}}" tooltipped data-position="bottom" data-delay="50" data-tooltip="{{tdTask.title}}">{{tdTask.title}}</a>
                     <br />
                     <small>Creada el {{tdTask.creation_date | moment:'DD/MM/YYYY'}}</small>
                   </div>
@@ -71,6 +74,12 @@
                     'ur-black'  : tdTask.urgency.id == 1,
                     }">{{ tdTask.urgency.name }}</span>
                 </td>
+                <td ng-if="tdTask.om">
+                  {{ tdTask.om }}
+                </td>
+                <td ng-if="!tdTask.om">
+                  Ninguno
+                </td>
                 <td ng-if="tdTask.finish_date">
                   {{ tdTask.finish_date | moment:'DD/MM/YYYY'}}
                 </td>
@@ -78,7 +87,7 @@
                   n/a
                 </td>
                 <td>
-                  <a confirmed-click="deleteTask(tdTask.id)" ng-confirm-click="Desea borrar la tarea?" class="btn btn-danger btn-xs pull-right">
+                  <a confirmed-click="deleteTask(tdTask.id)" ng-confirm-click="Desea borrar la tarea?" class="btn-floating btn-small waves-effect waves-light naranja-std pull-right">
                     <i class="fa fa-trash-o"></i>
                   </a>
                 </td>
@@ -98,7 +107,7 @@
       </div>
       <div class="x_content">
         <div style="padding-right: 20px;">
-          <input ng-model="searchReferent" tabindex="0" aria-invalid="false" type="text" class="form-control" placeholder="Filtrar..." style="margin-left: 10px;border-radius: 5px;">
+          <input ng-model="searchReferent" tabindex="0" aria-invalid="false" type="text" class="form-control" placeholder="Filtrar..." style="margin-left: 10px">
           <br>
         </div>
         <div ng-repeat="client in clients | orderBy:['organization','lastname','firstname'] | filter:filterFullname" class="animated flipInY col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -117,7 +126,7 @@
 <div id="myModal" class="modal fade" role="dialog">
   <div class="modal-dialog">
     <div class="modal-content">
-      <form ng-submit="newTask()">
+      <form ng-submit="newTask()" name="form">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
           <h4 class="modal-title">Nueva tarea</h4>
@@ -127,7 +136,10 @@
             <div class="col-xs-12">
               <div class="form-group">
                 <label for="title">Titulo :</label>
-                <input required type='text' class="form-control" ng-model="task.title" id="title">
+                <input 
+                  ng-required="true"
+                  ng-model="task.title"
+                  name="title" id="title" class="form-control" type='text'>
               </div>
             </div>
           </div>
@@ -135,16 +147,24 @@
             <div class="col-xs-6">
               <div class="form-group">
                 <label for="moduleSelect">Modulo :</label>
-                <select required name="moduleSelect" id="moduleSelect" ng-model="task.module" class="form-control">
-                  <option ng-repeat="optM in modules" value="{{optM.id}}">{{optM.tag}} - {{optM.name}}</option>
+                <select 
+                  ng-required="true"
+                  ng-options="optM.id as optM.name for optM in modules" 
+                  ng-model="task.module"
+                  name="moduleSelect" id="moduleSelect" class="form-control">
+                  <option value="">-</option>
                 </select>
               </div>
             </div>
             <div class="col-xs-6">
               <div class="form-group">
                 <label for="clientSelect">Referente :</label>
-                <select required name="clientSelect" id="clientSelect" ng-model="task.client" class="form-control">
-                  <option ng-repeat="option in clientsM" value="{{option.userR.id}}">{{option.userR.first_name}} {{option.userR.last_name}}</option>
+                <select 
+                  ng-required="true"
+                  ng-options="option.userR.id as option.userR.first_name + ' ' + option.userR.last_name for option in clientsM" 
+                  ng-model="task.client" 
+                  name="clientSelect" id="clientSelect" class="form-control">
+                  <option value="">-</option>
                 </select>
               </div>
             </div>
@@ -153,15 +173,21 @@
             <div class="col-xs-6">
               <div class="form-group">
                 <label for="urgencySelect">Urgencia :</label>
-                <select required name="urgencySelect" id="urgencySelect" ng-model="task.urgency" class="form-control">
-                  <option ng-repeat="ur in urgency" value="{{ur.id}}">{{ur.name}}</option>
+                <select 
+                  ng-required="true"
+                  ng-options="ur.id as ur.name for ur in urgency" 
+                  ng-model="task.urgency"
+                  name="urgencySelect" id="urgencySelect" class="form-control">
+                  <option value="">-</option>
                 </select>
               </div>
             </div>
             <div class="col-xs-6">
               <div class="form-group">
                 <label for="estimation_hours">Horas estimadas:</label>
-                <input type='text' class="form-control" ng-model="task.estimation_hours" id="estimation_hours">
+                <input 
+                  ng-model="task.estimation_hours" 
+                  name="estimation_hours" id="estimation_hours" class="form-control" type='text'>
               </div>
             </div>
           </div>
@@ -169,13 +195,20 @@
             <div class="col-xs-6">
               <div class="form-group">
                 <label for="start_date">Fecha de comienzo :</label>
-                <input type='text' class="form-control" ng-model="task.start_date" id="start_date" jqdatepicker format="yy-mm-dd"> 
+                <input 
+                  jqdatepicker format="yy-mm-dd" 
+                  ng-required="true"
+                  ng-model="task.start_date" 
+                  name="start_date" id="start_date" class="form-control" type='text'> 
               </div>
             </div>
             <div class="col-xs-6">
               <div class="form-group">
                 <label for="finish_date">Fecha de finalizacion :</label>
-                <input type="text" class="form-control" ng-model="task.finish_date" id="finish_date" jqdatepicker format="yy-mm-dd">
+                <input 
+                  jqdatepicker format="yy-mm-dd" 
+                  ng-model="task.finish_date" 
+                  name="finish_date" id="finish_date" class="form-control" type="text">
               </div>
             </div>
           </div>
@@ -183,13 +216,18 @@
             <div class="col-xs-6">
               <div class="form-group">
                 <label for="description">Descripcion :</label>
-                <input type='text' class="form-control" ng-model="task.description" id="description">
+                <input 
+                  ng-required="true"
+                  ng-model="task.description" 
+                  name="description" id="description" class="form-control" type='text'>
               </div>
             </div>
             <div class="col-xs-6">
               <div class="form-group">
                 <label for="identificator">Identificador :</label>
-                <input type='text' class="form-control" ng-model="task.identificator" id="identificator">
+                <input 
+                  ng-model="task.identificator" 
+                  name="identificator" id="identificator" class="form-control" type='text'>
               </div>
             </div>
           </div>
@@ -197,29 +235,41 @@
             <div class="col-xs-6">
               <div class="form-group">
                 <label for="implementation_id">Id. Administrador de implementacion :</label>
-                <input type='text' class="form-control" ng-model="task.implementation_id" id="implementation_id">
+                <input 
+                  ng-model="task.implementation_id" 
+                  name="implementation_id" id="implementation_id" class="form-control" type='text'>
               </div>
             </div>
             <div class="col-xs-6">
               <div class="form-group">
                 <label for="priority">Orden :</label>
-                <input type='text' class="form-control" ng-model="task.priority" id="priority">
+                <input 
+                  ng-model="task.priority" 
+                  name="priority" id="priority" class="form-control" type='text'>
               </div>
             </div>
           </div>
           <div class="row">
             <div class="col-xs-6">
               <label for="statusSelect">Estado :</label>
-              <select required name="statusSelect" id="statusSelect" ng-model="task.status" class="form-control">
-                <option ng-repeat="status in Tstatus" value="{{status.id}}">{{status.name}}</option>
+              <select 
+                ng-required="true" 
+                ng-options="status.id as status.name for status in Tstatus" 
+                ng-model="task.status"
+                name="statusSelect" id="statusSelect" class="form-control">
+                <option value="">-</option>
               </select>
             </div>
-            <div class="col-xs-6"> 
+            <div class="col-xs-6">
+              <label for="om">Responsable OyP :</label>
+              <input 
+                  ng-model="task.om" 
+                  name="om" id="om" class="form-control" type='text'>
             </div>
           </div>
         </div>
         <div class="modal-footer">
-          <button ng-click="ok()" class="btn btn-info" type="submit">Guardar</button>
+          <button ng-click="form.$valid && ok()" class="btn btn-info" type="submit">Guardar</button>
           <button ng-click="cancel()" data-dismiss="modal" class="btn btn-default">Cerrar</button>
         </div>
       </form>
@@ -227,3 +277,10 @@
   </div>
 </div>
 </div>
+
+
+<script>
+  $('th').click(function(){
+    $("[class^='iconTable']").toggleClass('fa-angle-down fa-angle-up');
+  })
+</script>

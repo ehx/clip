@@ -6444,25 +6444,25 @@ ul.notifications {
 .ur-red{
     width: 5em;
     color: #FFFFFF;
-    background-color: #0A369D;
+    background-color: #001A23;
 }
 
 .ur-yellow{
     width: 5em;
     color: #FFFFFF;
-    background-color: #4472CA;
+    background-color: #31493C;
 }
 
 .ur-green{
     width: 5em;
     color: #FFFFFF;
-    background-color: #5E7CE2;
+    background-color: #7A9E7E;
 }
 
 .ur-black{
     width: 5em;
     color: #FFFFFF;
-    background-color: #92B4F4;
+    background-color: #B3EFB2;
 }
 
 #tasktitle a {
@@ -6584,3 +6584,34 @@ ul.notifications {
 .margin-b10{
     margin-bottom: 10px;
 }
+
+
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none;   /* Chrome/Safari/Opera */
+  -khtml-user-select: none;    /* Konqueror */
+  -moz-user-select: none;      /* Firefox */
+  -ms-user-select: none;       /* Internet Explorer/Edge */
+  user-select: none;           /* Non-prefixed version, currently
+                                  not supported by any browser */
+}
+
+.verde-std, .verde-std:hover{
+    background-color: #26B99A;
+    color: #fff;
+}
+
+.verde-texto {
+    color: #1ABB9C;
+}
+
+.gris-std, .gris-std:hover{
+    background-color: #575E68;
+    color: #fff;
+}
+
+.naranja-std, .naranja-std:hover{
+    background-color: #EDA65A;
+    color: #fff;
+}
+

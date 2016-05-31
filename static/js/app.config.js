@@ -90,6 +90,14 @@ function configFunction($httpProvider, $resourceProvider, localStorageServicePro
     }
   })
 
+  .when('/test/', {
+    templateUrl: 'test.html',
+    
+    resolve: {
+      loggedIn: onlyLoggedIn
+    }
+  })
+
   .otherwise({
     redirectTo: '/login/'
   });

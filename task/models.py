@@ -77,8 +77,9 @@ class Task(models.Model):
     description = models.CharField(default='', max_length=255, verbose_name='Descripcion')
     identificator = models.CharField(max_length=30, verbose_name='Incidente', blank=True)
     done = models.BooleanField(default=0, verbose_name='Completado')
-    module = models.ForeignKey(Module, null=True, verbose_name="Modulo")
+    module = models.ForeignKey(Module, verbose_name="Modulo")
     status = models.ForeignKey(Status, null=True, verbose_name="Estado")
+    om = models.CharField(max_length=100, blank=True, verbose_name="Responsable OyP")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

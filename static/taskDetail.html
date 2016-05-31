@@ -29,13 +29,10 @@
                 <!-- user messages -->
                 <div class="row clearfix margin-b10">
                   <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11">
-                    <input ng-model="searchComment" tabindex="0" aria-invalid="false" type="text" class="form-control pull-left" placeholder="Buscar comentario..." 
-                    style="border-radius: 5px">
+                    <input ng-model="searchComment" tabindex="0" aria-invalid="false" type="text" class="form-control pull-left" placeholder="Buscar comentario...">
                   </div>
                   <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
-                    <a scroll-on-click>
-                      <i class="fa fa-pencil-square-o icon-36 pull-right" aria-hidden="true"></i>
-                    </a>
+                    <a scroll-on-click class="btn-floating btn-small waves-effect waves-light green-std"><i class="fa fa-pencil"></i></a>
                   </div>
                 </div>
                 <ul class="messages">
@@ -64,13 +61,11 @@
                     <div class="row">
                       <div class="col-xs-2 col-xs-offset-10 col-md-2 col-md-offset-10">
                         <span class="btn-group pull-right" role="group">
-                          <button class="btn btn-xs" ng-click="makeFavourite(comment)">
-                            <i class="fa fa-star star" ng-if="comment.favourite === true"></i>
-                            <i class="fa fa-star-o" ng-if="comment.favourite === false"></i>
-                          </button>
-                          <button class="btn btn-xs" ng-if="userId === comment.user.id" ng-click="deleteComment(comment.id)">
-                            <i class="fa fa-trash-o"></i> 
-                          </button>
+                          <a ng-click="makeFavourite(comment)" class="btn-floating btn-small waves-effect waves-light blue-grey lighten-1">
+                            <i ng-if="comment.favourite === true" class="fa fa-star"></i>
+                            <i ng-if="comment.favourite === false" class="fa fa-star-o"></i>
+                          </a>
+                          <a ng-if="userId === comment.user.id" ng-click="deleteComment(comment.id)" class="btn-floating btn-small waves-effect waves-light blue-grey lighten-1"><i class="fa fa-trash-o"></i></a>
                         </span>
                       </div>
                     </div>
@@ -102,7 +97,7 @@
               <div role="tabpanel" class="tab-pane fade" id="profile-tab" aria-labelledby="profile-tab">
                 <!-- /checklist-tab -->
                 <div ng-controller="todoController" class="wrapper-md">
-                  <input ng-model="searchTodo" tabindex="0" aria-invalid="false" type="text" class="form-control" placeholder="Filtrar tarea a realizar..." style="border-radius: 5px;">
+                  <input ng-model="searchTodo" tabindex="0" aria-invalid="false" type="text" class="form-control" placeholder="Filtrar tarea a realizar...">
                   </br>
                   <div>
                     <form ng-submit="addTodo()" id="todo-form" class="ng-pristine ng-valid">
@@ -209,8 +204,7 @@
               <div role="tabpanel" class="tab-pane fade" id="comments-stars" aria-labelledby="comments-stars">
                 <!-- /comments-stars -->
                 <ul class="messages">
-                  <input ng-model="searchComment" tabindex="0" aria-invalid="false" type="text" class="form-control" placeholder="Buscar comentario..." style="border-radius: 5px;width: 96%;">
-                  </br>
+                  <input ng-model="searchComment" tabindex="0" aria-invalid="false" type="text" class="form-control" placeholder="Buscar comentario..." style="width: 96%;">
                   <li class="comments" ng-if="totalItems > 0" ng-repeat="comment in allComments | filter: { comment : searchComment } | filter: {favourite : true}">
                     <img ng-src="{{ comment.user.avatar || 'images/user.png'}}" class="avatar" alt="Avatar">
                     <div class="message_date">
@@ -267,7 +261,7 @@
               <div class="clearfix"></div>
             </div>
             <div class="panel-body">
-              <h3 class="green">{{task.title}}</h3>
+              <h3 class="verde-texto">{{task.title}}</h3>
               <p>
                 <b>Descripcion :</b> {{task.description}}
               </p>
@@ -279,46 +273,50 @@
                 <b>Propietario de la tarea : </b>{{task.user.first_name}} {{task.user.last_name}}
               </p>
               <div class="divisor"></div>
-              <p>
+              <p ng-if="task.identificator">
                 <b>Cod. Tarea :</b>
                 <a href="#" onaftersave="updateTask()" editable-text="task_update.identificator">{{task.identificator}}</a>
               </p>
-              <p>
+              <p ng-if="task.start_date">
                 <b>Fecha de comienzo :</b>
                 <a href="#" onaftersave="updateTask()" editable-date="task_update.start_date" e-datepicker-popup="yyyy-MM-dd">{{task.start_date}}</a>
               </p>
-              <p>
+              <p ng-if="task.finish_date">
                 <b>Fecha de finalizacion :</b>
                 <a href="#" onaftersave="updateTask()" editable-date="task_update.finish_date" e-datepicker-popup="yyyy-MM-dd">{{task.finish_date}}</a>
               </p>
-              <p>
+              <p ng-if="task.estimation_hours">
                 <b>Horas estimadas :</b>
                 <a href="#" onaftersave="updateTask()" editable-text="task_update.estimation_hours">{{task.estimation_hours}}</a> hs
               </p>
-              <p>
+              <p ng-if="task.implementation_id">
                 <b>Cod. Admin. Implementacion :</b>
                 <a href="#" onaftersave="updateTask()" editable-text="task_update.implementation_id">{{task.implementation_id}}</a>
               </p>
-              <p>
+              <p ng-if="task.urgency.name">
                 <b>Urgencia :</b>
                 <a href="#" onaftersave="updateTask()" editable-select="task_update.urgency" e-ng-options="item.id as item.name for item in urgency">{{task.urgency.name}}</a>
               </p>
-              <p>
+              <p ng-if="task.module.name">
                 <b>Modulo :</b>
                 <a href="#" onaftersave="updateTask()" editable-select="task_update.module" e-ng-options="item.id as item.name for item in modules">{{task.module.name}}</a>
               </p>
-              <p>
+              <p ng-if="task.status.name">
                 <b>Estado :</b>
                 <a href="#" onaftersave="updateTask()" editable-select="task_update.status" e-ng-options="item.id as item.name for item in Tstatus">{{task.status.name}}</a>
               </p>
-              <p>
+              <p ng-if="task.priority">
                 <b>Orden :</b>
                 <a href="#" onaftersave="updateTask()" editable-text="task_update.priority">{{task.priority}}</a>
               </p>
+              <p ng-if="task.om">
+                <b>Responsable OyP :</b>
+                <a href="#" onaftersave="updateTask()" editable-text="task_update.om">{{task.om}}</a>
+              </p>
               <div class="mtop20">
-                <button ng-if="!task.done" ng-click="doneTask()" class="btn btn-sm btn-info">Cerrar tarea</button>
-                <button ng-if="task.done" ng-click="openTask()" class="btn btn-sm btn-info">Abrir tarea</button>
-                <button ng-if="userId === task.user.id" ng-click="deleteTask()" class="btn btn-sm btn-danger">Borrar tarea</button>
+                <button ng-if="!task.done" ng-click="doneTask()" class="waves-effect waves-light btn btn-sm gris-std"><i class="fa fa-lock left"></i>Cerrar tarea</button>
+                <button ng-if="task.done" ng-click="openTask()" class="waves-effect waves-light btn btn-sm gris-std"><i class="fa fa-unlock left"></i>Abrir tarea</button>
+                <button ng-if="userId === task.user.id" ng-click="deleteTask()" class="waves-effect waves-light btn btn-sm naranja-std"><i class="fa fa-trash left"></i>Borrar tarea</button>
               </div>
               <div ng-if="attachments.length > 0">
                 <div class="ln_solid"></div>
@@ -331,6 +329,13 @@
                     </a>
                   </li>
                 </ul>
+
+                <div>
+                  <uib-pagination boundary-links="true" total-items="totalAttach" ng-model="asd" class="pagination-sm pagination" 
+                  previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;" ng-change="pageChangedAttach()" items-per-page="5">
+                  </uib-pagination>
+                </div>
+
               </div>
             </div>
           </section>
