@@ -2,47 +2,79 @@
   <div class="col-md-9 col-sm-9 col-xs-12">
     <div class="x_panel">
       <div class="x_title">
-        <h2>Historial de tareas</h2>
+        <h2>Lista de tareas cerradas ({{count}})</h2>
         <div class="clearfix"></div>
       </div>
       <div class="x_content">
-        <input ng-model="searchTask" tabindex="0" aria-invalid="false" type="text" class="form-control" placeholder="Filtrar tarea..." style="border-radius: 5px;">
-        </br>
-        <!-- task list -->
+        <div class="row">
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <input ng-model="searchTask" tabindex="0" aria-invalid="false" type="text" class="form-control form-control-inline pull-left" placeholder="Filtrar tarea..." autofocus="autofocus" 
+            id="searchTask">
+            <span class="fixed-action-btn horizontal pull-right hidden-xs hidden-md" id="btn-export">
+              <a class="btn-floating btn-small blue-grey" >
+                <i class="fa fa-external-link" ></i>
+              </a>
+              <ul>
+                <li><a class="btn-floating blue-grey lighten-3"><i class="fa fa-file-pdf-o" ng-click="exportAction('pdf')"></i></a></li>
+                <li><a class="btn-floating blue-grey lighten-2"><i class="fa fa-file-excel-o" ng-click="exportAction('excel')"></i></a></li>
+                <li><a class="btn-floating blue-grey lighten-1"><i class="fa fa-file-word-o" ng-click="exportAction('doc')"></i></a></li>
+              </ul>
+            </span>
+          </div>
+        </div>
+        <!-- task list -->  
         <div class="table-responsive">
-          <table class="table table-striped responsive-utilities export-table">
+          <table id="TaskList" class="table table-striped responsive-utilities export-table">
             <thead>
               <tr>
-                <th>Modulo</th>
-                <th>Nombre</th>
-                <th>Urgencia</th>
-                <th>Fecha comprometida</th>
-                <th>Accion</th>
+                <th ng-click="order('module.tag')" class="col-lg-1 col-md-1 col-sm-1 col-xs-1 noselect">Modulo
+                  <i class="iconTable fa fa-angle-up" ng-show="predicate === 'module.tag'"></i>
+                </th>
+                <th ng-click="order('title')" class="col-lg-6 col-md-6 col-sm-6 col-xs-6 noselect">Nombre
+                  <i class="iconTable fa fa-angle-up" ng-show="predicate === 'title'"></i>
+                </th>
+                <th ng-click="order('urgency.id')" class="col-lg-1 col-md-1 col-sm-1 col-xs-1 noselect">Urgencia
+                  <i class="iconTable fa fa-angle-up" ng-show="predicate === 'urgency.id'"></i>
+                </th>
+                <th ng-click="order('om')" class="col-lg-1 col-md-1 col-sm-1 col-xs-1 noselect">Resp. OyP
+                  <i class="iconTable fa fa-angle-up" ng-show="predicate === 'om'"></i>
+                </th>
+                <th ng-click="order('finish_date')" class="col-lg-1 col-md-1 col-sm-1 col-xs-1 noselect">Deadline
+                  <i class="iconTable fa fa-angle-up" ng-show="predicate === 'finish_date'"></i>
+                </th>
+                <th class="col-lg-1 col-md-1 col-sm-1 col-xs-1">Accion</th>
               </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="tdTask in tasks | 
-                  filter: (vm.client || '') |
-                  filterBy: ['user.id', 'client.id']: vm.client |
-                  filter: {$:searchTask }"
+              <tr ng-repeat="tdTask in tasks | 
+                filter: (vm.client || '') |
+                filterBy: ['user.id', 'client.id']: vm.client |
+                filter: {$:searchTask } | 
+                orderBy:predicate:reverse"
                 >
                 <td>
                   {{ tdTask.module.tag }}
                 </td>
                 <td>
                   <div id="tasktitle">
-                    <a href="#/task/{{tdTask.id}}" >{{tdTask.title}}</a>
+                    <a href="#/task/{{tdTask.id}}" tooltipped data-position="bottom" data-delay="50" data-tooltip="{{tdTask.title}}">{{tdTask.title}}</a>
                     <br />
                     <small>Creada el {{tdTask.creation_date | moment:'DD/MM/YYYY'}}</small>
                   </div>
                 </td>
                 <td>
-                  <span class="btn btn-xs" ng-class="{
-                    'ur-red'    : tdTask.urgency.id == 4,
-                    'ur-yellow' : tdTask.urgency.id == 3,
-                    'ur-green'  : tdTask.urgency.id == 2,
-                    'ur-black'  : tdTask.urgency.id == 1,
+                  <span class="emergency-label" ng-class="{
+                    'ur-red'    :tdTask.urgency.id == 4,
+                    'ur-yellow' :tdTask.urgency.id == 3,
+                    'ur-green'  :tdTask.urgency.id == 2,
+                    'ur-black'  :tdTask.urgency.id == 1,
                     }">{{ tdTask.urgency.name }}</span>
+                </td>
+                <td ng-if="tdTask.om">
+                  {{ tdTask.om }}
+                </td>
+                <td ng-if="!tdTask.om">
+                  Ninguno
                 </td>
                 <td ng-if="tdTask.finish_date">
                   {{ tdTask.finish_date | moment:'DD/MM/YYYY'}}
@@ -51,11 +83,8 @@
                   n/a
                 </td>
                 <td>
-                  <a ng-click="" href="" class="btn btn-info btn-xs">
-                  <i class="fa fa-pencil"></i>
-                  </a>
-                  <a confirmed-click="deleteTask(tdTask.id)" ng-confirm-click="Desea borrar la tarea?" class="btn btn-danger btn-xs">
-                  <i class="fa fa-trash-o"></i>
+                  <a confirmed-click="deleteTask(tdTask.id)" ng-confirm-click="Desea borrar la tarea?" class="btn-floating btn-small waves-effect waves-light naranja-std pull-right">
+                    <i class="fa fa-trash-o"></i>
                   </a>
                 </td>
               </tr>
@@ -74,7 +103,7 @@
       </div>
       <div class="x_content">
         <div style="padding-right: 20px;">
-          <input ng-model="searchReferent" tabindex="0" aria-invalid="false" type="text" class="form-control" placeholder="Filtrar..." style="margin-left: 10px;border-radius: 5px;">
+          <input ng-model="searchReferent" tabindex="0" aria-invalid="false" type="text" class="form-control" placeholder="Filtrar..." style="margin-left: 10px">
           <br>
         </div>
         <div ng-repeat="client in clients | orderBy:['organization','lastname','firstname'] | filter:filterFullname" class="animated flipInY col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -89,3 +118,18 @@
     </div>
   </div>
 </div>
+</div>
+
+<script>
+  $('th').click(function(){
+    $("[class^='iconTable']").toggleClass('fa-angle-down fa-angle-up');
+  });
+
+  $('#btn-export').mouseover(function(){
+    $('#searchTask').css('width', '80%')
+  });
+
+  $('#btn-export').mouseleave(function(){
+    $('#searchTask').css('width', '95%')
+  });
+</script>

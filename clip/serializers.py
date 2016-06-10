@@ -127,9 +127,9 @@ class MilestoneSerializerWriter(serializers.ModelSerializer):
 class TipSerializer(serializers.ModelSerializer):
     class Meta:
         model = Tip
-        fields = ('id', 'description', 'category', 'user')
+        fields = ('id', 'description', 'title', 'user', 'color')
 
 class TipSerializerWriter(serializers.ModelSerializer):
     class Meta:
         model = Tip
-        fields = ('id', 'description', 'category', 'user')
+        fields = ('id', 'description', 'title', 'user', 'color')

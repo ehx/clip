@@ -10,25 +10,24 @@
       </div>
       <div class="x_content">
         <div class="row">
-          <div class="col-lg-10">
-            <input ng-model="searchTask" tabindex="0" aria-invalid="false" type="text" class="form-control" placeholder="Filtrar tarea..." autofocus="autofocus">
-          </div>
-          <div class="col-lg-2">
-            <div class="fixed-action-btn horizontal pull-right">
-              <a class="btn-floating btn-small blue-grey">
-                <i class="fa fa-external-link"></i>
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <input ng-model="searchTask" tabindex="0" aria-invalid="false" type="text" class="form-control form-control-inline pull-left" placeholder="Filtrar tarea..." autofocus="autofocus" 
+            id="searchTask">
+            <span class="fixed-action-btn horizontal pull-right hidden-xs hidden-md" id="btn-export">
+              <a class="btn-floating btn-small blue-grey" >
+                <i class="fa fa-external-link" ></i>
               </a>
               <ul>
                 <li><a class="btn-floating blue-grey lighten-3"><i class="fa fa-file-pdf-o" ng-click="exportAction('pdf')"></i></a></li>
                 <li><a class="btn-floating blue-grey lighten-2"><i class="fa fa-file-excel-o" ng-click="exportAction('excel')"></i></a></li>
                 <li><a class="btn-floating blue-grey lighten-1"><i class="fa fa-file-word-o" ng-click="exportAction('doc')"></i></a></li>
               </ul>
-            </div>
+            </span>
           </div>
         </div>
         <!-- task list -->  
         <div class="table-responsive">
-          <table class="table table-striped responsive-utilities export-table">
+          <table id="TaskList" class="table table-striped responsive-utilities export-table">
             <thead>
               <tr>
                 <th ng-click="order('module.tag')" class="col-lg-1 col-md-1 col-sm-1 col-xs-1 noselect">Modulo
@@ -68,10 +67,10 @@
                 </td>
                 <td>
                   <span class="emergency-label" ng-class="{
-                    'ur-red'    : tdTask.urgency.id == 4,
-                    'ur-yellow' : tdTask.urgency.id == 3,
-                    'ur-green'  : tdTask.urgency.id == 2,
-                    'ur-black'  : tdTask.urgency.id == 1,
+                    'ur-red'    :tdTask.urgency.id == 4,
+                    'ur-yellow' :tdTask.urgency.id == 3,
+                    'ur-green'  :tdTask.urgency.id == 2,
+                    'ur-black'  :tdTask.urgency.id == 1,
                     }">{{ tdTask.urgency.name }}</span>
                 </td>
                 <td ng-if="tdTask.om">
@@ -129,13 +128,13 @@
       <form ng-submit="newTask()" name="form">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Nueva tarea</h4>
+          <h5 class="modal-title">Nueva tarea</h5>
         </div>
         <div class="modal-body">
           <div class="row">
             <div class="col-xs-12">
-              <div class="form-group">
-                <label for="title">Titulo :</label>
+              <div class="form-group input-field">
+                <label for="title">Titulo</label>
                 <input 
                   ng-required="true"
                   ng-model="task.title"
@@ -145,8 +144,8 @@
           </div>
           <div class="row">
             <div class="col-xs-6">
-              <div class="form-group">
-                <label for="moduleSelect">Modulo :</label>
+              <div class="form-group input-field">
+                <label for="moduleSelect">Modulo</label>
                 <select 
                   ng-required="true"
                   ng-options="optM.id as optM.name for optM in modules" 
@@ -157,8 +156,8 @@
               </div>
             </div>
             <div class="col-xs-6">
-              <div class="form-group">
-                <label for="clientSelect">Referente :</label>
+              <div class="form-group input-field">
+                <label for="clientSelect">Referente</label>
                 <select 
                   ng-required="true"
                   ng-options="option.userR.id as option.userR.first_name + ' ' + option.userR.last_name for option in clientsM" 
@@ -171,8 +170,8 @@
           </div>
           <div class="row">
             <div class="col-xs-6">
-              <div class="form-group">
-                <label for="urgencySelect">Urgencia :</label>
+              <div class="form-group input-field">
+                <label for="urgencySelect">Urgencia</label>
                 <select 
                   ng-required="true"
                   ng-options="ur.id as ur.name for ur in urgency" 
@@ -183,8 +182,8 @@
               </div>
             </div>
             <div class="col-xs-6">
-              <div class="form-group">
-                <label for="estimation_hours">Horas estimadas:</label>
+              <div class="form-group input-field">
+                <label for="estimation_hours">Horas estimadas</label>
                 <input 
                   ng-model="task.estimation_hours" 
                   name="estimation_hours" id="estimation_hours" class="form-control" type='text'>
@@ -193,8 +192,8 @@
           </div>
           <div class="row">
             <div class="col-xs-6">
-              <div class="form-group">
-                <label for="start_date">Fecha de comienzo :</label>
+              <div class="form-group input-field">
+                <label for="start_date">Fecha de comienzo</label>
                 <input 
                   jqdatepicker format="yy-mm-dd" 
                   ng-required="true"
@@ -203,8 +202,8 @@
               </div>
             </div>
             <div class="col-xs-6">
-              <div class="form-group">
-                <label for="finish_date">Fecha de finalizacion :</label>
+              <div class="form-group input-field">
+                <label for="finish_date">Fecha de finalizacion</label>
                 <input 
                   jqdatepicker format="yy-mm-dd" 
                   ng-model="task.finish_date" 
@@ -214,8 +213,8 @@
           </div>
           <div class="row">
             <div class="col-xs-6">
-              <div class="form-group">
-                <label for="description">Descripcion :</label>
+              <div class="form-group input-field">
+                <label for="description">Descripcion</label>
                 <input 
                   ng-required="true"
                   ng-model="task.description" 
@@ -223,8 +222,8 @@
               </div>
             </div>
             <div class="col-xs-6">
-              <div class="form-group">
-                <label for="identificator">Identificador :</label>
+              <div class="form-group input-field">
+                <label for="identificator">Identificador</label>
                 <input 
                   ng-model="task.identificator" 
                   name="identificator" id="identificator" class="form-control" type='text'>
@@ -233,16 +232,16 @@
           </div>
           <div class="row">
             <div class="col-xs-6">
-              <div class="form-group">
-                <label for="implementation_id">Id. Administrador de implementacion :</label>
+              <div class="form-group input-field">
+                <label for="implementation_id">Id. Administrador de implementacion</label>
                 <input 
                   ng-model="task.implementation_id" 
                   name="implementation_id" id="implementation_id" class="form-control" type='text'>
               </div>
             </div>
             <div class="col-xs-6">
-              <div class="form-group">
-                <label for="priority">Orden :</label>
+              <div class="form-group input-field">
+                <label for="priority">Orden</label>
                 <input 
                   ng-model="task.priority" 
                   name="priority" id="priority" class="form-control" type='text'>
@@ -251,7 +250,7 @@
           </div>
           <div class="row">
             <div class="col-xs-6">
-              <label for="statusSelect">Estado :</label>
+              <label for="statusSelect">Estado</label>
               <select 
                 ng-required="true" 
                 ng-options="status.id as status.name for status in Tstatus" 
@@ -261,10 +260,12 @@
               </select>
             </div>
             <div class="col-xs-6">
-              <label for="om">Responsable OyP :</label>
-              <input 
-                  ng-model="task.om" 
-                  name="om" id="om" class="form-control" type='text'>
+              <div class="form-group input-field">
+                <label for="om">Responsable OyP</label>
+                <input 
+                    ng-model="task.om" 
+                    name="om" id="om" class="form-control" type='text'>
+              </div>
             </div>
           </div>
         </div>
@@ -278,9 +279,16 @@
 </div>
 </div>
 
-
 <script>
   $('th').click(function(){
     $("[class^='iconTable']").toggleClass('fa-angle-down fa-angle-up');
-  })
+  });
+
+  $('#btn-export').mouseover(function(){
+    $('#searchTask').css('width', '80%')
+  });
+
+  $('#btn-export').mouseleave(function(){
+    $('#searchTask').css('width', '95%')
+  });
 </script>

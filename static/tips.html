@@ -4,23 +4,28 @@
     <div class="x_panel">
       <div class="x_title">
         <h2>Tips</h2>
-        <ul class="nav navbar-right panel_toolbox">
-          <li>
-            <a class="collapse-link">
-              <i class="fa fa-plus-square icon-20 pull-right" data-toggle="modal" data-target="#myModal"></i>
-            </a>
-          </li>
+        <ul class="nav navbar-right panel_toolbox" uib-popover="Nuevo tip" popover-trigger="mouseenter" popover-placement="left">
+          <a class="btn-floating btn-small waves-effect waves-light green-std">
+            <i class="fa fa-plus" data-toggle="modal" data-target="#myModal"></i></a>
+          </a>
         </ul>
         <div class="clearfix"></div>
       </div>
       <div class="x_content">
-          <input ng-model="searchTip" tabindex="0" aria-invalid="false" type="text" class="form-control" placeholder="Filtrar tips..." style="border-radius: 5px;">
-          </br>
-          <div ng-repeat="cat in categoryToFilter() | filter:filterCategory | filter: searchTip">
-            <b>{{cat.category}}</b>
-            <li ng-repeat="tip in tips | filter:{category: cat.category}" style="list-style: none;" ng-bind-html="tip.description | rawHtml">
-            </li>
-          </div>
+        <input ng-model="searchTip" tabindex="0" aria-invalid="false" type="text" class="form-control" placeholder="Filtrar tips...">
+        </br>
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="row">
+              <div ng-repeat="tip in tips | filter: searchTip" class="col-md-4">
+                <div class="bs-callout" style="border-left-color: {{tip.color}};">
+                  <p class="text-category">{{ tip.title }}</p>
+                  <p ng-bind-html="tip.description" class="bs-description"></p>
+                </div>
+              </div>
+            </div><!--/row-->    
+          </div><!--/col-12-->
+        </div><!--/row-->
       </div>
     </div>
   </div>
@@ -33,21 +38,28 @@
       <form ng-submit="newTask()">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Nuevo tip</h4>
+          <h5 class="modal-title">Nuevo tip</h5>
         </div>
         <div class="modal-body">
           <div class="row">
             <div class="col-xs-6">
-              <div class="form-group">
-                <label for="category">Categoria :</label>
+              <div class="form-group input-field">
+                <label for="category">Categoria</label>
                 <input required type='text' class="form-control" ng-model="tip.category" id="category">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-6">
+              <div class="form-group">
+                <button colorpicker colorpicker-position="top" ng-model="tip.color" class="btn btn-default" type="button">Cambiar color</button>
               </div>
             </div>
           </div>
           <div class="row">
             <div class="col-xs-12">
               <div class="form-group">
-                <label for="description">Descripcion :</label>
+                <label for="description">Descripcion</label>
                 <div text-angular ng-model="tip.description" name="comment" id="description"></div>
               </div>
             </div>
