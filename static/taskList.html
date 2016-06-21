@@ -33,7 +33,7 @@
                 <th ng-click="order('module.tag')" class="col-lg-1 col-md-1 col-sm-1 col-xs-1 noselect">Modulo
                   <i class="iconTable fa fa-angle-up" ng-show="predicate === 'module.tag'"></i>
                 </th>
-                <th ng-click="order('title')" class="col-lg-6 col-md-6 col-sm-6 col-xs-6 noselect">Nombre
+                <th ng-click="order('title')" class="col-lg-8 col-md-8 col-sm-8 col-xs-8 noselect">Nombre
                   <i class="iconTable fa fa-angle-up" ng-show="predicate === 'title'"></i>
                 </th>
                 <th ng-click="order('urgency.id')" class="col-lg-1 col-md-1 col-sm-1 col-xs-1 noselect">Urgencia
@@ -45,7 +45,7 @@
                 <th ng-click="order('finish_date')" class="col-lg-1 col-md-1 col-sm-1 col-xs-1 noselect">Deadline
                   <i class="iconTable fa fa-angle-up" ng-show="predicate === 'finish_date'"></i>
                 </th>
-                <th class="col-lg-1 col-md-1 col-sm-1 col-xs-1">Accion</th>
+                <th class=""></th>
               </tr>
             </thead>
             <tbody>
@@ -60,7 +60,7 @@
                 </td>
                 <td>
                   <div id="tasktitle">
-                    <a href="#/task/{{tdTask.id}}" tooltipped data-position="bottom" data-delay="50" data-tooltip="{{tdTask.title}}">{{tdTask.title}}</a>
+                    <a href="#/task/{{tdTask.id}}" popover-animation="true" uib-popover="{{tdTask.title}}">{{tdTask.title}}</a>
                     <br />
                     <small>Creada el {{tdTask.creation_date | moment:'DD/MM/YYYY'}}</small>
                   </div>
@@ -73,11 +73,8 @@
                     'ur-black'  :tdTask.urgency.id == 1,
                     }">{{ tdTask.urgency.name }}</span>
                 </td>
-                <td ng-if="tdTask.om">
-                  {{ tdTask.om }}
-                </td>
-                <td ng-if="!tdTask.om">
-                  Ninguno
+                <td>
+                  {{ tdTask.om || 'Ninguno'}}
                 </td>
                 <td ng-if="tdTask.finish_date">
                   {{ tdTask.finish_date | moment:'DD/MM/YYYY'}}

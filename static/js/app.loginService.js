@@ -34,7 +34,6 @@ function loginService($http, $location, localStorageService, toaster, RESOURCES,
     	// login erroneo , muestra error
       return toaster.pop({
         type: 'error',
-        title: 'Error',
         body: 'Los datos ingresados son incorrectos.',
         showMethod: 'fadeIn',
         hideMethod: 'fadeOut',

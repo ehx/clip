@@ -41,7 +41,12 @@ angular.module('app').filter('extension', function($sce) {
       var txtCut = txt.split(".");
       switch (txtCut[txtCut.length - 1]) {
         case 'doc':
+        case 'docx':
           return 'fa fa-file-word-o'
+          break;
+        case 'xls':
+        case 'xlsx':
+          return 'fa fa-file-excel-o'
           break;
         case 'pdf':
           return 'fa fa-file-pdf-o'
@@ -50,7 +55,18 @@ angular.module('app').filter('extension', function($sce) {
           return 'fa fa-mail-forward'
           break;
         case 'png':
+        case 'jpg':
           return 'fa fa-picture-o'
+          break;
+        case 'msg':
+          return 'fa fa-envelope-o'
+          break;
+        case 'txt':
+          return 'fa fa-file-text-o'
+          break;
+        case 'zip':
+        case 'rar':
+          return 'fa fa-file-archive-o'
           break;
         default:
           return 'fa fa-file-o'

@@ -10,31 +10,24 @@
     <title>EQuality | Clip </title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> 
 
-
-
-    <link href="components/textAngular/dist/textAngular.css" rel="stylesheet">
     <link rel="stylesheet" href="css/jquery-ui.css"/>
-    <link rel="stylesheet" href="css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="css/bootstrap.custom.css"/>
     <link rel="stylesheet" href="css/isteven-multi-select.css"/>
     <link rel="stylesheet" href="fonts/css/font-awesome.min.css"/>
     <link rel="stylesheet" href="css/animate.min.css"/>
     <link rel="stylesheet" href="css/icheck/flat/green.css"/>
     
     <link rel="stylesheet" href="css/normalize.css"/>
-    <link rel="stylesheet" href="css/toaster.min.css"/>
+    
     <link rel="stylesheet" href="css/switchery/switchery.min.css"/>
     <link rel="stylesheet" href="css/xeditable.css"/>
     <script src="js/jquery.min.js"></script>
 
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="materialize/css/materialize-custom.css">
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/angular-bootstrap-colorpicker/3.0.25/css/colorpicker.min.css">
-
     <link rel="stylesheet" href="css/custom.css"/>
-
-
-    
+    <link href="components/textAngular/dist/textAngular.css" rel="stylesheet">
 
     <!--[if lt IE 9]>
     <script src="../assets/js/ie8-responsive-file-warning.js"></script>
@@ -48,6 +41,7 @@
   <body ng-controller="mainController" class="nav-md">
     <div class="container body">
       <div class="main_container">
+        <toaster-container></toaster-container>
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
@@ -75,17 +69,17 @@
                   </li>
                   <li>
                     <a href="#/todo">
-                    <i class="fa fa-tasks"></i> Mis tareas
+                      <i class="fa fa-tasks"></i> Mi Agenda
                     </a>
                   </li>
                   <li>
                     <a href="#/messages">
-                    <i class="fa fa-envelope-o"></i> Centro de mensajes</span>
+                      <i class="fa fa-envelope-o"></i> Centro de mensajes
                     </a>
                   </li>
                   <li>
                     <a href="#/tips">
-                    <i class="fa fa-bullseye"></i> Tips</span>
+                      <i class="fa fa-bullseye"></i> Tips
                     </a>
                   </li>
                 </ul>
@@ -123,7 +117,7 @@
                 <li role="presentation" class="dropdown">
                   <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
                   <i class="fa fa-envelope-o"></i>
-                  <span class="badge bg-green">{{countNotification}}</span>
+                  <span class="badge-sm bg-green">{{countNotification}}</span>
                   </a>
                   <ul ng-if="countNotification > 0" id="menu1" class="dropdown-menu list-unstyled msg_list animated fadeInDown" role="menu">
                     <li ng-repeat="nt in notifications">

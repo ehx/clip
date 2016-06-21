@@ -1,30 +1,4 @@
-<div class="row">
-    <div class="col s12">
-        <ul class="tabs">
-            <li class="tab col m3 s12"><a class="blue-text" href="#voted">Votes</a></li>
-            <li class="tab col m3 s12"><a class="blue-text" href="#posts">Posts</a></li>
-            <li class="tab col m3 s12"><a class="blue-text" href="#followers">Followers</a></li>
-            <li class="tab col m3 s12"><a class="blue-text" href="#following">Following</a></li>
-            <div class="indicator blue" style="z-index:1"></div>
-        </ul>
-    </div>
-    <div id="voted" class="col s12 right-align">
-        <h4 class="right grey lighten-1 black-text text-lighten-1" title="Votes">&nbsp; +120 &nbsp;<a href="#" class="right green waves-effect white-text" id="btnVoteUp">&nbsp;<i class="mdi-social-plus-one small"></i>&nbsp;</a></h4>
-    </div>
-    <div id="posts" class="col s12">Test 2</div>
-    <div id="followers" class="col s12">Test 3</div>
-    <div id="following" class="col s12">Test 4</div>
-</div>
-
-
-<pagination
-    page="1"
-    page-size="10"
-    total="200"
-    show-prev-next="true"
-    use-simple-prev-next="false"
-    dots="...."
-    hide-if-empty="false"
-    adjacent="2"
-    scroll-top="false"
-    pagination-action="changePage(page)" />
+                    <p class="calendar">
+                      {{comment.created_at |  moment:'DD'}}
+                      <em>{{comment.created_at | moment:'MMM'}}</em>
+                    </p>

@@ -317,7 +317,7 @@ dark,
 }
 
 .bg-green {
-    background: #1ABB9C !important;
+    background: #26A69A !important;
     border: 1px solid #1ABB9C !important;
     color: #fff;
 }
@@ -1076,6 +1076,7 @@ h2 {
     border-bottom: 2px solid #E6E9ED;
     padding: 1px 5px 6px;
     margin-bottom: 10px;
+    padding-left: 15px;
 }
 
 .x_title .filter {
@@ -1768,6 +1769,7 @@ ul.msg_list li a .message {
 
 ul.to_do {
     padding: 0;
+    margin-top: 10px;
 }
 
 ul.to_do li {
@@ -4434,7 +4436,7 @@ img.avatar {
 
 ul.messages li .message_date {
     float: right;
-    margin-right: 10px;
+    margin-right: 13px;
 }
 
 ul.messages li .message_wrapper {
@@ -4522,7 +4524,7 @@ ul.project_files li {
 }
 
 ul.project_files li a i {
-    width: 20px;
+    width: 30px;
 }
 
 .project_detail p {
@@ -6358,11 +6360,6 @@ ul.notifications {
     font-size: 16px;
 }        
 
-.pagination>li>a:hover, .pagination>li>span:hover, .pagination>li>a:focus, .pagination>li>span:focus {
-    background-color: #1ABBA3 !important;
-    border-color: #267768;
-}
-
 .padd-top {
     padding-top: 8px;
 }
@@ -6521,11 +6518,11 @@ ul.notifications {
 }
 
 .future {
-    background-color: #4472CA;
+    background-color: #C9D8C5;
 } 
 
 .past {
-    background-color: #0A369D;
+    background-color: #5E5E5E;
 }
 
 .next {
@@ -6533,7 +6530,7 @@ ul.notifications {
 }
 
 .now {
-    background-color: #5E7CE2;
+    background-color: #95AF8C;
 }
 
 .blanco {
@@ -6569,11 +6566,6 @@ ul.notifications {
 
 .nav, .pagination, .carousel, .panel-title a {
     cursor: pointer;
-}
-
-.pagination>li>a:hover, .pagination>li>span:hover, .pagination>li>a:focus, .pagination>li>span:focus {
-    background-color: #1ABBA3 !important;
-    border-color: #267768;
 }
 
 .star {
@@ -6718,4 +6710,202 @@ span.badge.date {
 
 .padding-b10 {
     padding-bottom: 10px;
+}
+
+.ta-toolbar button {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.ta-toolbar button {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.ta-toolbar button:hover {
+    background-color: #E8E8E8;
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.18), 0 0 0 0 rgba(0, 0, 0, 0.15);
+}
+
+.ta-toolbar button i {
+    font-size: 0.8rem;
+}
+
+textarea:focus,
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="datetime"]:focus,
+input[type="datetime-local"]:focus,
+input[type="date"]:focus,
+input[type="month"]:focus,
+input[type="time"]:focus,
+input[type="week"]:focus,
+input[type="number"]:focus,
+input[type="email"]:focus,
+input[type="url"]:focus,
+input[type="search"]:focus,
+input[type="tel"]:focus,
+input[type="color"]:focus,
+.uneditable-input:focus {   
+  border-color: rgba(126, 239, 104, 0.8);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px #26a69a;
+  outline: 0 none;
+}
+
+.btn-task {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.calendar {
+    padding-top:5px;
+    float:left;
+    width:70px;
+    background:#ededef;
+    background: #EDEDED; 
+    font:bold 30px/60px Arial Black, Arial, Helvetica, sans-serif;
+    text-align:center;
+    color:#000;
+    text-shadow:#fff 0 1px 0;   
+    -moz-border-radius:3px;
+    -webkit-border-radius:3px;
+    border-radius:3px;  
+    position:relative;
+    -moz-box-shadow:0 2px 2px #888;
+    -webkit-box-shadow:0 2px 2px #888;
+    box-shadow:0 2px 2px #888;
+}
+.calendar em {
+    display:block;
+    font:normal bold 11px/30px Arial, Helvetica, sans-serif;
+    color:#fff;
+    text-shadow:#16A287 0 -1px 0;   
+    background:#04599a;
+    background:-webkit-gradient(linear, left top, left bottom, from(#16A287), to(#16A287)); 
+    background:-moz-linear-gradient(top,  #04599a,  #00365a); 
+    -moz-border-radius-bottomright:3px;
+    -webkit-border-bottom-right-radius:3px; 
+    border-bottom-right-radius:3px;
+    -moz-border-radius-bottomleft:3px;
+    -webkit-border-bottom-left-radius:3px;  
+    border-bottom-left-radius:3px;  
+    border-top:1px solid #16A287;
+}
+.calendar:before, .calendar:after {
+    content:'';
+    float:left;
+    position:absolute;
+    top:5px;    
+    width:8px;
+    height:8px;
+    background:#111;
+    z-index:1;
+    -moz-border-radius:10px;
+    -webkit-border-radius:10px;
+    border-radius:10px;
+    -moz-box-shadow:0 1px 1px #fff;
+    -webkit-box-shadow:0 1px 1px #fff;
+    box-shadow:0 1px 1px #fff;
+}
+.calendar:before { 
+  left:11px
+}   
+.calendar:after {
+  right:11px
+}
+.calendar em:before, .calendar em:after {
+    content:'';
+    float:left;
+    position:absolute;
+    top:-5px;   
+    width:4px;
+    height:14px;
+    background:#dadada;
+    background:-webkit-gradient(linear, left top, left bottom, from(#f1f1f1), to(#aaa)); 
+    background:-moz-linear-gradient(top,  #f1f1f1,  #aaa); 
+    z-index:2;
+    -moz-border-radius:2px;
+    -webkit-border-radius:2px;
+    border-radius:2px;
+}
+.calendar em:before { left:13px }   
+.calendar em:after { right:13px }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.messages .date {
+    padding-top: 10px;
+    background-color: #EDEDED;
+    color: #78909C;
+    min-height: 48px;
+    min-width: 48px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 700;
+    text-transform: uppercase;
+    border-radius: 50%;
+}
+
+.messages .date span {
+    display: block;
+    line-height: 14px;
+}
+
+.messages .date .month {
+    font-size: 11px;
+}
+
+
+
+@mixin vertical-align($position: relative) {
+  position: $position;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+.vertical-align {
+  @include vertical-align();
+}
+
+.pagination li.active {
+  background-color: #26A69A;
+}
+
+.pagination a:hover {
+    text-decoration: none;
+}
+
+.info-number .badge-sm {
+    font-size: 10px;
+    font-weight: normal;
+    line-height: 13px;
+    padding: 2px 6px;
+    position: absolute;
+    right: 2px;
+    top: 8px;
+}
+.badge-sm {
+    padding: 0 6px;
+    text-align: center;
+    font-size: 1rem;
+    line-height: inherit;
+    color: #757575;
+    position: absolute;
+    right: 15px;
+    border-radius: 10px;
+    box-sizing: border-box;
 }

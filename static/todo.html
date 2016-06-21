@@ -10,7 +10,7 @@
         <div class="form-group">
           <div class="row">
             <div class="col-md-12 col-sm-12 col-xs-12">
-              <input ng-model="searchTodo" tabindex="0" aria-invalid="false" type="text" class="form-control" placeholder="Filtrar tarea a realizar..." style="border-radius: 5px;">
+              <input ng-model="searchTodo" tabindex="0" aria-invalid="false" type="text" class="form-control" placeholder="Filtrar tarea a realizar...">
               </br>
               <div class="x_panel">
                 <div ng-controller="todoController" class="wrapper-md">
@@ -20,14 +20,14 @@
                     </form>
                   </div>
                   <div aria-hidden="false" class="">
-                    <ul class="nav nav-pills">
-                      <li ui-sref-active="active">
+                    <ul tabs>
+                      <li ui-sref-active="active" class="tab col s4">
                         <a ng-click="statusFilter = {}">Todas</a>
                       </li>
-                      <li ui-sref-active="active">
+                      <li ui-sref-active="active" class="tab col s4">
                         <a ng-click="statusFilter = {done: false}">Activas</a>
                       </li>
-                      <li ui-sref-active="active">
+                      <li ui-sref-active="active" class="tab col s4">
                         <a ng-click="statusFilter = {done: true}">Completas</a>
                       </li>
                     </ul>
@@ -64,24 +64,33 @@
   </div>
 </div>
 
+<div class="row">
+  <div 
+    
+    <input icheck ng-model="todo.done" ng-change="doneTodo(todo.id)" type="checkbox"> 
+    {{todo.created_at | moment:'DD/MM/YYYY' }} - {{todo.description}}
+    <a confirmed-click="deleteTodo(todo.id)" ng-confirm-click="Desea borrar ?" class="btn-floating btn-small waves-effect waves-light naranja-std pull-right">
+      <i class="fa fa-trash-o"></i>
+    </a>
+  </div>
+</div>
 
 
-<table class="highlight">
+<table>
   <tbody>
-    <tr ng-show="todoTasks !== []" 
-        ng-repeat="todo in todoTasks | 
-        filter: { description : searchTodo } |
-        filter : statusFilter">
-      <td>
-        <p>
-          <input ng-model="todo.done" type="checkbox" id="filled-in-box" checked="checked" />
-          <label for="filled-in-box">{{todo.created_at | moment:'DD/MM/YYYY' }} - {{todo.description}}</label>
-          <a confirmed-click="deleteTodo(todo.id)" ng-confirm-click="Desea borrar ?" class="btn-floating btn-small waves-effect waves-light naranja-std pull-right">
-            <i class="fa fa-trash-o"></i>
-          </a>
-        </p>
+    <tr 
+    ng-show="todoTasks !== []" 
+    ng-repeat="todo in todoTasks | 
+    filter: { description : searchTodo } |
+    filter : statusFilter">
+      <td class="col s1"><input icheck ng-model="todo.done" ng-change="doneTodo(todo.id)" type="checkbox"></td>
+      <td class="col s3">{{todo.created_at | moment:'DD/MM/YYYY' }}</td>
+      <td class="col s9">{{todo.description}}</td>
+      <td class="col s1">
+        <a confirmed-click="deleteTodo(todo.id)" ng-confirm-click="Desea borrar ?" class="btn-floating btn-small waves-effect waves-light naranja-std pull-right">
+          <i class="fa fa-trash-o"></i>
+        </a>
       </td>
     </tr>
   </tbody>
 </table>
-    
