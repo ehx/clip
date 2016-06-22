@@ -733,7 +733,7 @@ body.nav-md ul.nav.child_menu li:after {
 
 .nav.side-menu> li.current-page,
 .nav.side-menu> li.active {
-    border-right: 5px solid #1ABB9C;
+    border-right: 5px solid #26A69A;
 }
 
 li.current-page {
@@ -777,7 +777,7 @@ li.current-page a {
     display: block;
     height: 55px;
     margin: 0;
-    padding-left: 10px;
+    padding-left: 14px;
 }
 
 .site_title:hover,
@@ -2439,7 +2439,6 @@ span.section {
 
 .form-control {
     border-radius: 0;
-    line-height: 30px;
     width: 100%;
 }
 
@@ -6377,7 +6376,7 @@ ul.notifications {
 }
 
 .marcado {
-    background: #26B99A;
+    background: #26A69A;
 }
 
 .marcado h2 {
@@ -6569,7 +6568,7 @@ ul.notifications {
 }
 
 .star {
-    color: #F5F220;
+    color: #F5F220 !important;
     -webkit-text-stroke-width: 1px;
     -webkit-text-stroke-color: orange;
 }
@@ -6643,7 +6642,7 @@ span.badge.date {
 }
 
 #searchTask {
-    width: 95%;
+    width: 90%;
 }
 
 #btn-export:hover ~ #searchTask {
@@ -6670,6 +6669,10 @@ span.badge.date {
     background-color: rgb(245, 245, 245);
     min-height: 150px;
     max-height: 150px;
+}
+
+.bs-description {
+    word-break: break-word;
 }
 
 .bs-description:after {
@@ -6908,4 +6911,8 @@ input[type="color"]:focus,
     right: 15px;
     border-radius: 10px;
     box-sizing: border-box;
+}
+
+.filter {
+    width: 50% !important;
 }

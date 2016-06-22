@@ -38,7 +38,7 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
-  <body ng-controller="mainController" class="nav-md">
+  <body ng-controller="mainController" class="nav-sm">
     <div class="container body">
       <div class="main_container">
         <toaster-container></toaster-container>
@@ -48,37 +48,33 @@
               <a href="#/" class="site_title"><i class="fa fa-paperclip"></i> <span>Clip</span></a>
             </div>
             <div class="clearfix"></div>
-            <br />
             <!-- sidebar menu -->
-            <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+            <div active-link id="sidebar-menu" class="main_menu_side hidden-print main_menu">
               <div class="menu_section">
                 <h3>General</h3>
                 <ul class="nav side-menu">
                   <li>
-                    <a>
-                    <i class="fa fa-edit"></i> Lista de tareas <span class="fa fa-chevron-down"></span>
+                    <a href="#/">
+                      <i class="fa fa-edit"></i> Lista de tareas
                     </a>
-                    <ul class="nav child_menu" style="display: none">
-                      <li>
-                        <a href="#/">Tareas</a>
-                      </li>
-                      <li>
-                        <a href="#/taskhistory">Historial</a>
-                      </li>
-                    </ul>
                   </li>
                   <li>
-                    <a href="#/todo">
+                    <a href="#/taskhistory/">
+                      <i class="fa fa-history"></i> Historial
+                    </a>
+                  </li>  
+                  <li>
+                    <a href="#/todo/">
                       <i class="fa fa-tasks"></i> Mi Agenda
                     </a>
                   </li>
                   <li>
-                    <a href="#/messages">
+                    <a href="#/messages/">
                       <i class="fa fa-envelope-o"></i> Centro de mensajes
                     </a>
                   </li>
                   <li>
-                    <a href="#/tips">
+                    <a href="#/tips/">
                       <i class="fa fa-bullseye"></i> Tips
                     </a>
                   </li>
@@ -92,9 +88,6 @@
         <div class="top_nav">
           <div class="nav_menu">
             <nav class="" role="navigation">
-              <div class="nav toggle">
-                <a id="menu_toggle"><i class="fa fa-bars"></i></a>
-              </div>
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
@@ -162,14 +155,13 @@
             <div ng-view></div>
           </div>
           <!-- footer content -->
-          <footer>
-            <div class="">
-              <p class="pull-right">
+          <footer class="footer">
+            <div class="container">
+              <div class="pull-right">
                 <img src="images/eqlogo.png" id="logo-eq">
                 <a href="http://www.equality.coop">EQualityCoop.</a>
-              </p>
+              </div>
             </div>
-            <div class="clearfix"></div>
           </footer>
           <!-- /footer content -->
         </div>

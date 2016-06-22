@@ -14,14 +14,14 @@
                 <li class="tab col s3"><a href="#profile-tab">Checklist</a></li>
                 <li class="tab col s3"><a href="#dates-tab">Hitos</a></li>
                 <li class="tab col s3"><a href="#comments-stars">Destacados</a></li>
-                <li ng-if="attachments.length > 0" class="tab col s3"><a href="#attachments-tab">Adjuntos</a></li>
+                <li class="tab col s3"><a href="#attachments-tab">Adjuntos</a></li>
               </ul>
             </div>
             <div id="comments-tab" class="col s12 margin-top10">
               <!-- user messages -->
               <div class="row clearfix margin-b10">
                 <div ng-if="totalItems > 0" class="col-lg-11 col-md-11 col-sm-11 col-xs-11">
-                  <input ng-model="searchComment" tabindex="0" aria-invalid="false" type="text" class="form-control pull-left" placeholder="Buscar comentario...">
+                  <input ng-model="searchComment" tabindex="0" aria-invalid="false" type="text" class="form-control pull-left filter" placeholder="Buscar comentario...">
                 </div>
                 <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 pull-right">
                   <a scroll-on-click class="btn-floating btn-small waves-effect waves-light green-std"><i class="fa fa-pencil"></i></a>
@@ -65,8 +65,8 @@
                     <div class="col-xs-2 col-xs-offset-10 col-md-2 col-md-offset-10">
                       <span class="btn-group pull-right" role="group">
                       <a ng-click="makeFavourite(comment)" class="btn-floating btn-small waves-effect waves-light blue-grey lighten-1">
-                      <i ng-if="comment.favourite === true" class="fa fa-star"></i>
-                      <i ng-if="comment.favourite === false" class="fa fa-star-o"></i>
+                        <i ng-if="comment.favourite === true" class="fa fa-star star"></i>
+                        <i ng-if="comment.favourite === false" class="fa fa-star-o"></i>
                       </a>
                       <a ng-if="userId === comment.user.id" ng-click="deleteComment(comment.id)" class="btn-floating btn-small waves-effect waves-light naranja-std"><i class="fa fa-trash-o"></i></a>
                       </span>
@@ -101,11 +101,11 @@
             <div id="profile-tab" class="col s12 margin-top10">
               <!-- /checklist-tab -->
               <div ng-controller="todoController" class="wrapper-md">
-                <input ng-model="searchTodo" tabindex="0" aria-invalid="false" type="text" class="form-control" placeholder="Filtrar tarea a realizar...">
+                <input ng-model="searchTodo" tabindex="0" aria-invalid="false" type="text" class="form-control filter" placeholder="Filtrar tarea a realizar...">
                 </br>
                 <div>
                   <form ng-submit="addTodo()" id="todo-form" class="ng-pristine ng-valid">
-                    <input ng-model="description" placeholder="Tarea a realizar" class="form-control input-md ng-pristine ng-valid ng-touched" tabindex="0" aria-invalid="false">
+                    <input ng-model="description" placeholder="Tarea a realizar" class="form-control input-md filter" tabindex="0" aria-invalid="false">
                   </form>
                 </div>
                 <div aria-hidden="false" class="">
@@ -250,7 +250,8 @@
               <!-- /comments-stars -->
             </div>
             <div id="attachments-tab" class="col s12 margin-top10">
-              <input ng-model="searchAttach" tabindex="0" aria-invalid="false" type="text" class="form-control pull-left" placeholder="Buscar adjunto...">
+              <input ng-model="searchAttach" tabindex="0" aria-invalid="false" type="text" class="form-control pull-left filter" placeholder="Buscar adjunto...">
+              <div class="clearfix"></div>
               <div ng-if="attachments.length > 0">
                 <ul class="list-unstyled project_files">
                   <li ng-repeat="att in attachments | filter: searchAttach">

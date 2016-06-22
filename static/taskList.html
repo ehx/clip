@@ -39,7 +39,7 @@
                 <th ng-click="order('urgency.id')" class="col-lg-1 col-md-1 col-sm-1 col-xs-1 noselect">Urgencia
                   <i class="iconTable fa fa-angle-up" ng-show="predicate === 'urgency.id'"></i>
                 </th>
-                <th ng-click="order('om')" class="col-lg-1 col-md-1 col-sm-1 col-xs-1 noselect">Resp. OyP
+                <th ng-click="order('om')" class="col-lg-1 col-md-1 col-sm-1 col-xs-1 noselect">Responsable
                   <i class="iconTable fa fa-angle-up" ng-show="predicate === 'om'"></i>
                 </th>
                 <th ng-click="order('finish_date')" class="col-lg-1 col-md-1 col-sm-1 col-xs-1 noselect">Deadline
@@ -282,10 +282,10 @@
   });
 
   $('#btn-export').mouseover(function(){
-    $('#searchTask').css('width', '80%')
+    $('#searchTask').css('width', '75%')
   });
 
   $('#btn-export').mouseleave(function(){
-    $('#searchTask').css('width', '95%')
+    $('#searchTask').css('width', '90%')
   });
 </script>
