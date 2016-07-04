@@ -1,3 +1,9 @@
+html,
+body {
+  height: 100%;
+  /* The html and body elements cannot have any padding or margin. */
+}
+
 body.nav-sm .container.body .left_col {
     width: 70px;
     padding: 0;
@@ -884,9 +890,11 @@ li.current-page a {
 
 footer {
     background: #fff;
-    padding: 5px 20px 0;
     height: 45px;
-    margin: 0 -17px;
+    margin-left: 0px;
+    margin-right: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
 }
 
 .tile-stats.sparkline {
@@ -6669,6 +6677,7 @@ span.badge.date {
     background-color: rgb(245, 245, 245);
     min-height: 150px;
     max-height: 150px;
+    overflow: hidden;
 }
 
 .bs-description {

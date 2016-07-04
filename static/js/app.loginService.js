@@ -94,6 +94,7 @@ function loginService($http, $location, localStorageService, toaster, RESOURCES,
   function logout(){
     $http.post(RESOURCES.SERVER + '/auth/logout/').then(function(){
       localStorageService.remove('user');
+      localStorageService.remove('token');
       return $location.path( "/login" );
     })
 

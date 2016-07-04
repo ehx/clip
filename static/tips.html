@@ -17,9 +17,53 @@
           <div class="col-sm-12">
             <div class="row">
               <div ng-repeat="tip in tips | filter: searchTip track by tip.id" class="col-md-4">
-                <div class="bs-callout" style="border-left-color: {{tip.color}};">
-                  <p class="text-category">{{ tip.title }}</p>
-                  <p ng-bind-html="tip.description" class="bs-description"></p>
+                <a data-toggle="modal" data-target="#modal{{tip.id}}" style="text-decoration: none;">
+                  <div class="bs-callout" style="border-left-color: {{tip.color}};" >
+                    <p class="text-category">{{ tip.title }}</p>
+                    <p ng-bind-html="tip.description" class="bs-description"></p>
+                  </div>
+                </a>
+
+                <div id="modal{{tip.id}}" class="modal fade" role="dialog">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <form>
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal">&times;</button>
+                          <h5 class="modal-title">Nuevo tip</h5>
+                        </div>
+                        <div class="modal-body">
+                          <div class="row">
+                            <div class="col-xs-6">
+                              <div class="form-group input-field">
+                                <label for="title">Titulo</label>
+                                <input ng-required="true" ng-model="tip.title" type='text' class="form-control" id="title">
+                              </div>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-xs-6">
+                              <div class="form-group">
+                                <button colorpicker colorpicker-position="top" ng-model="tip.color" class="btn btn-default" type="button">Cambiar color</button>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-xs-12">
+                              <div class="form-group">
+                                <label for="description">Descripcion</label>
+                                <div text-angular ng-model="tip.description" id="description"></div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="modal-footer">
+                          <button ng-click="updateTip(tip)" class="btn btn-info" type="submit">Actualizar</button>
+                          <button ng-click="cancel()" data-dismiss="modal" class="btn btn-default">Cerrar</button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div><!--/row-->    
@@ -34,7 +78,7 @@
 <div id="myModal" class="modal fade" role="dialog">
   <div class="modal-dialog">
     <div class="modal-content">
-      <form ng-submit="newTask()">
+      <form>
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
           <h5 class="modal-title">Nuevo tip</h5>
