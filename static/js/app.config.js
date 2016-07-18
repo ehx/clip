@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('app').constant('RESOURCES', {
-  'SERVER': 'http://192.168.1.248:8000',
+  'SERVER': 'http://localhost:8000',
 });
 
 angular.module('app').config(configFunction);

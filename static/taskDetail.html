@@ -30,16 +30,41 @@
               <ul class="row messages">
                 <li class="comments" ng-if="totalItems> 0" ng-repeat="comment in allComments | filter:{ comment : searchComment }">
 
+                  <div id="modal{{comment.id}}" class="modal fade" role="dialog">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <form>
+                          <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h5 class="modal-title">Editar comentario</h5>
+                          </div>
+                          <div class="modal-body">
+                            <div class="row">
+                              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div class="form-group">
+                                  <label for="comment">Comentario</label>
+                                  <div text-angular ng-model="comment.comment" id="comment"></div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="modal-footer">
+                              <button ng-click="updateComment(comment)" data-dismiss="modal" class="btn btn-info" type="submit">Actualizar</button>
+                              <button ng-click="cancel()" data-dismiss="modal" class="btn btn-default">Cerrar</button>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+
                   <p style="border-top: 2px solid #EDEDED;padding-top: 5px;">{{ comment.user.first_name }} {{ comment.user.last_name }}</p>
 
-
-                  
                   <div class="message_date">
                     <div class="date"><span class="day">{{comment.created_at |  moment:'DD'}}</span><span class="month">{{comment.created_at | moment:'MMM'}}</span></div>
                   </div>
                   <div class="message_wrapper">
                     <div ng-if="userId === comment.user.id">
-                      <a href="#" onaftersave="updateComment(comment)" editable-text="comment.comment">
+                      <a data-toggle="modal" data-target="#modal{{comment.id}}" style="text-decoration: none;">
                         <blockquote ng-bind-html="comment.comment | rawHtml"></blockquote>
                       </a>
                     </div>

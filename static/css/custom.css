@@ -6968,3 +6968,8 @@ p.description_content{
 .img-avatar {
     width: 80px;
 }
+
+.padding-rl5 {
+    padding-right: 10px !important; 
+    padding-left: 10px !important; 
+}
