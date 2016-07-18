@@ -30,15 +30,7 @@
               <ul class="row messages">
                 <li class="comments" ng-if="totalItems> 0" ng-repeat="comment in allComments | filter:{ comment : searchComment }">
 
-
-                <div class='img-comment'>
-                  <img ng-src="{{ comment.user.avatar || 'images/user.png'}}" class="img-avatar"/>  
-                  <div class='description'>  
-                    <p class='description_content'>{{ comment.user.first_name }}</p>  
-                  </div>  
-                </div>  
-
-
+                  <p style="border-top: 2px solid #EDEDED;padding-top: 5px;">{{ comment.user.first_name }} {{ comment.user.last_name }}</p>
 
 
                   

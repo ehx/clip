@@ -4424,11 +4424,13 @@ ul.messages {
     padding: 0;
 }
 
+/*
 ul.messages li,
 .tasks li {
     border-bottom: 1px solid #B1B0B0;
     padding: 8px 0 0;
 }
+*/
 
 img.avatar {
     height: 32px;
