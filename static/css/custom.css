@@ -890,7 +890,7 @@ li.current-page a {
 
 footer {
     background: #fff;
-    height: 45px;
+    height: 35px;
     margin-left: 0px;
     margin-right: 0px;
     padding-left: 0px;
@@ -1788,11 +1788,15 @@ ul.to_do li {
     position: relative;
     padding: 7px;
     margin-bottom: 5px;
+    height: 50px;
     list-style: none;
 }
 
 ul.to_do p {
     margin: 0;
+    line-height: 32px;
+    font-size: 13px;
+    font-family: monospace;
 }
 
 .dashboard-widget {
@@ -4426,7 +4430,6 @@ ul.messages li,
     padding: 8px 0 0;
 }
 
-ul.messages li img.avatar,
 img.avatar {
     height: 32px;
     width: 32px;
@@ -4444,11 +4447,6 @@ img.avatar {
 ul.messages li .message_date {
     float: right;
     margin-right: 13px;
-}
-
-ul.messages li .message_wrapper {
-    margin-left: 50px;
-    margin-right: 40px;
 }
 
 ul.messages li .message_wrapper h4.heading {
@@ -6680,6 +6678,15 @@ span.badge.date {
     overflow: hidden;
 }
 
+@media (max-width: 600px) {
+    .bs-callout {
+        min-height: 20px;
+        max-height: 100px;
+    }
+}
+
+
+
 .bs-description {
     word-break: break-word;
 }
@@ -6924,4 +6931,38 @@ input[type="color"]:focus,
 
 .filter {
     width: 50% !important;
+}
+
+.padding-t10 {
+    padding-top: 10px;
+}
+
+.img-comment {  
+    float:left; /* important */  
+    position:relative; /* important(so we can absolutely position the description div */  
+}  
+
+div.description{  
+    position:absolute; /* absolute position (so we can position it where we want)*/  
+    bottom:0px; /* position will be on bottom */  
+    left:0px;  
+    width:100%;  
+    /* styling bellow */  
+    background-color:black;  
+    font-family: 'tahoma';  
+    font-size:15px;  
+    color:white;  
+    opacity:0.6; /* transparency */  
+    filter:alpha(opacity=60); /* IE transparency */  
+}  
+p.description_content{  
+    margin-bottom: 0px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    padding-left: 10px;
+    padding-right: 10px;
+}  
+
+.img-avatar {
+    width: 80px;
 }

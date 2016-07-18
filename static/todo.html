@@ -33,15 +33,15 @@
                     </ul>
                     <ul class="to_do">
                       <li 
-                      ng-show="todoTasks !== []" 
-                      ng-repeat="todo in todoTasks | 
-                      filter: { description : searchTodo } |
-                      filter : statusFilter">
+                        ng-show="todoTasks !== []" 
+                        ng-repeat="todo in todoTasks | 
+                        filter: { description : searchTodo } |
+                        filter : statusFilter">
                         <p>
                           <input icheck ng-model="todo.done" ng-change="doneTodo(todo.id)" type="checkbox"> 
                           {{todo.created_at | moment:'DD/MM/YYYY' }} - {{todo.description}}
                           <a confirmed-click="deleteTodo(todo.id)" ng-confirm-click="Desea borrar ?" class="btn-floating btn-small waves-effect waves-light naranja-std pull-right">
-                            <i class="fa fa-trash-o"></i>
+                          <i class="fa fa-trash-o"></i>
                           </a>
                         </p>
                       </li>
@@ -63,34 +63,3 @@
     </div>
   </div>
 </div>
-
-<div class="row">
-  <div 
-    
-    <input icheck ng-model="todo.done" ng-change="doneTodo(todo.id)" type="checkbox"> 
-    {{todo.created_at | moment:'DD/MM/YYYY' }} - {{todo.description}}
-    <a confirmed-click="deleteTodo(todo.id)" ng-confirm-click="Desea borrar ?" class="btn-floating btn-small waves-effect waves-light naranja-std pull-right">
-      <i class="fa fa-trash-o"></i>
-    </a>
-  </div>
-</div>
-
-
-<table>
-  <tbody>
-    <tr 
-    ng-show="todoTasks !== []" 
-    ng-repeat="todo in todoTasks | 
-    filter: { description : searchTodo } |
-    filter : statusFilter">
-      <td class="col s1"><input icheck ng-model="todo.done" ng-change="doneTodo(todo.id)" type="checkbox"></td>
-      <td class="col s3">{{todo.created_at | moment:'DD/MM/YYYY' }}</td>
-      <td class="col s9">{{todo.description}}</td>
-      <td class="col s1">
-        <a confirmed-click="deleteTodo(todo.id)" ng-confirm-click="Desea borrar ?" class="btn-floating btn-small waves-effect waves-light naranja-std pull-right">
-          <i class="fa fa-trash-o"></i>
-        </a>
-      </td>
-    </tr>
-  </tbody>
-</table>

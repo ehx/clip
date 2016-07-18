@@ -4466,6 +4466,7 @@ small {
   display: block;
   position: fixed;
   z-index: 10000;
+  right: 0;
 }
 
 @media only screen and (max-width: 600px) {
@@ -5012,7 +5013,7 @@ a.waves-effect .waves-ripple {
 
 @media only screen and (max-width: 992px) {
   .modal {
-    width: 80%;
+    width: 100%;
   }
 }
 

@@ -9,10 +9,10 @@
         <div class="row">
           <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <input ng-model="searchTask" tabindex="0" aria-invalid="false" type="text" class="form-control form-control-inline pull-left" placeholder="Filtrar tarea..." autofocus="autofocus" 
-            id="searchTask">
+              id="searchTask">
             <span class="fixed-action-btn horizontal pull-right hidden-xs hidden-md" id="btn-export">
-              <a class="btn-floating btn-small blue-grey" >
-                <i class="fa fa-external-link" ></i>
+              <a class="btn-floating btn-small blue-grey">
+              <i class="fa fa-external-link"></i>
               </a>
               <ul>
                 <li><a class="btn-floating blue-grey lighten-3"><i class="fa fa-file-pdf-o" ng-click="exportAction('pdf')"></i></a></li>
@@ -51,7 +51,7 @@
                 filterBy: ['user.id', 'client.id']: vm.client |
                 filter: {$:searchTask } | 
                 orderBy:predicate:reverse"
-                >
+               >
                 <td>
                   {{ tdTask.module.tag }}
                 </td>
@@ -84,7 +84,7 @@
                 </td>
                 <td>
                   <a confirmed-click="deleteTask(tdTask.id)" ng-confirm-click="Desea borrar la tarea?" class="btn-floating btn-small waves-effect waves-light naranja-std pull-right">
-                    <i class="fa fa-trash-o"></i>
+                  <i class="fa fa-trash-o"></i>
                   </a>
                 </td>
               </tr>
@@ -119,16 +119,15 @@
   </div>
 </div>
 </div>
-
 <script>
   $('th').click(function(){
     $("[class^='iconTable']").toggleClass('fa-angle-down fa-angle-up');
   });
-
+  
   $('#btn-export').mouseover(function(){
     $('#searchTask').css('width', '80%')
   });
-
+  
   $('#btn-export').mouseleave(function(){
     $('#searchTask').css('width', '95%')
   });

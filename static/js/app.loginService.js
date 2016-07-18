@@ -32,13 +32,7 @@ function loginService($http, $location, localStorageService, toaster, RESOURCES,
       });
     }, function() {
     	// login erroneo , muestra error
-      return toaster.pop({
-        type: 'error',
-        body: 'Los datos ingresados son incorrectos.',
-        showMethod: 'fadeIn',
-        hideMethod: 'fadeOut',
-        positionClass: 'toast-top-full-width'
-      });
+      return Materialize.toast('Los datos ingresados son incorrectos.', 2000, '');
     });
   }
 
@@ -46,13 +40,19 @@ function loginService($http, $location, localStorageService, toaster, RESOURCES,
     var user = localStorageService.get('user');
     var d = $q.defer();
 
-    configurationResource.query({
-      user : user.data.id
-    }, function(data) {
-      user.data['avatar'] = data[0].avatar;
-      d.resolve(user.data);
-    })
+    if(user){
+      configurationResource.query({
+        user : user.data.id
+      }, function(data) {
+        user.data['avatar'] = data[0].avatar;
+        d.resolve(user.data);
+      })
+      return d.promise;
+    }
+
+    d.reject('no data');
     return d.promise;
+
   }
 
   function getAvatar(userId){
@@ -68,26 +68,25 @@ function loginService($http, $location, localStorageService, toaster, RESOURCES,
 
   function getUserId() {
     var user = localStorageService.get('user');
-    return user.data.id;
+    if(user){
+      return user.data.id;  
+    }
+    return 0;
   }
 
   function getUsername() {
     var user = localStorageService.get('user');
-    return user.data.username;
+    if(user){
+      return user.data.username;
+    }
+    return '';
   }
 
   //TODO
   function resetPassword(){
      $http.post(RESOURCES.SERVER + '/auth/logout/').then(function(){
       localStorageService.remove('user');
-      return toaster.pop({
-        type: 'info',
-        title: 'Reset password',
-        body: 'Se envio un mail con el reseteo del password.',
-        showMethod: 'fadeIn',
-        hideMethod: 'fadeOut',
-        positionClass: 'toast-top-full-width'
-      });
+      return Materialize.toast('Se envio un mail con el reseteo del password.', 2000, '');
     })
   }
 
@@ -97,8 +96,6 @@ function loginService($http, $location, localStorageService, toaster, RESOURCES,
       localStorageService.remove('token');
       return $location.path( "/login" );
     })
-
     $http.defaults.headers.common['Authorization'] = ''
-
   }
 }

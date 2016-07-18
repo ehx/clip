@@ -8,27 +8,22 @@
     <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
     <link rel="icon" href="images/favicon.ico" type="image/x-icon">
     <title>EQuality | Clip </title>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> 
-
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="css/jquery-ui.css"/>
     <link rel="stylesheet" href="css/bootstrap.custom.css"/>
     <link rel="stylesheet" href="css/isteven-multi-select.css"/>
     <link rel="stylesheet" href="fonts/css/font-awesome.min.css"/>
     <link rel="stylesheet" href="css/animate.min.css"/>
     <link rel="stylesheet" href="css/icheck/flat/green.css"/>
-    
     <link rel="stylesheet" href="css/normalize.css"/>
-    
     <link rel="stylesheet" href="css/switchery/switchery.min.css"/>
     <link rel="stylesheet" href="css/xeditable.css"/>
     <script src="js/jquery.min.js"></script>
-
     <!-- Compiled and minified CSS -->
-    <link rel="stylesheet" href="materialize/css/materialize-custom.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/angular-bootstrap-colorpicker/3.0.25/css/colorpicker.min.css">
+    <link rel="stylesheet" href="materialize/css/materialize-custom.css" media="screen,projection">
+    <link rel="stylesheet" href="css/colorpicker.min.css">
     <link rel="stylesheet" href="css/custom.css"/>
-    <link href="components/textAngular/dist/textAngular.css" rel="stylesheet">
-
+    <link rel="stylesheet" href="components/textAngular/dist/textAngular.css" rel="stylesheet">
     <!--[if lt IE 9]>
     <script src="../assets/js/ie8-responsive-file-warning.js"></script>
     <![endif]-->
@@ -41,7 +36,6 @@
   <body ng-controller="mainController" class="nav-sm">
     <div class="container body">
       <div class="main_container">
-        <toaster-container></toaster-container>
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
@@ -55,27 +49,27 @@
                 <ul class="nav side-menu">
                   <li>
                     <a href="#/">
-                      <i class="fa fa-edit"></i> Lista de tareas
+                    <i class="fa fa-edit"></i> Lista de tareas
                     </a>
                   </li>
                   <li>
                     <a href="#/taskhistory/">
-                      <i class="fa fa-history"></i> Historial
+                    <i class="fa fa-history"></i> Historial
                     </a>
-                  </li>  
+                  </li>
                   <li>
                     <a href="#/todo/">
-                      <i class="fa fa-tasks"></i> Mi Agenda
+                    <i class="fa fa-tasks"></i> Mi Agenda
                     </a>
                   </li>
                   <li>
                     <a href="#/messages/">
-                      <i class="fa fa-envelope-o"></i> Centro de mensajes
+                    <i class="fa fa-envelope-o"></i> Centro de mensajes
                     </a>
                   </li>
                   <li>
                     <a href="#/tips/">
-                      <i class="fa fa-bullseye"></i> Tips
+                    <i class="fa fa-bullseye"></i> Tips
                     </a>
                   </li>
                 </ul>
@@ -102,7 +96,7 @@
                     </li>
                     <li>
                       <a href="" ng-click="logout()">
-                        <i class="fa fa-sign-out pull-right"></i> Cerrar session
+                      <i class="fa fa-sign-out pull-right"></i> Cerrar session
                       </a>
                     </li>
                   </ul>
@@ -112,29 +106,26 @@
                   <i class="fa fa-envelope-o"></i>
                   <span class="badge-sm bg-green">{{countNotification}}</span>
                   </a>
-                  <ul ng-if="countNotification > 0" id="menu1" class="dropdown-menu list-unstyled msg_list animated fadeInDown" role="menu">
+                  <ul ng-if="countNotification> 0" id="menu1" class="dropdown-menu list-unstyled msg_list animated fadeInDown" role="menu">
                     <li ng-repeat="nt in notifications">
                       <a ng-click="readNotification(nt)">
-                        <span class="image">
-                          <img src="images/img.jpg" alt="Profile Image" />
-                        </span>
-                        <span>
-                        <span>{{nt.user.first_name}} {{nt.user.last_name}}</span>
-                        <span class="time">{{nt.creation_date | moment:'DD/MM/YYYY'}}</span>
-                        </span>
-                        <span class="message">
-                          <span ng-bind-html="nt.ntype | rawHtml" class="message"></span>
-                        </span>
+                      <span class="image">
+                      <img src="images/img.jpg" alt="Profile Image" />
+                      </span>
+                      <span>
+                      <span>{{nt.user.first_name}} {{nt.user.last_name}}</span>
+                      <span class="time">{{nt.creation_date | moment:'DD/MM/YYYY'}}</span>
+                      </span>
+                      <span class="message">
+                      <span ng-bind-html="nt.ntype | rawHtml" class="message"></span>
+                      </span>
                       </a>
-
                     </li>
-                    <li ng-show="countNotification > 0">
-                    <!-- paginator -->
-                      
-                        <uib-pagination total-items="countNotification" ng-model="currentPage" class="pagination-sm pagination" previous-text="&lsaquo;" next-text="&rsaquo;" 
+                    <li ng-show="countNotification> 0">
+                      <!-- paginator -->
+                      <uib-pagination total-items="countNotification" ng-model="currentPage" class="pagination-sm pagination" previous-text="&lsaquo;" next-text="&rsaquo;" 
                         first-text="&laquo;" last-text="&raquo;" items-per-page="5">
-                        </uib-pagination>
-                      
+                      </uib-pagination>
                       <!-- /paginator -->
                     </li>
                   </ul>
@@ -152,21 +143,22 @@
         <!-- page content -->
         <div class="right_col" role="main">
           <div class="">
+            <toaster-container></toaster-container>
             <div ng-view></div>
           </div>
           <!-- footer content -->
-          <footer class="footer">
-            <div class="container">
-              <div class="pull-right">
-                <img src="images/eqlogo.png" id="logo-eq">
-                <a href="http://www.equality.coop">EQualityCoop.</a>
-              </div>
-            </div>
-          </footer>
           <!-- /footer content -->
         </div>
         <!-- /page content -->
       </div>
+      <footer class="footer">
+        <div class="container">
+          <div class="pull-right padding-t10">
+            <img src="images/eqlogo.png" id="logo-eq">
+            <a href="http://www.equality.coop">EQualityCoop.</a>
+          </div>
+        </div>
+      </footer>
     </div>
     <div id="custom_notifications" class="custom-notifications dsp_none">
       <ul class="list-unstyled notifications clearfix" data-tabbed_notifications="notif-group">
@@ -175,6 +167,8 @@
       <div id="notif-group" class="tabbed_notifications"></div>
     </div>
     <!-- javascripts -->  
+    <script type="text/javascript" src="//cdn.rawgit.com/MrRio/jsPDF/master/dist/jspdf.min.js"></script> 
+    <script type="text/javascript" src="//cdn.rawgit.com/niklasvh/html2canvas/0.5.0-alpha2/dist/html2canvas.min.js"></script>
     <script type="text/javascript" src="components/jquery/dist/jquery.min.js"></script>
     <script type="text/javascript" src="components/jquery-ui/jquery-ui.min.js"></script>
     <script type="text/javascript" src="components/angular/angular.min.js"></script>
@@ -182,9 +176,6 @@
     <script type="text/javascript" src="components/angular-resource/angular-resource.min.js"></script>
     <script type="text/javascript" src="components/angular-route/angular-route.min.js"></script>
     <script type="text/javascript" src="components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
-    
-    
-
     <script type="text/javascript" src="components/angular-cookies/angular-cookies.min.js"></script>
     <script type="text/javascript" src="components/angular-sanitize/angular-sanitize.min.js"></script>
     <script type="text/javascript" src="components/moment/min/moment.min.js"></script>
@@ -207,13 +198,10 @@
     <script type="text/javascript" src="js/tableExport/jspdf/jspdf.js"></script>
     <script type="text/javascript" src="js/tableExport/jspdf/libs/base64.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-filter/0.5.8/angular-filter.min.js"></script>
-
     <script type="text/javascript" src="js/angular-materialize.min.js"></script>
-
     <!-- Compiled and minified JavaScript -->
     <script src="materialize/js/materialize.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-touch/1.5.6/angular-touch.min.js"></script>
-
     <script type="text/javascript" src="js/app.min.js"></script>
     <script type="text/javascript" src="js/app.config.js"></script>
     <script type="text/javascript" src="js/app.run.js"></script>
@@ -225,13 +213,11 @@
     <script type="text/javascript" src="js/app.notificationService.js"></script>
     <script type="text/javascript" src="js/custom.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
-
     <!-- icheck -->
     <script type="text/javascript" src="js/icheck/icheck.min.js"></script>
     <!-- switchery -->
     <script type="text/javascript" src="js/switchery/switchery.min.js"></script>
     <script type="text/javascript" src="js/isteven-multi-select.js"></script>
-
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-bootstrap-colorpicker/3.0.25/js/bootstrap-colorpicker-module.min.js"></script>
   </body>
 </html>

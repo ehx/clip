@@ -7,7 +7,7 @@
       </div>
       <div class="x_content">
         <div class="col-md-8 col-sm-8 col-xs-12">
-          <div class="row" >
+          <div class="row">
             <div class="col s12">
               <ul tabs>
                 <li class="tab col s3"><a class="active" href="#comments-tab">Comentarios</a></li>
@@ -20,33 +20,32 @@
             <div id="comments-tab" class="col s12 margin-top10">
               <!-- user messages -->
               <div class="row clearfix margin-b10">
-                <div ng-if="totalItems > 0" class="col-lg-11 col-md-11 col-sm-11 col-xs-11">
+                <div ng-if="totalItems> 0" class="col-lg-11 col-md-11 col-sm-11 col-xs-11">
                   <input ng-model="searchComment" tabindex="0" aria-invalid="false" type="text" class="form-control pull-left filter" placeholder="Buscar comentario...">
                 </div>
                 <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 pull-right">
                   <a scroll-on-click class="btn-floating btn-small waves-effect waves-light green-std"><i class="fa fa-pencil"></i></a>
                 </div>
               </div>
+              <ul class="row messages">
+                <li class="comments" ng-if="totalItems> 0" ng-repeat="comment in allComments | filter:{ comment : searchComment }">
 
-              
-           
-            
 
-              <ul class="messages">
-                
-                
+                <div class='img-comment'>
+                  <img ng-src="{{ comment.user.avatar || 'images/user.png'}}" class="img-avatar"/>  
+                  <div class='description'>  
+                    <p class='description_content'>{{ comment.user.first_name }}</p>  
+                  </div>  
+                </div>  
+
+
+
+
                   
-                
-                
-                <li class="comments" ng-if="totalItems > 0" ng-repeat="comment in allComments | filter:{ comment : searchComment }">
-                  <img ng-src="{{ comment.user.avatar || 'images/user.png'}}" class="avatar" alt="Avatar">
                   <div class="message_date">
-
                     <div class="date"><span class="day">{{comment.created_at |  moment:'DD'}}</span><span class="month">{{comment.created_at | moment:'MMM'}}</span></div>
                   </div>
-
                   <div class="message_wrapper">
-                    <h4 class="heading">{{comment.user.first_name}} {{comment.user.last_name}}</h4>
                     <div ng-if="userId === comment.user.id">
                       <a href="#" onaftersave="updateComment(comment)" editable-text="comment.comment">
                         <blockquote ng-bind-html="comment.comment | rawHtml"></blockquote>
@@ -62,11 +61,11 @@
                     </p>
                   </div>
                   <div class="row">
-                    <div class="col-xs-2 col-xs-offset-10 col-md-2 col-md-offset-10">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                       <span class="btn-group pull-right" role="group">
                       <a ng-click="makeFavourite(comment)" class="btn-floating btn-small waves-effect waves-light blue-grey lighten-1">
-                        <i ng-if="comment.favourite === true" class="fa fa-star star"></i>
-                        <i ng-if="comment.favourite === false" class="fa fa-star-o"></i>
+                      <i ng-if="comment.favourite === true" class="fa fa-star star"></i>
+                      <i ng-if="comment.favourite === false" class="fa fa-star-o"></i>
                       </a>
                       <a ng-if="userId === comment.user.id" ng-click="deleteComment(comment.id)" class="btn-floating btn-small waves-effect waves-light naranja-std"><i class="fa fa-trash-o"></i></a>
                       </span>
@@ -80,6 +79,16 @@
                 <br />
               </div>
               <!-- end of user messages -->
+              </br>
+              <!-- paginator -->
+              <div class="center">
+                <div ng-show="totalItems> 0">
+                  <uib-pagination boundary-links="true" total-items="totalItems" ng-model="currentPage" class="pagination-sm pagination" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;" ng-change="pageChanged()" items-per-page="5">
+                  </uib-pagination>
+                </div>
+              </div>
+              </br>
+              <!-- /paginator -->
               <form name="form" ng-submit="newComment(form)">
                 <div class="form-group">
                   <div id="comments" text-angular ng-model="cm.comment" name="comment"></div>
@@ -89,14 +98,6 @@
                   <button class="btn btn-default btn-sm" type="submit">Comentar</button>
                 </div>
               </form>
-              <!-- paginator -->
-              <div class="center">
-                <div ng-show="totalItems > 0">
-                  <uib-pagination boundary-links="true" total-items="totalItems" ng-model="currentPage" class="pagination-sm pagination" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;" ng-change="pageChanged()" items-per-page="5">
-                  </uib-pagination>
-                </div>
-              </div>
-              <!-- /paginator -->
             </div>
             <div id="profile-tab" class="col s12 margin-top10">
               <!-- /checklist-tab -->
@@ -126,9 +127,13 @@
                       ng-repeat="todo in todoTasks | 
                       filter: { description : searchTodo } |
                       filter : statusFilter">
-                      <p>
-                        <input icheck data-i-check ng-model="todo.done" ng-change="doneTodo(todo.id)" type="checkbox" class="flat"> {{ todo.description }}
-                      </p>
+                        <p>
+                          <input icheck ng-model="todo.done" ng-change="doneTodo(todo.id)" type="checkbox"> 
+                          {{todo.created_at | moment:'DD/MM/YYYY' }} - {{todo.description}}
+                          <a confirmed-click="deleteTodo(todo.id)" ng-confirm-click="Desea borrar ?" class="btn-floating btn-small waves-effect waves-light naranja-std pull-right">
+                          <i class="fa fa-trash-o"></i>
+                          </a>
+                        </p>
                     </li>
                   </ul>
                   <div ng-if="todoTasks.length === 0" class="streamline b-l m-b">
@@ -174,7 +179,7 @@
                   </ul>
                 </div>
                 </br>
-                <div ng-if="milestones.length > 0" ng-repeat="ml in milestones | filter: statusFilter">
+                <div ng-if="milestones.length> 0" ng-repeat="ml in milestones | filter: statusFilter">
                   <span class="milestone" ng-class="getClass(ml.date)">
                     {{ ml.date }} &nbsp 
                     {{ ml.description }}
@@ -209,10 +214,10 @@
             <div id="comments-stars" class="col s12 margin-top10">
               <!-- /comments-stars -->
               <ul class="messages">
-                <li class="comments" ng-if="totalItems > 0" ng-repeat="comment in allComments | filter:{ comment : searchComment } | filter: {favourite: true}">
+                <li class="comments" ng-if="totalItems> 0" ng-repeat="comment in allComments | filter:{ comment : searchComment } | filter: {favourite: true}">
                   <img ng-src="{{ comment.user.avatar || 'images/user.png'}}" class="avatar" alt="Avatar">
-                  <div class="message_date" style="margin-right: 0px;">
-                    <a class="waves-effect waves-light btn disabled">{{comment.created_at |  moment:'DD'}} {{comment.created_at | moment:'MMM'}}</a>
+                  <div class="message_date">
+                    <div class="date"><span class="day">{{comment.created_at |  moment:'DD'}}</span><span class="month">{{comment.created_at | moment:'MMM'}}</span></div>
                   </div>
                   <div class="message_wrapper">
                     <h4 class="heading">{{comment.user.first_name}} {{comment.user.last_name}}</h4>
@@ -231,13 +236,13 @@
                     </p>
                   </div>
                   <div class="row">
-                    <div class="col-xs-2 col-xs-offset-10 col-md-2 col-md-offset-10">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                       <span class="btn-group pull-right" role="group">
                       <a ng-click="makeFavourite(comment)" class="btn-floating btn-small waves-effect waves-light blue-grey lighten-1">
-                      <i ng-if="comment.favourite === true" class="fa fa-star"></i>
+                      <i ng-if="comment.favourite === true" class="fa fa-star star"></i>
                       <i ng-if="comment.favourite === false" class="fa fa-star-o"></i>
                       </a>
-                      <a ng-if="userId === comment.user.id" ng-click="deleteComment(comment.id)" class="btn-floating btn-small waves-effect waves-light blue-grey lighten-1"><i class="fa fa-trash-o"></i></a>
+                      <a ng-if="userId === comment.user.id" ng-click="deleteComment(comment.id)" class="btn-floating btn-small waves-effect waves-light naranja-std"><i class="fa fa-trash-o"></i></a>
                       </span>
                     </div>
                   </div>
@@ -248,11 +253,20 @@
                 <br />
               </div>
               <!-- /comments-stars -->
+              <!-- paginator -->
+              <div class="center">
+                <div ng-show="totalItems> 0">
+                  <uib-pagination boundary-links="true" total-items="totalItems" ng-model="currentPage" class="pagination-sm pagination" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;" ng-change="pageChanged()" items-per-page="5">
+                  </uib-pagination>
+                </div>
+              </div>
+              </br>
+              <!-- /paginator -->
             </div>
             <div id="attachments-tab" class="col s12 margin-top10">
               <input ng-model="searchAttach" tabindex="0" aria-invalid="false" type="text" class="form-control pull-left filter" placeholder="Buscar adjunto...">
               <div class="clearfix"></div>
-              <div ng-if="attachments.length > 0">
+              <div ng-if="attachments.length> 0">
                 <ul class="list-unstyled project_files">
                   <li ng-repeat="att in attachments | filter: searchAttach">
                     <a href="{{ att.docfile }}">
@@ -338,3 +352,5 @@
     </div>
   </div>
 </div>
+
+
