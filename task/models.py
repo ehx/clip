@@ -169,7 +169,7 @@ class Milestone(models.Model):
 
 class Tip(models.Model):
     title = models.CharField(max_length=255, verbose_name='Categoria', unique=True)
-    description = models.CharField(max_length=2000, verbose_name='Descripcion')
+    description = models.CharField(max_length=5000, verbose_name='Descripcion')
     color = models.CharField(default="#F5F5F5", max_length=7, verbose_name="Color")
     user = models.ForeignKey(User, verbose_name="Usuario", related_name="tips_owner")
     created_at = models.DateTimeField(auto_now_add=True)
