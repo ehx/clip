@@ -4,6 +4,9 @@
     <div class="x_panel">
       <div class="x_title">
         <h2>Mis tareas</h2>
+          <ul class="nav navbar-right panel_toolbox" >
+            <a uib-popover="Nueva tarea" popover-trigger="mouseenter" popover-placement="left" class="btn-floating btn-small waves-effect waves-light green-std"><i class="fa fa-plus" data-toggle="modal" data-target="#modalTodo"></i></a>
+          </ul>
         <div class="clearfix"></div>
       </div>
       <div class="x_content">
@@ -36,10 +39,11 @@
                         ng-show="todoTasks !== []" 
                         ng-repeat="todo in todoTasks | 
                         filter: { description : searchTodo } |
-                        filter : statusFilter">
+                        filter : statusFilter | 
+                        orderBy : todo.dtime">
                         <p>
                           <input icheck ng-model="todo.done" ng-change="doneTodo(todo.id)" type="checkbox"> 
-                          {{todo.created_at | moment:'DD/MM/YYYY' }} - {{todo.description}}
+                          {{todo.dtime | moment:'DD/MM/YYYY HH:ss' }} - {{todo.description}}
                           <a confirmed-click="deleteTodo(todo.id)" ng-confirm-click="Desea borrar ?" class="btn-floating btn-small waves-effect waves-light naranja-std pull-right">
                           <i class="fa fa-trash-o"></i>
                           </a>
@@ -60,6 +64,37 @@
           </div>
         </div>
       </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal -->
+<div id="modalTodo" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form>
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h5 class="modal-title">Nuevo evento</h5>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+              <div class="form-group input-field">
+                <label for="title">Titulo</label>
+                <input ng-required="true" ng-model="todo.description" type='text' class="form-control" id="title">
+                <time-date-picker style="margin: 0 auto" ng-model="todo.dtime" data-display-mode="full" class="modal-content"></time-date-picker>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button ng-click="newTodo()" data-dismiss="modal" class="btn btn-info" type="submit">Guardar</button>
+          <button ng-click="cancel()" data-dismiss="modal" class="btn btn-default">Cerrar</button>
+        </div>
+      </form>
     </div>
   </div>
 </div>

@@ -14,12 +14,18 @@ class Urgency(models.Model):
     def __str__(self):
         return self.name
 
+    def __unicode__(self):
+        return self.name
+
 class Status(models.Model):
     name = models.CharField(max_length=50, verbose_name="Nombre")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
+        return self.name
+
+    def __unicode__(self):
         return self.name
 
 class Module(models.Model):
@@ -29,6 +35,9 @@ class Module(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
+        return self.tag + ' - ' + self.name
+
+    def __unicode__(self):
         return self.tag + ' - ' + self.name
 
 class Notification(models.Model):
@@ -43,6 +52,9 @@ class Notification(models.Model):
     def __str__(self):
         return self.user.first_name + ' ' + self.ntype
 
+    def __unicode__(self):
+        return self.user.first_name + ' ' + self.ntype
+
 class Organization(models.Model):
     name = models.CharField(max_length=50, verbose_name="Nombre")
     address = models.CharField(max_length=50, verbose_name="Direccion")
@@ -50,6 +62,9 @@ class Organization(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
+        return self.name
+
+    def __unicode__(self):
         return self.name
 
 class Client(models.Model):
@@ -62,6 +77,9 @@ class Client(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     
     def __str__(self):
+        return self.name + ' ' + self.lastname
+
+    def __unicode__(self):
         return self.name + ' ' + self.lastname
 
 class Task(models.Model):
@@ -86,6 +104,9 @@ class Task(models.Model):
     def __str__(self):
         return self.title
 
+    def __unicode__(self):
+        return self.title
+
     def pre_save(self, obj):
         obj.user = self.request.user
 
@@ -99,6 +120,9 @@ class TaskComment(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     
     def __str__(self):
+        return self.user.first_name + ' ' + self.comment
+
+    def __unicode__(self):
         return self.user.first_name + ' ' + self.comment
 
     def delete(self,*args,**kwargs):
@@ -118,19 +142,25 @@ class UserClient(models.Model):
     def __str__(self):
         return self.user.last_name + ' ' + self.user.first_name + ' / ' + self.userR.last_name + ' ' + self.userR.first_name + ' @ ' + self.relation
 
+    def __unicode__(self):
+        return self.user.last_name + ' ' + self.user.first_name + ' / ' + self.userR.last_name + ' ' + self.userR.first_name + ' @ ' + self.relation
+
     class Meta:
         unique_together = ('user', 'userR')
-
 
 class Todo(models.Model):
     description = models.CharField(max_length=255, verbose_name='Descripcion')
     user = models.ForeignKey(User, verbose_name="Usuario")
     task = models.ForeignKey(Task, null=True, verbose_name="Tarea")
     done = models.BooleanField(default=0, verbose_name='Completado')
+    dtime = models.DateTimeField(auto_now=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     
     def __str__(self):
+        return str(self.created_at) + ' @ ' + self.user.first_name  + ' / ' + self.description 
+
+    def __unicode__(self):
         return str(self.created_at) + ' @ ' + self.user.first_name  + ' / ' + self.description 
 
 class Message(models.Model):
@@ -144,6 +174,9 @@ class Message(models.Model):
     def __str__(self):
         return self.user.first_name  + ' / ' + self.client.name + ' @ ' + self.message
 
+    def __unicode__(self):
+        return str(self.created_at) + ' @ ' + self.user.first_name  + ' / ' + self.description 
+
 class UserProfile(models.Model):
     user = models.OneToOneField(User, unique=True, verbose_name="Usuario")
     avatar = models.FileField(upload_to='avatar', null=True, blank=True)
@@ -153,6 +186,9 @@ class UserProfile(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
+        return self.user.username
+
+    def __unicode__(self):
         return self.user.username
 
 class Milestone(models.Model):
@@ -167,6 +203,9 @@ class Milestone(models.Model):
     def __str__(self):
         return str(self.task) + ' @ ' + str(self.date)
 
+    def __unicode__(self):
+        return str(self.task) + ' @ ' + str(self.date)
+
 class Tip(models.Model):
     title = models.CharField(max_length=255, verbose_name='Categoria', unique=True)
     description = models.CharField(max_length=5000, verbose_name='Descripcion')
@@ -176,4 +215,7 @@ class Tip(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
+        return self.title + ' @ ' + self.description
+
+    def __unicode__(self):
         return self.title + ' @ ' + self.description

@@ -117,10 +117,10 @@ class TaskCommentViewSet(viewsets.ModelViewSet):
         return TaskCommentSerializerWriter
 
 class TodoViewSet(viewsets.ModelViewSet):
-    queryset = Todo.objects.all()
+    queryset = Todo.objects.all().order_by('-dtime')
     serializer_class = TodoSerializer
     filter_backends = (filters.DjangoFilterBackend,)
-    filter_fields = ('id', 'done', 'user', 'task')
+    filter_fields = ('id', 'done', 'user', 'task', 'dtime')
 
     def get_queryset(self):
         queryset = super(TodoViewSet, self).get_queryset() 

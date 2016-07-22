@@ -75,7 +75,7 @@ class TaskCommentSerializer(serializers.ModelSerializer):
 class TodoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Todo
-        fields = ('id', 'done', 'user', 'description', 'task', 'created_at', 'updated_at')
+        fields = ('id', 'done', 'user', 'description', 'task', 'dtime', 'created_at', 'updated_at')
 
 class UserClientSerializerWriter(serializers.ModelSerializer):
     class Meta:

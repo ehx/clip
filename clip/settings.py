@@ -22,6 +22,7 @@ INSTALLED_APPS = (
     'redactor',
     'djoser',
     'rest_framework.authtoken',
+    'post_office'
 )
 
 MIDDLEWARE_CLASSES = (
@@ -111,3 +112,16 @@ DJOSER = {
     'ACTIVATION_URL': '#/activate/{uid}/{token}',
     'SEND_ACTIVATION_EMAIL': False,
 }
+
+EMAIL_BACKEND = 'post_office.EmailBackend'
+
+POST_OFFICE = {
+    'DEFAULT_PRIORITY' : 'now'
+}
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = "eloycolella@gmail.com"
+EMAIL_HOST_PASSWORD = "River88Jessy."
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = 'eloycolella@gmail.com'
