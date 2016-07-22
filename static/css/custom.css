@@ -6897,8 +6897,6 @@ input[type="color"]:focus,
     font-size: 11px;
 }
 
-
-
 @mixin vertical-align($position: relative) {
   position: $position;
   top: 50%;
