@@ -1796,7 +1796,6 @@ ul.to_do p {
     margin: 0;
     line-height: 32px;
     font-size: 13px;
-    font-family: monospace;
 }
 
 .dashboard-widget {
@@ -4450,7 +4449,6 @@ img.avatar {
 
 ul.messages li .message_date {
     float: right;
-    margin-right: 13px;
 }
 
 ul.messages li .message_wrapper h4.heading {
@@ -6620,6 +6618,11 @@ ul.notifications {
     color: #fff;
 }
 
+.gris-light-std, .gris-light-std:hover{
+    background-color: #EDEDED;
+    color: #78909C;
+}
+
 .naranja-std, .naranja-std:hover{
     background-color: #EDA65A;
     color: #fff;
@@ -6877,20 +6880,16 @@ input[type="color"]:focus,
 
 
 .messages .date {
-    padding-top: 10px;
-    background-color: #EDEDED;
-    color: #78909C;
     min-height: 48px;
     min-width: 48px;
     text-align: center;
-    font-size: 18px;
+    font-size: 25px;
     font-weight: 700;
     text-transform: uppercase;
-    border-radius: 50%;
+    margin-right: 9px;
 }
 
 .messages .date span {
-    display: block;
     line-height: 14px;
 }
 
