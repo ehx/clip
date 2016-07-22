@@ -7013,3 +7013,16 @@ p.description_content{
     overflow: hidden
 }
 /* */
+
+.avatar-user {
+    line-height: 16px;
+    font-size: 14px;
+    padding-top: 10px;
+    background-color: #EDEDED;
+    color: #78909C;
+    min-height: 36px;
+    min-width: 38px;
+    text-align: center;
+    font-weight: 700;
+    border-radius: 50%;
+}

@@ -57,8 +57,6 @@
                     </div>
                   </div>
 
-                  <p style="border-top: 2px solid #EDEDED;padding-top: 5px;">{{ comment.user.first_name }} {{ comment.user.last_name }}</p>
-
                   <div class="message_date">
                     <div class="date"><span class="day">{{comment.created_at |  moment:'DD'}}</span><span class="month">{{comment.created_at | moment:'MMM'}}</span></div>
                   </div>
@@ -77,8 +75,11 @@
                       <a href="{{comment.docfile}}"><i class="fa fa-paperclip"></i> {{comment.docfile | lastWord}} </a>
                     </p>
                   </div>
-                  <div class="row">
+                  <div class="row" style="border-bottom: 2px solid #EDEDED;padding-bottom: 10px;">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                      <span class="btn-group pull-left" role="group">
+                        <div class="btn-floating btn-small waves-effect waves-light gris-std text-center">{{ comment.user.first_name[0] }}{{ comment.user.last_name[0] }}</div>
+                      </span>
                       <span class="btn-group pull-right" role="group">
                       <a ng-click="makeFavourite(comment)" class="btn-floating btn-small waves-effect waves-light blue-grey lighten-1">
                       <i ng-if="comment.favourite === true" class="fa fa-star star"></i>
@@ -232,14 +233,12 @@
               <!-- /comments-stars -->
               <ul class="messages">
                 <li class="comments" ng-if="totalItems> 0" ng-repeat="comment in allComments | filter:{ comment : searchComment } | filter: {favourite: true}">
-                  <img ng-src="{{ comment.user.avatar || 'images/user.png'}}" class="avatar" alt="Avatar">
                   <div class="message_date">
                     <div class="date"><span class="day">{{comment.created_at |  moment:'DD'}}</span><span class="month">{{comment.created_at | moment:'MMM'}}</span></div>
                   </div>
                   <div class="message_wrapper">
-                    <h4 class="heading">{{comment.user.first_name}} {{comment.user.last_name}}</h4>
                     <div ng-if="userId === comment.user.id">
-                      <a href="#" onaftersave="updateComment(comment)" editable-text="comment.comment">
+                      <a data-toggle="modal" data-target="#modal{{comment.id}}" style="text-decoration: none;">
                         <blockquote ng-bind-html="comment.comment | rawHtml"></blockquote>
                       </a>
                     </div>
@@ -252,8 +251,11 @@
                       <a href="{{comment.docfile}}"><i class="fa fa-paperclip"></i> {{comment.docfile | lastWord}} </a>
                     </p>
                   </div>
-                  <div class="row">
+                  <div class="row" style="border-bottom: 2px solid #EDEDED;padding-bottom: 10px;">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                      <span class="btn-group pull-left" role="group">
+                        <div class="btn-floating btn-small waves-effect waves-light gris-std text-center">{{ comment.user.first_name[0] }}{{ comment.user.last_name[0] }}</div>
+                      </span>
                       <span class="btn-group pull-right" role="group">
                       <a ng-click="makeFavourite(comment)" class="btn-floating btn-small waves-effect waves-light blue-grey lighten-1">
                       <i ng-if="comment.favourite === true" class="fa fa-star star"></i>
