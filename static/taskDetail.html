@@ -71,15 +71,18 @@
                       <blockquote ng-bind-html="comment.comment | rawHtml"></blockquote>
                     </div>
                     <br />
-                    <p class="url" ng-show="comment.docfile">
-                      <span class="fs1 text-info" aria-hidden="true" data-icon=""></span>
-                      <a href="{{comment.docfile}}"><i class="fa fa-paperclip"></i> {{comment.docfile | lastWord}} </a>
-                    </p>
                   </div>
                   <div class="row" style="border-bottom: 2px solid #EDEDED;padding-bottom: 10px;">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                       <span class="btn-group pull-left" role="group">
+
                         <div class="btn-floating btn-small waves-effect waves-light gris-std text-center">{{ comment.user.first_name[0] }}{{ comment.user.last_name[0] }}</div>
+                        <span ng-show="comment.docfile">
+                          <div class="btn-floating btn-small waves-effect waves-light">
+                            <i class="fa fa-paperclip"></i>
+                          </div>
+                          <a href="{{comment.docfile}}">{{comment.docfile | lastWord}}</a>
+                        </span>
                       </span>
                       <span class="btn-group pull-right" role="group">
                       <a ng-click="makeFavourite(comment)" class="btn-floating btn-small waves-effect waves-light blue-grey lighten-1">
