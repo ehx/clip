@@ -125,6 +125,7 @@ class MilestoneSerializerWriter(serializers.ModelSerializer):
         fields = ('id', 'task', 'user', 'date', 'description', 'done')
 
 class TipSerializer(serializers.ModelSerializer):
+    user = UserSerializer()
     class Meta:
         model = Tip
         fields = ('id', 'description', 'title', 'user', 'color')
