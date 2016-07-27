@@ -3,9 +3,6 @@
     <div class="x_panel">
       <div class="x_title">
         <h2>Lista de tareas cerradas ({{count}})</h2>
-        <ul class="nav navbar-right panel_toolbox" >
-          <a ng-click="printDiv('table');" class="btn-floating btn-small waves-effect waves-light naranja-std"><i class="fa fa-print"></i></a>
-        </ul>
         <div class="clearfix"></div>
       </div>
       <div class="x_content">
@@ -14,9 +11,11 @@
             <input ng-model="searchTask" tabindex="0" aria-invalid="false" type="text" class="form-control form-control-inline pull-left" placeholder="Filtrar tarea..." autofocus="autofocus" 
               id="searchTask">
             <span class="fixed-action-btn horizontal pull-right hidden-xs hidden-md" id="btn-export">
+
               <a class="btn-floating btn-small blue-grey">
               <i class="fa fa-external-link"></i>
               </a>
+              <a ng-click="printDiv('table');" class="btn-floating btn-small waves-effect waves-light gris-std"><i class="fa fa-print"></i></a>
               <ul>
                 <li><a class="btn-floating blue-grey lighten-3"><i class="fa fa-file-pdf-o" ng-click="exportAction('pdf')"></i></a></li>
                 <li><a class="btn-floating blue-grey lighten-2"><i class="fa fa-file-excel-o" ng-click="exportAction('excel')"></i></a></li>
@@ -60,7 +59,7 @@
                 </td>
                 <td>
                   <div id="tasktitle">
-                    <a href="#/task/{{tdTask.id}}" tooltipped data-position="bottom" data-delay="50" data-tooltip="{{tdTask.title}}">{{tdTask.title}}</a>
+                    <a href="#/task/{{tdTask.id}}">{{tdTask.title}}</a>
                     <br />
                     <small>Creada el {{tdTask.creation_date | moment:'DD/MM/YYYY'}}</small>
                   </div>
@@ -128,10 +127,10 @@
   });
   
   $('#btn-export').mouseover(function(){
-    $('#searchTask').css('width', '80%')
+    $('#searchTask').css('width', '70%');
   });
   
   $('#btn-export').mouseleave(function(){
-    $('#searchTask').css('width', '95%')
+    $('#searchTask').css('width', '88%');
   });
 </script>

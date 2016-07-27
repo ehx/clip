@@ -219,7 +219,7 @@ angular.module('app').directive('scrollOnClick', function() {
     restrict: 'A',
     link: function(scope, $elm) {
       $elm.on('click', function() {
-        var $el = angular.element("div[contenteditable=true]");
+        var $el = angular.element("div[contenteditable=true]:last");
         $("body").animate({scrollTop: $el.offset().top}, "slow");
       });
     }

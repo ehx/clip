@@ -6645,17 +6645,17 @@ span.badge.date {
 
 .fixed-action-btn.horizontal ul {
     text-align: right;
-    right: 50px;
-    top: 26%;
+    right: 85px;
+    top: 21%;
     -webkit-transform: translateY(-50%);
     transform: translateY(-50%);
     height: 100%;
     left: auto;
-    width: 500px;
+    width: 180px;
 }
 
 #searchTask {
-    width: 95%;
+    width: 88%;
 }
 
 @media screen and (max-width: 765px) {

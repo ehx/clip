@@ -13,8 +13,17 @@
           <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <input ng-model="searchTask" tabindex="0" aria-invalid="false" type="text" class="form-control form-control-inline pull-left" placeholder="Filtrar tarea..." autofocus="autofocus" 
               id="searchTask">
-            <span class="pull-right hidden-xs hidden-md">
-              <a ng-click="printDiv('table');" class="btn-floating btn-small blue-grey"><i class="fa fa-print"></i></a>
+            <span class="fixed-action-btn horizontal pull-right hidden-xs hidden-md" id="btn-export">
+
+              <a class="btn-floating btn-small blue-grey">
+              <i class="fa fa-external-link"></i>
+              </a>
+              <a ng-click="printDiv('table');" class="btn-floating btn-small waves-effect waves-light gris-std"><i class="fa fa-print"></i></a>
+              <ul>
+                <li><a class="btn-floating blue-grey lighten-3"><i class="fa fa-file-pdf-o" ng-click="exportAction('pdf')"></i></a></li>
+                <li><a class="btn-floating blue-grey lighten-2"><i class="fa fa-file-excel-o" ng-click="exportAction('excel')"></i></a></li>
+                <li><a class="btn-floating blue-grey lighten-1"><i class="fa fa-file-word-o" ng-click="exportAction('doc')"></i></a></li>
+              </ul>
             </span>
           </div>
         </div>
@@ -271,5 +280,13 @@
 <script>
   $('th').click(function(){
     $("[class^='iconTable']").toggleClass('fa-angle-down fa-angle-up');
+  });
+
+  $('#btn-export').mouseover(function(){
+    $('#searchTask').css('width', '70%')
+  });
+  
+  $('#btn-export').mouseleave(function(){
+    $('#searchTask').css('width', '88%')
   });
 </script>

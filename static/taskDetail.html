@@ -6,7 +6,7 @@
         <div class="clearfix"></div>
       </div>
       <div class="x_content">
-        <div class="col-md-8 col-sm-8 col-xs-12">
+        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
           <div class="row">
             <div class="col s12">
               <ul tabs>
@@ -23,7 +23,7 @@
                 <div ng-if="totalItems> 0" class="col-lg-11 col-md-11 col-sm-11 col-xs-11">
                   <input ng-model="searchComment" tabindex="0" aria-invalid="false" type="text" class="form-control pull-left filter" placeholder="Buscar comentario...">
                 </div>
-                <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 pull-right">
+                <div class="pull-right">
                   <a scroll-on-click class="btn-floating btn-small waves-effect waves-light green-std"><i class="fa fa-pencil"></i></a>
                 </div>
               </div>
@@ -78,7 +78,7 @@
 
                         <div class="btn-floating btn-small waves-effect waves-light gris-std text-center">{{ comment.user.first_name[0] }}{{ comment.user.last_name[0] }}</div>
                         <span ng-show="comment.docfile">
-                          <div class="btn-floating btn-small waves-effect waves-light">
+                          <div class="btn-floating btn-small waves-effect waves-light ">
                             <i class="fa fa-paperclip"></i>
                           </div>
                           <a href="{{comment.docfile}}">{{comment.docfile | lastWord}}</a>
@@ -127,8 +127,8 @@
                 <input ng-model="searchTodo" tabindex="0" aria-invalid="false" type="text" class="form-control filter" placeholder="Filtrar tarea a realizar...">
                 </br>
                 <div>
-                  <form ng-submit="addTodo()" id="todo-form" class="ng-pristine ng-valid">
-                    <input ng-model="description" placeholder="Tarea a realizar" class="form-control input-md filter" tabindex="0" aria-invalid="false">
+                  <form ng-submit="newTodo()" id="todo-form" class="ng-pristine ng-valid">
+                    <input ng-model="todo.description" placeholder="Tarea a realizar" class="form-control input-md filter" tabindex="0" aria-invalid="false">
                   </form>
                 </div>
                 <div aria-hidden="false" class="">
@@ -149,13 +149,13 @@
                       ng-repeat="todo in todoTasks | 
                       filter: { description : searchTodo } |
                       filter : statusFilter">
-                        <p>
+                        <div>
                           <input icheck ng-model="todo.done" ng-change="doneTodo(todo.id)" type="checkbox"> 
                           {{todo.created_at | moment:'DD/MM/YYYY' }} - {{todo.description}}
                           <a confirmed-click="deleteTodo(todo.id)" ng-confirm-click="Desea borrar ?" class="btn-floating btn-small waves-effect waves-light naranja-std pull-right">
                           <i class="fa fa-trash-o"></i>
                           </a>
-                        </p>
+                        </div>
                     </li>
                   </ul>
                   <div ng-if="todoTasks.length === 0" class="streamline b-l m-b">
@@ -303,7 +303,7 @@
           </div>
         </div>
         <!-- start project-detail sidebar -->
-        <div class="col-md-4 col-sm-4 col-xs-12">
+        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" style="padding-right: 0px;padding-left: 20px;">
           <section class="panel" id="proj-panel">
             <div class="x_title" id="proj-title">
               <h2>Descripcion del proyecto</h2>
