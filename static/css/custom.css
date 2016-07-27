@@ -1167,6 +1167,10 @@ legend {
     -webkit-border-radius: 4px;
 }
 
+.pagination li {
+    border-radius: 50% !important;
+}
+
 .well.profile_view {
     background: #fff;
 }
@@ -6886,7 +6890,7 @@ input[type="color"]:focus,
     font-size: 25px;
     font-weight: 700;
     text-transform: uppercase;
-    margin-right: 9px;
+    margin-right: 2px;
 }
 
 .messages .date span {
@@ -7022,4 +7026,14 @@ p.description_content{
     text-align: center;
     font-weight: 700;
     border-radius: 50%;
+}
+
+.btn-def-small {
+    width: 30px !important;
+    height: 30px !important;
+    line-height: 31px;
+}
+
+.btn-def-small i {
+    line-height: 32px !important;
 }
