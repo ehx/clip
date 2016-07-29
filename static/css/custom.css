@@ -7029,11 +7029,30 @@ p.description_content{
 }
 
 .btn-def-small {
-    width: 30px !important;
-    height: 30px !important;
+    width: 30px;
+    height: 30px;
     line-height: 31px;
 }
 
 .btn-def-small i {
-    line-height: 32px !important;
+    line-height: 32px;
 }
+
+
+/* calendar */
+[date-picker] .active, [date-picker] .now {
+    text-shadow: 0 -1px 0 rgba(0,0,0,.25);
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+    background-color: #006dcc;
+    background-image: -moz-linear-gradient(top,#08c,#04c);
+    background-image: -webkit-gradient(linear,0 0,0 100%,from(#08c),to(#04c));
+    background-image: -webkit-linear-gradient(top,#08c,#04c);
+    background-image: -o-linear-gradient(top,#08c,#04c);
+    background-image: linear-gradient(to bottom,#08c,#04c);
+    border-color: #04c #04c #002a80;
+    border-color: rgba(0,0,0,.1) rgba(0,0,0,.1) rgba(0,0,0,.25);
+    color: #fff;
+}
+/* calendar */
+
