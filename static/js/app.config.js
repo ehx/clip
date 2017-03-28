@@ -1,104 +1,137 @@
 'use strict';
 
 angular.module('app').constant('RESOURCES', {
-  'SERVER': 'http://localhost:8000',
+    'SERVER': 'http://localhost:8000'
 });
 
 angular.module('app').config(configFunction);
 
-function configFunction($httpProvider, $resourceProvider, localStorageServiceProvider, uiSelectConfig, $routeProvider) {
-  var onlyLoggedIn = function($location, localStorageService, $http) {
-    if (localStorageService.get('token')) {
-      $http.defaults.headers.common.Authorization = 'Token ' + localStorageService.get('token');
-      return true;
-    } else {
-      $location.url('/login');
-    }
-  };
+function configFunction($httpProvider, $authProvider, $resourceProvider, uiSelectConfig, $routeProvider) {
 
-  uiSelectConfig.theme = 'bootstrap';
-  uiSelectConfig.resetSearchInput = true;
-  uiSelectConfig.appendToBody = true;
+    /**
+     * Helper auth functions
+     */
+    var loginRequired = ['$q', '$location', '$auth', function ($q, $location, $auth) {
+        var deferred = $q.defer();
+        if ($auth.isAuthenticated()) {
+            deferred.resolve();
+        } else {
+            $location.path('/login');
+        }
+        return deferred.promise;
+    }];
 
-  localStorageServiceProvider.setPrefix('clip_');
+    $authProvider.loginUrl = "http://localhost:8000/api-token-auth/";
+    $authProvider.signupUrl = "http://localhost:8000/auth/register/";
+    $authProvider.tokenName = "token";
+    $authProvider.tokenPrefix = "clip";
+    $authProvider.tokenHeader = 'Authorization';
+    $authProvider.tokenType = 'Bearer';
 
-  $httpProvider.defaults.xsrfCookieName = 'csrftoken';
-  $httpProvider.defaults.xsrfHeaderName = 'X-CSRFToken';
-  $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
-  $resourceProvider.defaults.stripTrailingSlashes = false;
+    uiSelectConfig.theme = 'bootstrap';
+    uiSelectConfig.resetSearchInput = true;
+    uiSelectConfig.appendToBody = true;
 
-  $routeProvider
-    .when('/', {
-      templateUrl: 'taskList.html',
-      controller: 'taskController',
-      resolve: {
-        loggedIn: onlyLoggedIn
-      }
-    })
+    $resourceProvider.defaults.stripTrailingSlashes = false;
 
-  .when('/task/:taskId/', {
-    templateUrl: 'taskDetail.html',
-    controller: 'commentsController',
-    resolve: {
-      loggedIn: onlyLoggedIn
-    }
-  })
+    $routeProvider
+        .when('/', {
+            templateUrl: 'taskList.html',
+            controller: 'taskController',
+            resolve: {
+                skipIfLoggedIn: loginRequired
+            }
+        })
 
-  .when('/taskhistory/', {
-    templateUrl: 'taskHistory.html',
-    controller: 'taskHController',
-    resolve: {
-      loggedIn: onlyLoggedIn
-    }
-  })
+        .when('/task/:taskId/', {
+            templateUrl: 'taskDetail.html',
+            controller: 'commentsController',
+            resolve: {
+                skipIfLoggedIn: loginRequired
+            }
+        })
 
-  .when('/todo/', {
-    templateUrl: 'todo.html',
-    controller: 'todoController',
-    resolve: {
-      loggedIn: onlyLoggedIn
-    }
-  })
+        .when('/taskhistory/', {
+            templateUrl: 'taskHistory.html',
+            controller: 'taskHController',
+            resolve: {
+                skipIfLoggedIn: loginRequired
+            }
+        })
 
-  .when('/messages/', {
-    templateUrl: 'messages.html',
-    controller: 'messagesController',
-    resolve: {
-      loggedIn: onlyLoggedIn
-    }
-  })
+        .when('/todo/', {
+            templateUrl: 'todo.html',
+            controller: 'todoController',
+            resolve: {
+                skipIfLoggedIn: loginRequired
+            }
+        })
 
-  .when('/login/', {
-    templateUrl: 'login.html',
-    controller: 'loginController'
-  })
+        .when('/messages/', {
+            templateUrl: 'messages.html',
+            controller: 'messagesController',
+            resolve: {
+                skipIfLoggedIn: loginRequired
+            }
+        })
 
-  .when('/configuration/', {
-    templateUrl: 'userConfiguration.html',
-    controller: 'configController',
-    resolve: {
-      loggedIn: onlyLoggedIn
-    }
-  })
+        .when('/login/', {
+            templateUrl: 'login.html',
+            controller: 'LoginController',
+        })
 
-  .when('/tips/', {
-    templateUrl: 'tips.html',
-    controller: 'tipController',
-    resolve: {
-      loggedIn: onlyLoggedIn
-    }
-  })
+        .when('/register/', {
+            templateUrl: 'register.html',
+            controller: 'SignUpController',
+            resolve: {
+                skipIfLoggedIn: loginRequired
+            }
+        })
 
-  .when('/test/', {
-    templateUrl: 'test.html',
-    
-    resolve: {
-      loggedIn: onlyLoggedIn
-    }
-  })
+        .when('/configuration/', {
+            templateUrl: 'userConfiguration.html',
+            controller: 'configController',
+            resolve: {
+                skipIfLoggedIn: loginRequired
+            }
+        })
 
-  .otherwise({
-    redirectTo: '/login/'
-  });
-};
+        .when('/tips/', {
+            templateUrl: 'tips.html',
+            controller: 'tipController',
+            resolve: {
+                skipIfLoggedIn: loginRequired
+            }
+        })
+
+        .when('/test/', {
+            templateUrl: 'test.html',
+            resolve: {
+                skipIfLoggedIn: loginRequired
+            }
+        })
+
+        .otherwise({
+            redirectTo: '/login/'
+        });
+}
+
+app.config(['$httpProvider', '$authProvider', function ($httpProvider, config) {
+    $httpProvider.interceptors.push(['$q', function ($q) {
+        var tokenName = config.tokenPrefix ? config.tokenPrefix + '_' + config.tokenName : config.tokenName;
+        return {
+            request: function (httpConfig) {
+                var token = localStorage.getItem(tokenName);
+                if (token && config.httpInterceptor) {
+                    token = config.tokenHeader === 'Authorization' ? 'JWT ' + token : token;
+                    httpConfig.headers[config.tokenHeader] = token;
+                }
+                return httpConfig;
+            },
+            responseError: function (response) {
+                return $q.reject(response);
+            }
+        };
+    }]);
+}]);
